@@ -111,13 +111,15 @@ class WasteCollectionTable extends PureComponent {
 
   deleteButton = cell => (
     <Row style={{ alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: '30px' }}>
-        <p onClick={() => this.deleteLogistics(cell)} style={{ textAlign: 'center' }}><span
-          className="lnr lnr-trash"
-          style={{ color: '#ff4861', cursor: 'pointer' }}
-        />
-        </p>
-      </div>
+      {this.state.userType && (this.state.userType === 'SUPER ADMIN' || this.state.userType === 'OPERATION MANAGER') &&
+        <div style={{ width: '30px' }}>
+          <p onClick={() => this.deleteLogistics(cell)} style={{ textAlign: 'center' }}><span
+            className="lnr lnr-trash"
+            style={{ color: '#ff4861', cursor: 'pointer' }}
+          />
+          </p>
+        </div>
+      }
       <div style={{ width: '30px' }}>
         <p onClick={() => this.redirectToEditPage(cell)}><span
           className="lnr lnr-pencil"
@@ -137,7 +139,7 @@ class WasteCollectionTable extends PureComponent {
 
   redirectToEditPage = (logisticsId) => {
     // alert('Comming Soon');
-    history.push(`/schedules/waste-collection/${logisticsId}`);
+    history.push(`/schedule/waste-collection/${logisticsId}`);
     window.location.reload(true);
   }
 

@@ -7,7 +7,8 @@ import {
 } from 'reactstrap';
 // import { FaPlus } from 'react-icons/fa';
 // import TrainingTable from './components/TrainingTable';
-import TrainingCourse from './components/TrainingCourse';
+import TrainingCourse from './components/TrainingCourse_bk';
+// import history from '../../../shared/utils/history';
 
 const Training = () => (
   <Container className="dashboard" style={{ overflow: 'hidden' }}>
@@ -21,10 +22,13 @@ const Training = () => (
           color="success"
           style={{ float: 'right' }}
           // eslint-disable-next-line react/prop-types
-          onClick={() => props.history.push('/training/add')}
+          onClick={() => {
+            history.push('/training/quizzes');
+            window.location.reload(true);
+          }}
         >
           <p>
-            <FaPlus /> Request New Training
+            Test your knowledge
           </p>
         </Button>
       </Col> */}

@@ -4,6 +4,10 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import PropTypes from 'prop-types';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory from 'react-bootstrap-table2-filter';
+// import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+
+// const { ExportCSVButton } = CSVExport;
 
 export default class ReactBootstrapTable extends PureComponent {
   static propTypes = {
@@ -30,6 +34,20 @@ export default class ReactBootstrapTable extends PureComponent {
     } = this.props;
     return (
       <div className="table">
+        {/* <ToolkitProvider
+          keyField="id"
+          data={rows}
+          columns={heads}
+          exportCSV
+        >
+          {
+            props => (
+              <div>
+                <ExportCSVButton {...props.csvProps}>Export CSV!!</ExportCSVButton>
+              </div>
+            )
+          }
+        </ToolkitProvider> */}
         <BootstrapTable
           ref={n => this.setNode(n)}
           keyField="id"
@@ -39,6 +57,7 @@ export default class ReactBootstrapTable extends PureComponent {
           filter={filterFactory()}
           bordered={false}
           rowEvents={rowEvents}
+          // {...props.baseProps}
         />
       </div>
     );

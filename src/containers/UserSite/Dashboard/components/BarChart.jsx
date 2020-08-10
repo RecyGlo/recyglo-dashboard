@@ -73,7 +73,6 @@ class SimpleLineChart extends Component {
         reports.push(reportData);
       });
 
-      console.log(reports);
       this.setState({
         data: reports,
       });

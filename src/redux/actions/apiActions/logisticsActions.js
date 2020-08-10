@@ -294,9 +294,12 @@ export const changePickUpTime = (logisticsId, pickUpTime) => (dispatch) => {
     });
 };
 
-export const updateLogiostics = (data, logisticsId) => (dispatch) => {
+export const updateLogistics = (data, logisticsId) => (dispatch) => {
   if (checkJWTExpire()) {
     refreshJWTToken();
+  }
+  if (data.wayType) {
+    data.wayType = data.wayType.value;
   }
   axios({
     method: 'patch',

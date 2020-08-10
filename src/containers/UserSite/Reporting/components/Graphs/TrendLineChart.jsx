@@ -4,13 +4,21 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList,
 } from 'recharts';
 
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
+
+const formatDate = date => `${MONTH_NAMES[new Date(date).getMonth()]} ${new Date(date).getFullYear()}`;
+
 const CustomizedAxisTick = (props) => {
   const {
     x, y, payload,
   } = props;
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">{payload.value}</text>
+      <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">
+        {formatDate(payload.value)}
+      </text>
     </g>
   );
 };

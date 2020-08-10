@@ -1,19 +1,56 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
+/* eslint-disable max-len */
+/* eslint-disable arrow-parens */
+
 import React from 'react';
-import { Container, Card, CardBody, Col, Row, CardHeader } from 'reactstrap';
+import { Container, Card, CardBody, Col, Row, CardHeader, Modal, Button } from 'reactstrap';
+import { Tab, Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CryptoJS from 'crypto-js';
+import { Field, reduxForm } from 'redux-form';
+
+import renderCheckBoxField from '../../../shared/components/form/CheckBox';
 import { getPaymentDetail } from '../../../redux/actions/apiActions/paymentAction';
 
 const convertCurrency = {
   840: 'USD',
   104: 'MMK',
 };
+// const [key, setKey] = useState('home');
+// const [activeTab, setActiveTab] = useState('1');
+// const toggle = tab => {
+//   if (activeTab !== tab) setActiveTab(tab);
+// };
+const img1_link1 = `${process.env.PUBLIC_URL}/img/logo/VISA-logo.png`;
+const img2_link1 = `${process.env.PUBLIC_URL}/img/logo/Mastercard-logo.png`;
+const img1_link2 = `${process.env.PUBLIC_URL}/img/logo/1STOP.png`;
+const img2_link2 = `${process.env.PUBLIC_URL}/img/logo/ABC.png`;
+const img3_link2 = `${process.env.PUBLIC_URL}/img/logo/AOMM.png`;
+const img4_link2 = `${process.env.PUBLIC_URL}/img/logo/CMTMM.png`;
+const img5_link2 = `${process.env.PUBLIC_URL}/img/logo/DNK.png`;
+const img6_link2 = `${process.env.PUBLIC_URL}/img/logo/ECITY.png`;
+const img7_link2 = `${process.env.PUBLIC_URL}/img/logo/FFMM.png`;
+const img8_link2 = `${process.env.PUBLIC_URL}/img/logo/GNG.png`;
+const img9_link2 = `${process.env.PUBLIC_URL}/img/logo/LGM.png`;
+const img10_link2 = `${process.env.PUBLIC_URL}/img/logo/MPMM.png`;
+const img11_link2 = `${process.env.PUBLIC_URL}/img/logo/MBMM.png`;
+const img12_link2 = `${process.env.PUBLIC_URL}/img/logo/MPS.png`;
+const img13_link2 = `${process.env.PUBLIC_URL}/img/logo/OAS.png`;
+const img14_link2 = `${process.env.PUBLIC_URL}/img/logo/OCEMM.png`;
+const img15_link2 = `${process.env.PUBLIC_URL}/img/logo/SGH.png`;
+const img16_link2 = `${process.env.PUBLIC_URL}/img/logo/TMN.png`;
+const img17_link2 = `${process.env.PUBLIC_URL}/img/logo/WYE.png`;
+const img1_link3 = `${process.env.PUBLIC_URL}/img/logo/AYA.png`;
+const img2_link3 = `${process.env.PUBLIC_URL}/img/logo/CB.png`;
+const img3_link3 = `${process.env.PUBLIC_URL}/img/logo/KBZPAY.png`;
+const img1_link4 = `${process.env.PUBLIC_URL}/img/logo/mpu-member.png`;
+
 class Payment extends React.Component {
   state = {
     data: null,
     gotData: false,
+    isOpen: true,
   }
 
   componentWillMount() {
@@ -67,6 +104,12 @@ class Payment extends React.Component {
     });
   }
 
+  closeModal = () => {
+    this.setState({
+      isOpen: false,
+    });
+  }
+
   handleSubmit = (values) => {
     console.log(values);
     // eslint-disable-next-line max-len
@@ -77,13 +120,46 @@ class Payment extends React.Component {
   }
 
   render() {
-    const { data, gotData } = this.state;
+    const { data, gotData, isOpen } = this.state;
     const { payments } = this.props;
     if (payments.detail && !gotData) {
       this.getPaymentData(payments.detail);
     }
     return (
       <Container>
+        <Modal
+          isOpen={isOpen}
+          className="modal-dialog--success"
+        >
+          <div className="modal__header">
+            <button className="lnr lnr-cross modal__close-btn" type="button" onClick={this.closeModal} />
+            <h4 style={{ textAlign: 'left', marginBottom: 20 }}>Terms and Conditions</h4>
+          </div>
+          <div className="modal__body">
+            <form className="form">
+              <div className="form__form-group">
+                <div className="form__form-group-field">
+                  <Field
+                    name="4ce1b6"
+                    component={renderCheckBoxField}
+                    defaultChecked
+                    color="#4ce1b6"
+                    label="I have read and agree to the "
+                    className="colored"
+                  />
+                  <a href="/terms"> &nbsp;<u>Terms and Conditions.</u></a>
+                </div>
+              </div>
+            </form>
+            <Button
+              className="icon"
+              color="success"
+              style={{ marginTop: 10 }}
+            >
+              <p>Agree and Continue</p>
+            </Button>
+          </div>
+        </Modal>
         <Row>
           <Col md={6}>
             <Row>
@@ -132,6 +208,102 @@ class Payment extends React.Component {
                         <input className="btn btn-success" type="submit" name="submit" value="Checkout" />
                       </form>
                     }
+                    <div>
+                      {/* <Nav tabs>
+                        <NavItem>
+                          <NavLink
+                            className={classnames({ active: activeTab === '1' })}
+                            onClick={() => { toggle('1'); }}
+                          >
+                            Tab1
+                          </NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink
+                            className={classnames({ active: activeTab === '2' })}
+                            onClick={() => { toggle('2'); }}
+                          >
+                            More Tabs
+                          </NavLink>
+                        </NavItem>
+                      </Nav>
+                      <TabContent activeTab={activeTab}>
+                        <TabPane tabId="1">
+                          <Row>
+                            <Col sm="12">
+                              <h4>Tab 1 Contents</h4>
+                            </Col>
+                          </Row>
+                        </TabPane>
+                      </TabContent> */}
+                      {/* <Tabs
+                        id="controlled-tab-example"
+                        activeKey={key}
+                        onSelect={(k) => setKey(k)}
+                      >
+                        <Tab eventKey="home" title="Home">
+                          <p>aaa</p>
+                        </Tab>
+                        <Tab eventKey="profile" title="Profile">
+                          <p>bbb</p>
+                        </Tab>
+                        <Tab eventKey="contact" title="Contact" disabled>
+                          <p>ccc</p>
+                        </Tab>
+                      </Tabs> */}
+                    </div>
+                    <Tab.Container defaultActiveKey="link-1">
+                      <br />
+                      <h4>Available Payment Options</h4>
+                      <br />
+                      <Nav variant="tabs" defaultActiveKey="/home">
+                        <Nav.Item>
+                          <Nav.Link eventKey="link-1">Credit/Debit Counter</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="link-2">Over the Counter</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="link-3">Bank Channels</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="link-4">MPU Card</Nav.Link>
+                        </Nav.Item>
+                      </Nav>
+                      <Tab.Content style={{ paddingTop: 10 }}>
+                        <Tab.Pane eventKey="link-1">
+                          <img src={img1_link1} alt="img1_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img2_link1} alt="img2_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="link-2">
+                          <img src={img1_link2} alt="img1_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img2_link2} alt="img2_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img3_link2} alt="img3_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img4_link2} alt="img4_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img5_link2} alt="img5_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img6_link2} alt="img6_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img7_link2} alt="img7_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img8_link2} alt="img8_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img9_link2} alt="img9_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img10_link2} alt="img10_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img11_link2} alt="img11_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img12_link2} alt="img12_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img13_link2} alt="img13_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img14_link2} alt="img14_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img15_link2} alt="img15_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img16_link2} alt="img16_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img17_link2} alt="img17_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="link-3">
+                          <img src={img1_link3} alt="img1_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img2_link3} alt="img2_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                          <img src={img3_link3} alt="img3_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="link-4">
+                          <img src={img1_link4} alt="img1_link4" />
+                        </Tab.Pane>
+                      </Tab.Content>
+                    </Tab.Container>
                   </div>
                 </CardBody>
               </Card>
@@ -153,5 +325,10 @@ const mapStateToProps = state => ({
   payments: state.payments,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+// export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+//   form: 'tNcCheck',
+// })(connect(mapStateToProps, mapDispatchToProps)(Payment)));
 
+export default reduxForm({
+  form: 'tNc',
+})(connect(mapStateToProps, mapDispatchToProps)(Payment));

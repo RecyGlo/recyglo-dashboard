@@ -106,7 +106,6 @@ class OverviewPieChart extends PureComponent {
 
   render() {
     const { totalWastes } = this.props.misc;
-    console.log(totalWastes);
     return (
       <Col xs={12} md={12} lg={12} xl={12}>
         <Card>

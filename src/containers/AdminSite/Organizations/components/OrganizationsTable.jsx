@@ -8,6 +8,7 @@ import { textFilter } from 'react-bootstrap-table2-filter';
 import { connect } from 'react-redux';
 // import moment from 'moment';
 import ReactBootstrapTable from '../../../../shared/components/table/ReactBootstrapTable';
+import { getUserType } from '../../../../redux/actions/apiActions/AuthActions';
 import { getOrganizationList, deleteOrganization } from '../../../../redux/actions/apiActions/organizationActions';
 import history from '../../../../shared/utils/history';
 
@@ -47,14 +48,16 @@ class OrganizationsTable extends PureComponent {
         filter: textFilter(),
       },
       {
-        dataField: 'startDate',
+        dataField: 'contracts.0.startDate',
         text: 'Joined Date ',
         filter: textFilter(),
+        formatter: this.dateFormatter,
       },
       {
-        dataField: 'expiredDate',
+        dataField: 'contracts.0.endDate',
         text: 'Contract Expiry Date ',
         filter: textFilter(),
+        formatter: this.dateFormatter,
       },
       {
         dataField: '_id',
@@ -75,16 +78,24 @@ class OrganizationsTable extends PureComponent {
 
     this.state = {
       rows: null,
+      userType: null,
     };
   }
 
   componentWillMount() {
+    this.setState({
+      userType: getUserType(),
+    });
     this.props.getOrganizationList();
   }
 
   componentDidUpdate() {
     this.updateRows();
   }
+
+  dateFormatter = cell => (
+    <p>{new Date(cell).toLocaleDateString()}</p>
+  )
 
   paymentFormatter = cell => (
     <span>
@@ -128,13 +139,15 @@ class OrganizationsTable extends PureComponent {
 
   deleteButton = cell => (
     <Row style={{ alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: '30px' }}>
-        <p onClick={() => this.deleteOrganization(cell)} style={{ textAlign: 'center' }}><span
-          className="lnr lnr-trash"
-          style={{ color: '#ff4861', cursor: 'pointer' }}
-        />
-        </p>
-      </div>
+      {this.state.userType && this.state.userType === 'SUPER ADMIN' &&
+        <div style={{ width: '30px' }}>
+          <p onClick={() => this.deleteOrganization(cell)} style={{ textAlign: 'center' }}><span
+            className="lnr lnr-trash"
+            style={{ color: '#ff4861', cursor: 'pointer' }}
+          />
+          </p>
+        </div>
+      }
       <div style={{ width: '30px' }}>
         <p onClick={() => this.redirectToEditPage(cell)}><span
           className="lnr lnr-pencil"

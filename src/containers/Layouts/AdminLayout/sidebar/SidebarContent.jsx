@@ -26,9 +26,9 @@ class SidebarContent extends Component {
         <SidebarLink icon="apartment" title="Organizations" route="/organizations" onClick={this.hideSidebar} />
         <SidebarLink icon="users" title="Users" route="/users" onClick={this.hideSidebar} />
         <ul className="sidebar__block">
-          <SidebarCategory title="Schedules" icon="calendar-full">
-            <SidebarLink title="Way schedules" route="/schedules/waste-collection" onClick={this.hideSidebar} />
-            <SidebarLink title="Trainings" route="/schedules/trainings" onClick={this.hideSidebar} />
+          <SidebarCategory title="Schedule" icon="calendar-full">
+            <SidebarLink title="Way schedules" route="/schedule/waste-collection" onClick={this.hideSidebar} />
+            <SidebarLink title="Trainings" route="/schedule/trainings" onClick={this.hideSidebar} />
           </SidebarCategory>
         </ul>
         <ul className="sidebar__block">

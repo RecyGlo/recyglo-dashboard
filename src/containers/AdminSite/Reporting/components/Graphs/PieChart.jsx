@@ -4,24 +4,23 @@ import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend,
 } from 'recharts';
 
-// const data = [
-//   { name: 'Group A', value: 400 },
-//   { name: 'Group B', value: 1 },
-//   { name: 'Group C', value: 300 },
-//   { name: 'Group D', value: 200 },
-// ];
-
 const COLORS = {
-  Papers: '#5886a5',
-  Plastics: '#de425b',
-  Cans: '#78ab63',
-  Glasses: '#fff314',
+  Paper: '#5886a5',
+  Plastic: '#de425b',
+  Can: '#78ab63',
+  Glass: '#fff314',
   'E-waste': '#FF7F00',
   Organic: '#654321',
 };
 
-
-// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const wastes = {
+  Papers: 'Paper',
+  Plastics: 'Plastic',
+  Cans: 'Can',
+  Glasses: 'Glass',
+  'E-waste': 'E-waste',
+  Organic: 'Organic',
+};
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -51,7 +50,7 @@ export default class Example extends PureComponent {
       if (!Object.keys(productTypes).includes(this.props.data[i].productType)) {
         productTypes[this.props.data[i].productType] = i;
         data.push({
-          name: this.props.data[i].productType,
+          name: wastes[this.props.data[i].productType],
           value: this.props.data[i].quantity,
         });
       } else {
@@ -62,19 +61,26 @@ export default class Example extends PureComponent {
   }
 
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
     return (
-      <ResponsiveContainer width={550} height={250}>
+      <ResponsiveContainer width={464} height={250}>
         {data.length > 0 &&
-          <PieChart>
+          <PieChart
+            margin={{
+            top: 0, right: 0, left: 0, bottom: -10,
+            }}
+          >
             <Legend />
             <Pie
               data={data}
-              cx={275}
+              cx={232}
               cy={120}
               labelLine
               label={renderCustomizedLabel}
-              outerRadius={60}
+              // outerRadius={60}
+              innerRadius={40}
+              outerRadius={80}
+              stroke=""
               fill="#8884d8"
               dataKey="value"
             >

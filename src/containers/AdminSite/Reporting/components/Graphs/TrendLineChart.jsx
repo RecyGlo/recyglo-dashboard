@@ -4,46 +4,11 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList,
 } from 'recharts';
 
-// const data = [
-//   {
-//     name: 'Page A', value: 13.5,
-//   },
-//   {
-//     name: 'Page B', value: 9.5,
-//   },
-//   {
-//     name: 'Page C', value: 10.5,
-//   },
-//   {
-//     name: 'Page D', value: 9,
-//   },
-//   {
-//     name: 'Page E', value: 11,
-//   },
-//   {
-//     name: 'Page F', value: 14.5,
-//   },
-//   {
-//     name: 'Page G', value: 12,
-//   },
-// ];
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+];
 
-// class CustomizedLabel extends PureComponent {
-//   render() {
-//     const {
-//       x, y, stroke, value,
-//     } = this.props;
-
-//     return <text x={x} y={y} dy={-4} fill={stroke} fontSize={10} textAnchor="middle">{value}</text>;
-//   }
-// }
-
-// const CustomizedLabel = (props) => {
-//   const {
-//     x, y, stroke, value,
-//   } = props;
-//   return <text x={x} y={y} dy={-4} fill={stroke} fontSize={10} textAnchor="middle">{value}</text>;
-// };
+const formatDate = date => `${MONTH_NAMES[new Date(date).getMonth()]} ${new Date(date).getFullYear()}`;
 
 const CustomizedAxisTick = (props) => {
   const {
@@ -51,7 +16,9 @@ const CustomizedAxisTick = (props) => {
   } = props;
   return (
     <g transform={`translate(${x},${y})`}>
-      <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">{payload.value}</text>
+      <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">
+        {formatDate(payload.value)}
+      </text>
     </g>
   );
 };
@@ -59,24 +26,11 @@ const CustomizedAxisTick = (props) => {
 export default class TrendLineChart extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
-  state = {
-    data: null,
-  }
-
-  componentWillMount() {
-    const { data } = this.props;
-    for (let i = 0; i < data.length; i += 1) {
-      data[i].value = parseFloat(data[i].value.toFixed(2));
-    }
-    this.setState({
-      data,
-    });
-  }
   render() {
     const { color } = this.props;
-    const { data } = this.state;
+    const { data } = this.props;
     return (
-      <ResponsiveContainer width={550} height={250}>
+      <ResponsiveContainer width={500} height={250}>
         {data &&
           <LineChart
             data={data}

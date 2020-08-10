@@ -1,12 +1,20 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable max-len */
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import MainWrapper from './MainWrapper';
 import LogIn from '../LogIn/index';
+import PasswordResetRequest from '../LogIn/PasswordResetRequest';
+import PasswordReset from '../LogIn/PasswordReset';
+
+// Layouts
+import AdminLayout from '../Layouts/AdminLayout/index';
+import UserLayout from '../Layouts/UserLayout/index';
+import OperationsLayout from '../Layouts/OperationsLayout/index';
+import FinanceLayout from '../Layouts/FinanceLayout/index';
 
 // Admin Site
-import AdminLayout from '../Layouts/AdminLayout/index';
 import Dashboard from '../AdminSite/Dashboard/index';
 
 import BinOrders from '../AdminSite/Bins/BinOrders/index';
@@ -52,37 +60,40 @@ import AdminPayment from '../AdminSite/Payment/index';
 import AddNewInvoicePage from '../AdminSite/Payment/AddNewInvoiceForm';
 
 // User Site
-import UserLayout from '../Layouts/UserLayout/index';
 import UserDashboard from '../UserSite/Dashboard/index';
 import SchedulesPage from '../UserSite/Schedules/index';
-import TrainingPage from '../UserSite/Training/index';
+import DataTable from '../UserSite/DataTable/index';
+// import TrainingPage from '../UserSite/Training/index';
 import TrainingDetailPage from '../UserSite/Training/TrainingDetails/index';
 import UserProfilePage from '../UserSite/UserProfile/index';
 import ChangePassword from '../UserSite/ChangePassword/index';
 import OrganizationPage from '../UserSite/Organization/index';
 import UserReporting from '../UserSite/Reporting/index';
-import PaperWasteManagement from '../UserSite/Training/components/PaperWasteManagement';
-import PlasticWasteManagement from '../UserSite/Training/components/PlasticWasteManagement';
 import Invoice from '../UserSite/Payment/Invoice';
 import Payment from '../UserSite/Payment/Payment';
 import ThankYou from '../UserSite/Payment/ThankYou';
-import PlasticQuiz from '../UserSite/Training/components/Quizzes/PlasticTest/PlasticTest';
-import PaperQuiz from '../UserSite/Training/components/Quizzes/PaperTest/PaperTest';
+import training from '../UserSite/Training/components';
+import trainingSlide from '../UserSite/Training/components/TrainingSlide';
+import quiz from '../UserSite/Training/components/Quizzes/index';
+import TermsAndConditions from '../UserSite/TermsAndConditions/TermsAndConditions';
 
 import Landing from '../Landing/index';
 import Report from '../Report/Reporting/index';
 import ExactReport from '../Report/Reporting/reporting';
 import PdfReport from '../UserSite/PdfReports/index';
 
+
+import Contact from '../UserSite/Contact';
+
 const Schedules = () => (
   <Switch>
-    <Route exact path="/schedules/waste-collection" component={WasteCollection} />
-    <Route exact path="/schedules/waste-collection/calendar" component={WasteCollectionCalendar} />
-    <Route exact path="/schedules/waste-collection/add" component={AddWasteCollectionSchedule} />
-    <Route exact path="/schedules/waste-collection/:logisticsId" component={WasteCollectinSheduleDetails} />
-    <Route exact path="/schedules/trainings" component={Trainings} />
-    <Route exact path="/schedules/trainings/add" component={AddTrainingSchedule} />
-    <Route exact path="/schedules/trainings/:trainingId" component={TrainingDetail} />
+    <Route exact path="/schedule/waste-collection" component={WasteCollection} />
+    <Route exact path="/schedule/waste-collection/calendar" component={WasteCollectionCalendar} />
+    <Route exact path="/schedule/waste-collection/add" component={AddWasteCollectionSchedule} />
+    <Route exact path="/schedule/waste-collection/:logisticsId" component={WasteCollectinSheduleDetails} />
+    <Route exact path="/schedule/trainings" component={Trainings} />
+    <Route exact path="/schedule/trainings/add" component={AddTrainingSchedule} />
+    <Route exact path="/schedule/trainings/:trainingId" component={TrainingDetail} />
   </Switch>
 );
 
@@ -129,7 +140,7 @@ const adminWrappedRoutes = () => (
     <div className="container__wrap">
       <Route exact path="/" component={Dashboard} />
       <Route path="/bin" component={Bins} />
-      <Route path="/schedules" component={Schedules} />
+      <Route path="/schedule" component={Schedules} />
       <Route path="/organizations" component={OrganizationPages} />
       <Route path="/users" component={UserPages} />
       <Route path="/settings" component={AdminSettings} />
@@ -141,25 +152,53 @@ const adminWrappedRoutes = () => (
   </div>
 );
 
+const operationsWrappedRoutes = () => (
+  <div>
+    <OperationsLayout />
+    <div className="container__wrap">
+      <Route exact path="/" component={Dashboard} />
+      <Route path="/schedule" component={Schedules} />
+      <Route path="/organizations" component={OrganizationPages} />
+      <Route path="/users" component={UserPages} />
+      <Route path="/settings" component={AdminSettings} />
+      <Route path="/change_password" component={AdminChangePassword} />
+    </div>
+  </div>
+);
+
+const financeWrappedRoutes = () => (
+  <div>
+    <FinanceLayout />
+    <div className="container__wrap">
+      <Route exact path="/" component={Dashboard} />
+      <Route path="/organizations" component={OrganizationPages} />
+      <Route path="/payment" component={PaymentPages} />
+      <Route path="/settings" component={AdminSettings} />
+      <Route path="/change_password" component={AdminChangePassword} />
+    </div>
+  </div>
+);
+
 const userWrappedRoutes = () => (
   <div>
     <UserLayout />
     <div className="container__wrap">
       <Route exact path="/" component={UserDashboard} />
-      <Route exact path="/schedules" component={SchedulesPage} />
+      <Route exact path="/schedule" component={SchedulesPage} />
+      <Route exact path="/data_table" component={DataTable} />
       <Route exact path="/profile" component={UserProfilePage} />
       <Route exact path="/change_password" component={ChangePassword} />
       <Route exact path="/organization" component={OrganizationPage} />
       <Route exact path="/reporting" component={UserReporting} />
-      <Route exact path="/training" component={TrainingPage} />
+      <Route exact path="/terms_and_conditions" component={TermsAndConditions} />
       <Route exact path="/training/edit/:trainingId" component={TrainingDetailPage} />
-      <Route exact path="/training/paper_waste_management" component={PaperWasteManagement} />
-      <Route exact path="/training/plastic_waste_management" component={PlasticWasteManagement} />
-      <Route exact path="/training/plastic_quiz" component={PlasticQuiz} />
-      <Route exact path="/training/paper_quiz" component={PaperQuiz} />
       <Route exact path="/invoice" component={Invoice} />
       <Route exact path="/payment/:paymentId" component={Payment} />
       <Route exact path="/thankyou" component={ThankYou} />
+      <Route exact path="/training" component={training} />
+      <Route exact path="/training/trainingSlide/:trainingSlideId" component={trainingSlide} />
+      <Route exact path="/training/quiz/:quizId" component={quiz} />
+      <Route exact path="/contact" component={Contact} />
     </div>
   </div>
 );
@@ -176,13 +215,17 @@ const Router = () => (
     <main>
       <Switch>
         <Route exact path="/log_in" component={LogIn} />
+        <Route exact path="/password_reset" component={PasswordResetRequest} />
+        <Route exact path="/password_reset/:link" component={PasswordReset} />
         <Route exact path="/landing" component={Landing} />
         {/* <Route exact path="/report" component={ExactReport} /> */}
         <Route exact path="/report" component={Report} />
         <Route path="/report/:reportId" component={ExactReport} />
         <Route path="/pdf_report/:reportId" component={PdfReport} />
         {/* <Route path="/bin/orders/edit/:binOrderId" component={EditBinOrder} /> */}
-        {user && user.type === 'ADMIN' && <Route path="/" component={adminWrappedRoutes} /> }
+        {user && (user.type === 'ADMIN' || user.type === 'SUPER ADMIN') && <Route path="/" component={adminWrappedRoutes} /> }
+        {user && (user.type === 'OPERATION' || user.type === 'OPERATION MANAGER') && <Route path="/" component={operationsWrappedRoutes} /> }
+        {user && (user.type === 'FINANNCE OFFICE' || user.type === 'CUSTOMER SERVICE') && <Route path="/" component={financeWrappedRoutes} /> }
         {user && user.type === 'OPERATION' && <Route path="/" component={adminWrappedRoutes} /> }
         {user && user.type === 'USER' && <Route path="/" component={userWrappedRoutes} /> }
         <Redirect to="/log_in" />

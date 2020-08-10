@@ -5,6 +5,7 @@ import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getOrganizationDetail, updateOrganization } from '../../../../redux/actions/apiActions/organizationActions';
+// import { CHANGE_LOCATION } from '../../../../redux/actions/apiActions/ActionTypes';
 import EditOrganizationForm from './components/EditOrganizationForm';
 // import showResults from './show';
 
@@ -15,6 +16,7 @@ class EditOrganization extends React.Component {
   }
   componentWillMount() {
     this.props.getOrganizationDetail(this.props.match.params.organizationId);
+    // this.props.changeLocation(this.props.organizations.detail.location);
   }
 
   componentDidUpdate() {
@@ -37,6 +39,7 @@ class EditOrganization extends React.Component {
     this.props.updateOrganization(
       values,
       this.props.match.params.organizationId,
+      this.props.organizations.location,
       this.props.organizations.startDate,
       this.props.organizations.expiredDate,
     );
@@ -68,8 +71,8 @@ const mapDispatchToProps = dispatch => ({
   getOrganizationDetail: (organizationId) => {
     dispatch(getOrganizationDetail(organizationId));
   },
-  updateOrganization: (data, organizationId, startDate, expiredDate) => {
-    dispatch(updateOrganization(data, organizationId, startDate, expiredDate));
+  updateOrganization: (data, organizationId, location, startDate, expiredDate) => {
+    dispatch(updateOrganization(data, organizationId, location, startDate, expiredDate));
   },
 });
 

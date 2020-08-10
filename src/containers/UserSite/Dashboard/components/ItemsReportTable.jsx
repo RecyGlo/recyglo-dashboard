@@ -53,18 +53,21 @@ class ItemsReportTable extends PureComponent {
     if (items) {
       // eslint-disable-next-line guard-for-in
       for (const key in items) {
-        data.push({ label: key, value: 10, color: colors[key] });
+        // data.push({ label: key, value: 10, color: colors[key] });
         // eslint-disable-next-line guard-for-in
         for (const productName in items[key]) {
-          if (productName === key) {
-            data.push({
-              label: `${productName} `, value: items[key][productName], parent: key, color: colors[key],
-            });
-          } else {
-            data.push({
-              label: productName, value: items[key][productName], parent: key, color: colors[key],
-            });
-          }
+          data.push({
+            label: productName, value: items[key][productName], color: colors[key],
+          });
+          // if (productName === key) {
+          //   data.push({
+          //     label: `${productName} `, value: items[key][productName], color: colors[key],
+          //   });
+          // } else {
+          //   data.push({
+          //     label: productName, value: items[key][productName], color: colors[key],
+          //   });
+          // }
         }
       }
     }
@@ -95,6 +98,7 @@ class ItemsReportTable extends PureComponent {
     //   },
     // ];
     const { items } = this.state;
+    const { firstMonth, lastMonth } = this.props;
     return (
       <Panel
         lg={12}
@@ -103,6 +107,7 @@ class ItemsReportTable extends PureComponent {
         title="Common Items Found in Waste Audits"
         panelClass="panel--narrow"
       >
+        <p style={{ fontSize: 10 }}>{firstMonth} - {lastMonth}</p>
         <div style={{ height: 10 }} />
         {items &&
           <JqxTreeMap

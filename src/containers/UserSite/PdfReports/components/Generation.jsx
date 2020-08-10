@@ -39,7 +39,7 @@ class Generation extends Component {
                 <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
                   <p style={{ textAlign: 'center', marginLeft: 30 }}>Pick Up ({item})</p>
                   <BarChart data={data[item].chartData} />
-                  <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '430px' }}>{organization} recycled {item.total} KG of recyclable waste in {item}.</li></ul>
+                  <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '430px' }}>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable waste in {item}.</li></ul>
                 </Col>
               ))}
             </Row>

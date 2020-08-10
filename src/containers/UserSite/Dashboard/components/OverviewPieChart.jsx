@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-mixed-operators */
+/* eslint-disable react/no-did-update-set-state */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
 import {
@@ -84,6 +85,7 @@ class OverviewPieChart extends PureComponent {
   state = {
     activeIndex: 0,
     data: null,
+    rawData: null,
   };
 
   componentWillMount() {
@@ -102,6 +104,25 @@ class OverviewPieChart extends PureComponent {
     });
   }
 
+  componentDidUpdate() {
+    if (this.state.rawData !== this.props.data) {
+      const data = [];
+      if (this.props.data) {
+        for (let i = 0; i < this.props.data.length; i += 1) {
+          const tmp = {
+            name: wastes[this.props.data[i].name],
+            quantity: this.props.data[i].quantity,
+          };
+          data.push(tmp);
+        }
+      }
+      this.setState({
+        data,
+        rawData: this.props.data,
+      });
+    }
+  }
+
   // eslint-disable-next-line no-shadow
   onPieEnter = (data, index) => {
     this.setState({
@@ -111,16 +132,18 @@ class OverviewPieChart extends PureComponent {
 
   render() {
     const { data } = this.state;
+    const { firstMonth, lastMonth } = this.props;
     return (
       <Col xs={12} md={12} lg={12} xl={6}>
         <Card>
           <CardBody>
             <div className="card__title">
               <h5 className="bold-text">Waste Composition (%)</h5>
+              <p style={{ fontSize: 10 }}>{firstMonth} - {lastMonth}</p>
             </div>
             {data &&
-              <ResponsiveContainer height={300}>
-                <PieChart width={500} height={300}>
+              <ResponsiveContainer height={350}>
+                <PieChart width={500} height={350}>
                   <Pie
                     activeIndex={this.state.activeIndex}
                     activeShape={renderActiveShape}

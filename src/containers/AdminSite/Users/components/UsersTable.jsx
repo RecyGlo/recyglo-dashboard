@@ -8,6 +8,7 @@ import { textFilter, selectFilter } from 'react-bootstrap-table2-filter';
 import { connect } from 'react-redux';
 import ReactBootstrapTable from '../../../../shared/components/table/ReactBootstrapTable';
 // import history from '../../../../shared/utils/history';
+import { getUserType } from '../../../../redux/actions/apiActions/AuthActions';
 import { getUserList, deleteUser } from '../../../../redux/actions/apiActions/userActions';
 import history from '../../../../shared/utils/history';
 
@@ -19,7 +20,10 @@ class UsersTable extends PureComponent {
     super();
 
     const userTypes = {
+      'SUPER ADMIN': 'SUPER ADMIN',
       ADMIN: 'ADMIN',
+      'OPERATION MANAGER': 'OPERATION MANAGER',
+      'FINANNCE OFFICE': 'FINANNCE OFFICER',
       USER: 'USER',
       DRIVER: 'DRIVER',
       OPERATION: 'OPERATION',
@@ -73,6 +77,9 @@ class UsersTable extends PureComponent {
   }
 
   componentWillMount() {
+    this.setState({
+      userType: getUserType(),
+    });
     // eslint-disable-next-line react/prop-types
     this.props.getUserList();
   }
@@ -96,13 +103,22 @@ class UsersTable extends PureComponent {
 
   deleteButton = cell => (
     <Row style={{ alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: '30px' }}>
+      {/* <div style={{ width: '30px' }}>
         <p onClick={() => this.deleteUser(cell)} style={{ textAlign: 'center' }}><span
           className="lnr lnr-trash"
           style={{ color: '#ff4861', cursor: 'pointer' }}
         />
         </p>
-      </div>
+      </div> */}
+      {this.state.userType && this.state.userType === 'SUPER ADMIN' &&
+        <div style={{ width: '30px' }}>
+          <p onClick={() => this.deleteUser(cell)} style={{ textAlign: 'center' }}><span
+            className="lnr lnr-trash"
+            style={{ color: '#ff4861', cursor: 'pointer' }}
+          />
+          </p>
+        </div>
+      }
       <div style={{ width: '30px' }}>
         <p onClick={() => this.redirectToEditPage(cell)}><span
           className="lnr lnr-pencil"

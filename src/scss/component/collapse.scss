@@ -5,6 +5,9 @@
     .collapse__title {
 
       p {
+        // @include themify($themes) {
+        //   color: themed('accentColor');
+        // }
         color: $color-additional;
       }
 
@@ -63,7 +66,7 @@
       transition: background-color 0.3s;
 
       @include themify($themes) {
-        color: themed('colorText');
+        color: themed('accentColor');
       }
 
       &:hover {
@@ -78,6 +81,9 @@
       }
 
       p {
+        @include themify($themes) {
+          color: themed('accentColor');
+        }
 
         svg {
           display: block;

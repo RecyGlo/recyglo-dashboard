@@ -10,6 +10,8 @@ import renderSelectField from '../../../../../shared/components/form/Select';
 import history from '../../../../../shared/utils/history';
 import renderInputField from '../../../../../shared/components/form/FieldComponents';
 
+const USER_TYPES = ['SUPER ADMIN', 'ADMIN', 'OPERATION MANAGER', 'OPERATION', 'FINANNCE OFFICE', 'USER', 'DRIVER'];
+
 class AddUserForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -62,12 +64,10 @@ class AddUserForm extends PureComponent {
                     name="type"
                     component={renderSelectField}
                     placeholder="Choose User Type"
-                    options={[
-                      { value: 'ADMIN', label: 'Admin' },
-                      { value: 'DRIVER', label: 'Driver' },
-                      { value: 'USER', label: 'User' },
-                      { value: 'OPERATION', label: 'Operation' },
-                    ]}
+                    options={USER_TYPES.map((prop, key) => (
+                        { key, label: prop, value: prop }
+                      ))
+                    }
                   />
                 </div>
               </div>

@@ -3,133 +3,170 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
+
 import React, { PureComponent } from 'react';
-import { Row, CardTitle, Button, Col } from 'reactstrap';
+import { Row, Button, Modal } from 'reactstrap';
+// import { connect } from 'react-redux';
 // import StarRatingComponent from 'react-star-rating-component';
 import history from '../../../../shared/utils/history';
+// import { getTrainingSlideList } from '../../../../redux/actions/apiActions/trainingSlideActions';
 // import img1 from '../../../../shared/img/Trainingview/img1.png';
 // // import img2 from '../../../../shared/img/Trainingview/Star.png';
-// import titleImg from '../../../../shared/img/Trainingview/titlePhoto.JPG';
+// import reference from '../../../../shared/img/Trainingview/reference.png';
+
+const reference = `${process.env.PUBLIC_URL}/img/Trainingview/reference.png`;
 
 
-class TrainingCourse extends PureComponent {
+class TrainingCourseAPI extends PureComponent {
   state = {
-    rows: null,
+    // rows: null,
+    isOpen: false,
+    ref: null,
+    // isOpenPlastic: false,
   }
+  // componentWillMount() {
+  //   this.props.getTrainingSlideList();
+  // }
 
-  redirectToPaperQuizPage = () => {
-    history.push('/training/paper_quiz');
+  // componentDidUpdate() {
+  //   this.updateRows();
+  // }
+
+  // updateRows() {
+  //   this.setState({ rows: this.props.training_slides.list });
+  // }
+
+  redirectToQuizPage = (quizId) => {
+    history.push(`/training/quiz/${quizId}`);
     window.location.reload(true);
   }
 
-  redirectToPlasticQuizPage = () => {
-    history.push('/training/plastic_quiz');
+  redirectToTrainingSlidePage = (trainingSlideId) => {
+    history.push(`/training/trainingSlide/${trainingSlideId}`);
     window.location.reload(true);
   }
 
-  redirectToPlasticPage = () => {
-    history.push('/training/plastic_waste_management');
-    window.location.reload(true);
+  closeModal = () => {
+    this.setState({
+      isOpen: false,
+    });
   }
 
-  redirectToPaperPage = () => {
-    history.push('/training/paper_waste_management');
-    window.location.reload(true);
+  openModal = (data) => {
+    // this.props.training_slides.list.map(data => (
+    this.setState({
+      ref: data,
+      isOpen: true,
+    });
+    // console.log(data)
+    // ));
   }
+
+  // closeModalPlastic = () => {
+  //   this.setState({
+  //     isOpenPlastic: false,
+  //   });
+  // }
+
+  // openModalPlastic = () => {
+  //   this.setState({
+  //     isOpenPlastic: true,
+  //   });
+  // }
 
   render() {
-    const { rows } = this.state;
+    const { training_slides } = this.props;
+    const { isOpen, ref } = this.state;
     return (
-      <div>
-        <Row>
-          <Col md={8} lg={8} sm={6} style={{ margin: '0 auto' }}>
-            {rows && JSON.stringify(rows)}
+      <div style={{ margin: '0 auto' }}>
+        { training_slides.list && training_slides.list.map(data => (
+          <div>
             <div className="training-list-content">
-              <CardTitle>
-                <h2 className="training__header">Paper Waste Management</h2><br />
-              </CardTitle>
+              {console.log(data.quizID._id)}
+              <Row width="100%">
+                <h2 className="training__header">{data.Title}</h2>
+                {/* {this.setState({ ref: { data } })} */}
+                {console.log(ref)}
+                <img
+                  src={reference}
+                  alt=""
+                  className="training__reference"
+                  // onClick ={this.setState({ isOpen: true })}
+                  onClick={() => this.openModal(data.Reference)}
+                /><br />
+              </Row>
               <p>
-              &emsp;This section will give you the proper ways to manage paper waste in order
-              &nbsp;to minimize the risks of public health and environmental issues.
+                &emsp;{data.Description}
               </p><br />
-              <p className="training__name">By Ma Candy</p>
+              <p className="training__name">By {data.Name}</p>
               <Button
                 outline
-                onClick={() => this.redirectToPaperPage()}
-                style={{ float: 'right' }}
-                color="info"
-              >
-                View
-              </Button>
-              <Button
-                outline
-                onClick={() => this.redirectToPaperQuizPage()}
+                onClick={() => this.redirectToQuizPage(data.quizID._id)}
                 style={{ float: 'right', margin: '0 10px' }}
                 color="info"
               >
                 Test Your Knowledge
               </Button>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={8} lg={8} sm={6} style={{ margin: '0 auto' }}>
-            {rows && JSON.stringify(rows)}
-            <div className="training-list-content">
-              <CardTitle>
-                <h2 className="training__header">Plastic Waste Management</h2><br />
-                <p>
-                &emsp;This short lesson will teach you how to dispose our plastic waste
-                &nbsp;without creating risk for public health and environment.
-                </p><br />
-              </CardTitle>
-              <p className="training__name">By Ma Candy</p>
               <Button
                 outline
-                color="info"
-                onClick={() => this.redirectToPlasticPage()}
+                onClick={() => this.redirectToTrainingSlidePage(data._id)}
                 style={{ float: 'right' }}
-              >
-                View
-              </Button>
-              <Button
-                outline
-                onClick={() => this.redirectToPlasticQuizPage()}
-                style={{ float: 'right', margin: '0 10px' }}
                 color="info"
               >
-                Test Your Knowledge
+                Learn
               </Button>
             </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={8} lg={8} sm={6} style={{ margin: '0 auto' }}>
-            {rows && JSON.stringify(rows)}
-            <div className="training-list-content">
-              <CardTitle>
-                <h2 className="training__header">E-waste Segregation Training</h2><br />
-              </CardTitle>
-              {/* <StarRatingComponent
-                name="rate3"
-                starCount={5}
-                value={5}
-              /> */}
-              <p className="training__name">By Ma Candy</p>
-              <Button
-                outline
-                color="info"
-                onClick={() => window.open('https://waste-learning.herokuapp.com/index.html')}
-                style={{ float: 'right' }}
+            <br />
+            <div>
+              <Modal
+                isOpen={isOpen}
+                className="modal-dialog--success"
               >
-                View
-              </Button>
+                <div className="modal__header">
+                  <button
+                    className="lnr lnr-cross modal__close-btn"
+                    type="button"
+                    onClick={this.closeModal}
+                  />
+                  {ref && <h4 className="bold-text  modal__title">Reference Websites</h4>}
+                </div>
+                <div className="modal__body">
+                  {ref && ref.map(prop => (
+                    <p>
+                      <a href={prop}>
+                        {prop}
+                      </a><br />
+                    </p>
+                  ))}
+                </div>
+              </Modal>
             </div>
-          </Col>
-        </Row>
+          </div>
+        ))}
+        <div className="training-list-content">
+          <Row>
+            <h2 className="training__header">E-waste Segregation Training</h2><br />
+          </Row>
+          {/* <StarRatingComponent
+            name="rate3"
+            starCount={5}
+            value={5}
+          /> */}
+          <p className="training__name">By May Khine Phyo Shwe</p>
+          <Button
+            outline
+            color="info"
+            onClick={() => window.open('https://waste-learning.herokuapp.com/index.html')}
+            style={{ float: 'right' }}
+          >
+            Learn
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
-export default TrainingCourse;
+export default TrainingCourseAPI;

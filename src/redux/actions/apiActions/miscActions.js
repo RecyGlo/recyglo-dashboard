@@ -12,6 +12,8 @@ import {
   GET_TREND,
   GET_TOTAL_WASTE_DATA,
   GET_TOTAL_WASTE_BY_ORGANIZATION,
+  GET_TOTAL_PICKUPS_BY_ORGANIZATION,
+  GET_CONTRACT_DURATION_FOR_EACH_ORGANIZATION,
   GET_MONTHLY_WASTE_DATA,
   GET_CONTRACT_EXPRIES,
   GET_TRENDLINE_WASTE_DATA,
@@ -169,7 +171,8 @@ export const getTotalWasteData = organization => (dispatch) => {
     });
 };
 
-export const getTotalWasteByOrganization = organizationId => (dispatch) => {
+export const getTotalWasteByOrganization = (organizationId, duration) => (dispatch) => {
+  console.log(duration);
   if (checkJWTExpire()) {
     refreshJWTToken();
   }
@@ -183,6 +186,9 @@ export const getTotalWasteByOrganization = organizationId => (dispatch) => {
     withCredentials: false,
     mode: 'no-cors',
     url: `${BASE_URL}/wastes/organizations/${organizationId}`,
+    params: {
+      duration,
+    },
   })
     .then((response) => {
       if (response.status === GET_SUCCESS) {
@@ -205,7 +211,82 @@ export const getTotalWasteByOrganization = organizationId => (dispatch) => {
     });
 };
 
-export const getMonthlyCollectedWaste = organizationId => (dispatch) => {
+export const getTotalPickupsForEachOrganization = (organizationId, duration) => (dispatch) => {
+  if (checkJWTExpire()) {
+    refreshJWTToken();
+  }
+  axios({
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': true,
+      Authorization: `Bearer ${JWT}`,
+    },
+    withCredentials: false,
+    mode: 'no-cors',
+    url: `${BASE_URL}/pickups/organizations/${organizationId}`,
+    params: {
+      duration,
+    },
+  })
+    .then((response) => {
+      if (response.status === GET_SUCCESS) {
+        dispatch({
+          type: GET_TOTAL_PICKUPS_BY_ORGANIZATION,
+          payload: response.data.data,
+        });
+      } else if (response.status === UNAUTHORIZED) {
+        dispatch(logOut());
+      } else {
+        window.alert('SERVER ERROR FOUND');
+      }
+    })
+    .catch((error) => {
+      if (error.message && error.message === 'Request failed with status code 401') {
+        dispatch(logOut());
+      } else {
+        window.alert(error);
+      }
+    });
+};
+
+export const getContractDurationForEachOrganization = organizationId => (dispatch) => {
+  if (checkJWTExpire()) {
+    refreshJWTToken();
+  }
+  axios({
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': true,
+      Authorization: `Bearer ${JWT}`,
+    },
+    withCredentials: false,
+    mode: 'no-cors',
+    url: `${BASE_URL}/contracts/organizations/${organizationId}`,
+  })
+    .then((response) => {
+      if (response.status === GET_SUCCESS) {
+        dispatch({
+          type: GET_CONTRACT_DURATION_FOR_EACH_ORGANIZATION,
+          payload: response.data.data,
+        });
+      } else if (response.status === UNAUTHORIZED) {
+        dispatch(logOut());
+      } else {
+        window.alert('SERVER ERROR FOUND');
+      }
+    })
+    .catch((error) => {
+      if (error.message && error.message === 'Request failed with status code 401') {
+        dispatch(logOut());
+      } else {
+        window.alert(error);
+      }
+    });
+};
+
+export const getMonthlyCollectedWaste = (organizationId, duration) => (dispatch) => {
   if (checkJWTExpire()) {
     refreshJWTToken();
   }
@@ -225,6 +306,9 @@ export const getMonthlyCollectedWaste = organizationId => (dispatch) => {
     withCredentials: false,
     mode: 'no-cors',
     url: `${url}`,
+    params: {
+      duration,
+    },
   })
     .then((response) => {
       if (response.status === GET_SUCCESS) {
@@ -280,7 +364,6 @@ export const getTrendlineWaste = organizationId => (dispatch) => {
   })
     .then((response) => {
       if (response.status === GET_SUCCESS) {
-        console.log(response);
         dispatch({
           type: GET_TRENDLINE_WASTE_DATA,
           payload: response.data.data,

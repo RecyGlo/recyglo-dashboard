@@ -5,7 +5,7 @@ import AddOrganizationForm from './components/AddOrganizationForm';
 import { addNewOrganization } from '../../../../redux/actions/apiActions/organizationActions';
 
 // eslint-disable-next-line react/prop-types
-const BasicForm = ({ dispatch, startDate }) => (
+const BasicForm = ({ dispatch, startDate, location }) => (
   <Container>
     <Row>
       <Col md={12}>
@@ -13,7 +13,7 @@ const BasicForm = ({ dispatch, startDate }) => (
       </Col>
     </Row>
     <Row>
-      <AddOrganizationForm onSubmit={values => dispatch(addNewOrganization(values, startDate))} />
+      <AddOrganizationForm onSubmit={values => dispatch(addNewOrganization(values, startDate, location))} />
     </Row>
   </Container>
 );
@@ -21,6 +21,7 @@ const BasicForm = ({ dispatch, startDate }) => (
 
 const mapStateToProps = state => ({
   startDate: state.organizations.startDate,
+  location: state.organizations.location,
 });
 
 export default connect(mapStateToProps)(BasicForm);

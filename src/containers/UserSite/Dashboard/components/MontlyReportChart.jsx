@@ -12,10 +12,27 @@ import { getMonthlyCollectedWaste } from '../../../../redux/actions/apiActions/m
 import Panel from '../../../../shared/components/Panel';
 
 class MontlyWasteCollection extends PureComponent {
+  state = {
+    duration: null,
+  }
+
   componentWillMount() {
     const user = JSON.parse(localStorage.getItem('user'));
     // eslint-disable-next-line no-underscore-dangle
     this.props.getMonthlyCollectedWaste(user.organizationId._id);
+  }
+
+  componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (this.props.duration && this.state.duration !== this.props.duration) {
+      // eslint-disable-next-line no-underscore-dangle
+      this.props.getMonthlyCollectedWaste(user.organizationId._id, this.props.duration);
+      this.setState({ duration: this.props.duration });
+    } else if (this.state.duration && this.props.duration === null) {
+      // eslint-disable-next-line no-underscore-dangle
+      this.props.getMonthlyCollectedWaste(user.organizationId._id);
+      this.setState({ duration: this.props.duration });
+    }
   }
 
   render() {
@@ -74,8 +91,8 @@ class MontlyWasteCollection extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMonthlyCollectedWaste: (organizationId) => {
-    dispatch(getMonthlyCollectedWaste(organizationId));
+  getMonthlyCollectedWaste: (organizationId, duration) => {
+    dispatch(getMonthlyCollectedWaste(organizationId, duration));
   },
 });
 

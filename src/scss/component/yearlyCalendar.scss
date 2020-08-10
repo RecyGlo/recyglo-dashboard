@@ -110,6 +110,36 @@ table.calendar td.pickupDates {
   color: white;
 }
 
+table.calendar td.Completed {
+  font-weight: bold;
+  background-color: rgba(99, 228, 13, 0.863);
+  color: white;
+}
+
+table.calendar td.Requested {
+  font-weight: bold;
+  background-color: rgb(253, 190, 16);
+  color: white;
+}
+
+table.calendar td.Cancelled {
+  font-weight: bold;
+  background-color: rgb(180, 42, 38);
+  color: white;
+}
+
+table.calendar td.OnHold {
+  font-weight: bold;
+  background-color: rgb(23, 29, 28);
+  color: white;
+}
+
+table.calendar td.Confirmed {
+  font-weight: bold;
+  background-color: rgb(26, 137, 211);
+  color: white;
+}
+
 div.calendar-controls {
   margin: 5px auto;
   display: table;

@@ -15,6 +15,9 @@ import {
   binReducer,
   binOrderReducer,
   paymentReducer,
+  quizReducer,
+  userAnsQuizReducer,
+  trainingSlideReducer,
 } from '../../redux/reducers/index';
 
 const reducer = combineReducers({
@@ -31,6 +34,9 @@ const reducer = combineReducers({
   bins: binReducer,
   binOrders: binOrderReducer,
   payments: paymentReducer,
+  quizzes: quizReducer,
+  user_ans_quizzes: userAnsQuizReducer,
+  training_slides: trainingSlideReducer,
 });
 
 const createAppStore = initialState => createStore(

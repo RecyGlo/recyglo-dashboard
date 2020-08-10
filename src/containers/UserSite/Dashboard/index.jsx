@@ -1,35 +1,143 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prefer-template */
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import Picker from 'react-month-picker';
 
-import { getTotalWasteByOrganization } from '../../../redux/actions/apiActions/miscActions';
+import {
+  getTotalWasteByOrganization,
+  getTotalPickupsForEachOrganization,
+  getContractDurationForEachOrganization,
+} from '../../../redux/actions/apiActions/miscActions';
 import MontlyReportChart from './components/MontlyReportChart';
+// import CommonItemsFoundGraph from './components/CommonItemsFoundGraph';
 import ItemsReportTable from './components/ItemsReportTable';
 import OverviewPieChart from './components/OverviewPieChart';
 import TrendLineChart from './components/TrendLineChart';
+import TotalCollectedWaste from './components/TotalCollectedWaste';
+import TotalWays from './components/TotalPickups';
+import ServicPeriod from './components/ServicPeriod';
+import TotalCarbonFootprint from './components/TotalCarbonFootprint';
+import MonthBox from './components/MonthBox';
 
 const graphs = ['both', 'bar', 'line'];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 class Dashboard extends React.Component {
   state = {
     graph: 'both',
+    rangeValue: {
+      from: { year: 2018, month: 4 },
+      to: { year: new Date().getFullYear(), month: new Date().getMonth() },
+    },
+    years: {
+      min: { year: 2018, month: 4 },
+      max: { year: new Date().getFullYear(), month: new Date().getMonth() },
+    },
+    monthlyWaste: null,
+    organizationId: null,
+    duration: null,
+    yearSet: false,
   }
 
   componentWillMount() {
     const user = JSON.parse(localStorage.getItem('user'));
     // eslint-disable-next-line no-underscore-dangle
-    this.props.getTotalWasteByOrganization(user.organizationId._id);
+    const organizationId = user.organizationId._id;
+    this.setState({ organizationId });
+    this.props.getTotalWasteByOrganization(organizationId);
+    this.props.getTotalPickupsForEachOrganization(organizationId);
+    this.props.getContractDurationForEachOrganization(organizationId);
   }
+
+  componentDidUpdate() {
+    if (this.props.misc.monthlyWaste && this.props.misc.monthlyWaste !== this.state.monthlyWaste) {
+      const { monthlyWaste } = this.props.misc;
+      const from = monthlyWaste[0].month;
+      const to = monthlyWaste[monthlyWaste.length - 1].month;
+      if (!this.state.yearSet) {
+        const years = {
+          min: { year: new Date(from).getFullYear(), month: new Date(from).getMonth() + 1 },
+          max: { year: new Date(to).getFullYear(), month: new Date(to).getMonth() + 1 },
+        };
+        const rangeValue = {
+          from: { year: new Date(from).getFullYear(), month: new Date(from).getMonth() + 1 },
+          to: { year: new Date(to).getFullYear(), month: new Date(to).getMonth() + 1 },
+        };
+        this.setState({
+          years,
+          yearSet: true,
+          rangeValue,
+        });
+      }
+      // const duration = { from: new Date(monthlyWaste[0].month), to: monthlyWaste[monthlyWaste.length - 1].month };
+      // const user = JSON.parse(localStorage.getItem('user'));
+      // // eslint-disable-next-line no-underscore-dangle
+      // const organizationId = user.organizationId._id;
+      // this.props.getTotalWasteByOrganization(organizationId, duration);
+      // this.props.getTotalPickupsForEachOrganization(organizationId, duration);
+      // this.props.getContractDurationForEachOrganization(organizationId, duration);
+      this.setState({ monthlyWaste });
+    }
+  }
+
+  pickRange = React.createRef()
 
   handleChange = (value) => {
     this.setState({ graph: value.value });
   };
 
+  resetDateRange = () => {
+    // console.log(this.state.rangeValue);
+    // console.log(this.state.years);
+    const { organizationId } = this.state;
+    const rangeValue = {
+      from: this.state.years.min,
+      to: this.state.years.max,
+    };
+    this.props.getTotalWasteByOrganization(organizationId);
+    this.props.getTotalPickupsForEachOrganization(organizationId);
+    this.setState({ rangeValue, duration: null });
+  }
+
+  _handleClickRangeBox = () => {
+    this.pickRange.current.show();
+  }
+
+  handleRangeDissmis = (value) => {
+    const { organizationId } = this.state;
+    const duration = {
+      from: new Date(months[value.from.month - 1] + ' ' + value.from.year),
+      to: new Date(value.to.year, value.to.month, 0),
+    };
+    this.props.getTotalWasteByOrganization(organizationId, duration);
+    this.props.getTotalPickupsForEachOrganization(organizationId, duration);
+    this.setState({ rangeValue: value, duration });
+  }
+
   render() {
     const { misc } = this.props;
-    const { graph } = this.state;
+    const {
+      graph, rangeValue, years, duration,
+    } = this.state;
+    console.log(misc);
+    const pickerLang = {
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      from: 'From',
+      to: 'To',
+    };
+
+    const makeText = (m) => {
+      console.log(m);
+      if (m && m.year && m.month) return (pickerLang.months[m.month - 1] + '. ' + m.year);
+      return '?';
+    };
+
     return (
       <Container className="dashboard">
         <Row>
@@ -39,9 +147,70 @@ class Dashboard extends React.Component {
         </Row>
         <Row>
           {misc && misc.totalWastesByOrganization &&
-            <OverviewPieChart data={misc.totalWastesByOrganization} />
+            <TotalCollectedWaste
+              collectedWaste={misc.totalWastesByOrganization}
+            />
           }
-          <ItemsReportTable />
+          {misc && misc.totalPickupsByOrganization &&
+            <TotalWays
+              ways={misc.totalPickupsByOrganization}
+            />
+          }
+          {misc && misc.contractDurationByOrganization &&
+            <ServicPeriod
+              contracts={misc.contractDurationByOrganization}
+            />
+          }
+          <TotalCarbonFootprint
+            co2={202.1}
+          />
+        </Row>
+
+        <label>
+          <b>Pick A Span of Months</b>
+          <span>(Available years from 2017 to this year)</span>
+        </label>
+        <Row>
+          <Col>
+            <div className="edit">
+              <Picker
+                ref={this.pickRange}
+                years={years}
+                value={rangeValue}
+                lang={pickerLang}
+                theme="light"
+                onChange={this.handleRangeChange}
+                onDismiss={this.handleRangeDissmis}
+              >
+                <MonthBox
+                  value={makeText(rangeValue.from) + ' ~ ' + makeText(rangeValue.to)}
+                  onClick={this._handleClickRangeBox}
+                />
+              </Picker>
+            </div>
+          </Col>
+          <Col lg={1} md={1} sm={1}>
+            <button
+              className="btn btn-secondary"
+              style={{ margin: '20px 0px', padding: 10 }}
+              onClick={this.resetDateRange}
+            >
+              Reset
+            </button>
+          </Col>
+        </Row>
+        <Row>
+          {misc && misc.totalWastesByOrganization &&
+            <OverviewPieChart
+              data={misc.totalWastesByOrganization}
+              firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+              lastMonth={misc.monthlyWaste && misc.monthlyWaste[misc.monthlyWaste.length - 1].month}
+            />
+          }
+          <ItemsReportTable
+            firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+            lastMonth={misc.monthlyWaste && misc.monthlyWaste[misc.monthlyWaste.length - 1].month}
+          />
         </Row>
 
         <div style={{ margin: 30 }}>
@@ -69,7 +238,7 @@ class Dashboard extends React.Component {
         }
         {graph === 'both' &&
           <Row>
-            <MontlyReportChart />
+            <MontlyReportChart duration={duration} />
             <TrendLineChart />
           </Row>
         }
@@ -79,8 +248,14 @@ class Dashboard extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getTotalWasteByOrganization: (organizationId) => {
-    dispatch(getTotalWasteByOrganization(organizationId));
+  getTotalWasteByOrganization: (organizationId, duration) => {
+    dispatch(getTotalWasteByOrganization(organizationId, duration));
+  },
+  getTotalPickupsForEachOrganization: (organizationId, duration) => {
+    dispatch(getTotalPickupsForEachOrganization(organizationId, duration));
+  },
+  getContractDurationForEachOrganization: (organizationId, duration) => {
+    dispatch(getContractDurationForEachOrganization(organizationId, duration));
   },
 });
 

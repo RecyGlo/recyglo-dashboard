@@ -1,17 +1,31 @@
 /* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable jsx-quotes */
+/* eslint-disable max-len */
+/* eslint-disable react/prop-types */
+/* eslint-disable camelcase */
 import React, { PureComponent } from 'react';
 import {
-  Card, CardBody, Col, Button, ButtonToolbar,
+  Card, CardBody, Col, Button, ButtonToolbar, Row,
 } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import mapboxgl from 'mapbox-gl';
+import { CHANGE_LOCATION } from '../../../../../redux/actions/apiActions/ActionTypes';
 import '../../../../../scss/component/date-time-picker.scss';
 import StartDatePicker from './StartDatePicker';
 import ExpiredDatePicker from './ExpiredDatePicker';
 import renderInputField from '../../../../../shared/components/form/FieldComponents';
 import renderSelectField from '../../../../../shared/components/form/Select';
 import history from '../../../../../shared/utils/history';
+import location_icon from '../../../../../shared/img/location_icon.png';
+import expand_icon from '../../../../../shared/img/Expand-icon.png';
+import marker_icon from '../../../../../shared/img/marker.png';
+import plus_icon from '../../../../../shared/img/plus_icon.png';
+import minus_icon from '../../../../../shared/img/minus_icon.png';
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhd2NoYXciLCJhIjoiY2theGNiMWhhMDU0NTJ5bm45d3JpdTZhbyJ9.jirgP7Ok6gUmSSBQpZWL9A';
 const COMPANY_TYPES = [
   'Advertising',
   'Bank',
@@ -46,16 +60,78 @@ class AddOrganizationForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     changeStartDate: PropTypes.func.isRequired,
+    changeLocation: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
+    this.state = {
+      zoom: 12,
+      location: {
+        lng: 96.195129,
+        lat: 16.866070,
+      },
+      startDate: new Date(),
+    };
     this.hiddenInput = this.hiddenInput.bind(this);
   }
-
-  state = {
-    startDate: new Date(),
+  componentWillMount() {
+    // if (this.props.location !== null) {
+    //   this.setState({
+    //     lng: this.props.location.lng,
+    //     lat: this.props.location.lat,
+    //   });
+    // }
+    console.log(this.props.location);
+    this.props.changeLocation(this.props.location);
+    // if (this.props.initialValues.location !== undefined) {
+    //   this.setState({
+    //     location: this.props.initialValues.location,
+    //   });
+    // }
   }
+  componentDidMount() {
+    const { location, zoom } = this.state;
+    console.log(location);
+    const map = new mapboxgl.Map({
+      container: this.mapRef.current,
+      style: 'mapbox://styles/mapbox/streets-v9',
+      center: [location.lng, location.lat],
+      zoom,
+    });
+    // marker
+    let marker = document.createElement('div');
+    marker.className = 'marker';
+    marker = new mapboxgl.Marker({
+      draggable: true,
+    })
+      .setLngLat([this.state.location.lng, this.state.location.lat])
+      .addTo(map);
+    marker.on('dragend', () => {
+      const { lng, lat } = marker.getLngLat();
+      this.setState({
+        location: {
+          lng: lng.toFixed(4),
+          lat: lat.toFixed(4),
+        },
+        zoom: map.getZoom().toFixed(2),
+      });
+      console.log(this.state.location);
+      this.props.changeLocation((this.state.location));
+    });
+    // zoom in zoom out
+    map.addControl(new mapboxgl.NavigationControl());
+    // current location
+    map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    }));
+    // full screen
+    map.addControl(new mapboxgl.FullscreenControl());
+  }
+  mapRef = React.createRef();
 
   handleChange = (date) => {
     console.log(date.toISOString());
@@ -72,7 +148,7 @@ class AddOrganizationForm extends PureComponent {
 
   render() {
     const { handleSubmit } = this.props;
-
+    const { location, zoom } = this.state;
     return (
       <Col md={12} lg={12}>
         <Card>
@@ -154,12 +230,57 @@ class AddOrganizationForm extends PureComponent {
               </div>
               <StartDatePicker />
               <ExpiredDatePicker />
-              <ButtonToolbar className="form__button-toolbar">
-                <Button color="primary" type="submit">Submit</Button>
-                <Button color="secondary" onClick={() => this.redirectToListingPage()}>
-                  Cancel
-                </Button>
-              </ButtonToolbar>
+              <div style={{ width: '100%' }}>
+                <div style={{ width: '70%', display: 'inline-block' }} name='location' >
+                  <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
+                    <div>{`Longitude: ${location.lng} Latitude: ${location.lat} Zoom: ${zoom}`}</div>
+                  </div>
+                  <div ref={this.mapRef} className="absolute top right left bottom" style={{ height: '400px' }} />
+                </div>
+                <div
+                  style={{
+                    width: '30%',
+                    display: 'inline-block',
+                    verticalAlign: 'top',
+                    paddingLeft: '15px',
+                    }}
+                >
+                  <br /><h4 style={{ textAlign: 'center' }}>Please Select your organization location</h4>
+                  <br />
+                  <p>
+                    {/* <span className="lnr lnr-map-marker" style={{ fontSize: '30px' }} /> */}
+                    <img src={marker_icon} alt="marker icon" style={{ width: '30px', height: '30px' }} />
+                    &ensp;This sign shows your selected location.
+                  </p>
+                  <p>
+                    &nbsp;
+                    <img src={plus_icon} alt="zoom in icon" style={{ width: '25px', height: '25px', margin: '0 auto' }} />
+                    &ensp;&nbsp;Click me to zoom in!
+                  </p>
+                  <p>
+                    <img src={minus_icon} alt="zoom out icon" style={{ width: '30px', height: '30px' }} />
+                    &ensp;Click me to zoom out!
+                  </p>
+                  <p>
+                    &nbsp;
+                    <img src={location_icon} alt="Location icon" style={{ width: '25px', height: '25px' }} />
+                    &ensp;&nbsp;Click me to show your current location!
+                  </p>
+                  <p>
+                    &nbsp;
+                    <img src={expand_icon} alt="expand icon" style={{ width: '25px', height: '25px' }} />
+                    &ensp;&nbsp;Click me to get full screen mode!
+                  </p>
+                </div>
+              </div>
+              <Row style={{ marginTop: '15px' }}>
+                <ButtonToolbar className="form__button-toolbar">
+                  <Button color="primary" type="submit">Submit</Button>
+                  <Button color="secondary" onClick={() => this.redirectToListingPage()}>
+                    Cancel
+                  </Button>
+                </ButtonToolbar>
+              </Row>
             </form>
           </CardBody>
         </Card>
@@ -199,11 +320,25 @@ const validate = (values) => {
   if (!values.address) {
     errors.address = 'Required';
   }
+  if (!values.companyType) {
+    errors.companyType = 'Required';
+  }
   return errors;
 };
 
-export default reduxForm({
+const mapStateToProps = state => ({
+  location: state.organizations.location,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeLocation: location => dispatch({
+    type: CHANGE_LOCATION,
+    payload: location,
+  }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'add_organization_form',
   enableReinitialize: true,
   validate,
-})(AddOrganizationForm);
+})(AddOrganizationForm));

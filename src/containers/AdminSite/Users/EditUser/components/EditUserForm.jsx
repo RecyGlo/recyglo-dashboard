@@ -9,13 +9,15 @@ import history from '../../../../../shared/utils/history';
 import renderSelectField from '../../../../../shared/components/form/Select';
 import renderInputField from '../../../../../shared/components/form/FieldComponents';
 
+const USER_TYPES = ['SUPER ADMIN', 'ADMIN', 'OPERATION MANAGER', 'OPERATION', 'FINANNCE OFFICE', 'USER', 'DRIVER'];
+
 class EditOrganizationForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
   };
 
   redirectToListingPage = () => {
-    history.push('/organizations');
+    history.push('/users');
     window.location.reload();
   }
 
@@ -55,12 +57,10 @@ class EditOrganizationForm extends PureComponent {
                     name="type"
                     component={renderSelectField}
                     placeholder="Choose User Type"
-                    options={[
-                      { value: 'ADMIN', label: 'Admin' },
-                      { value: 'DRIVER', label: 'Driver' },
-                      { value: 'USER', label: 'User' },
-                      { value: 'OPERATION', label: 'Operation' },
-                    ]}
+                    options={USER_TYPES.map((prop, key) => (
+                        { key, label: prop, value: prop }
+                      ))
+                    }
                   />
                 </div>
               </div>

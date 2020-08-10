@@ -31,7 +31,7 @@ class EditScheduleModal extends React.PureComponent {
   };
 
   goToDetail = (logisticsId) => {
-    history.push(`/schedules/waste-collection/${logisticsId}`);
+    history.push(`/schedule/waste-collection/${logisticsId}`);
     window.location.reload();
   }
 

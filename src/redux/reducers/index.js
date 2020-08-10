@@ -10,6 +10,9 @@ import trainingReducer from './apiReducers/trainingReducer';
 import binReducer from './apiReducers/binReducer';
 import binOrderReducer from './apiReducers/binOrderReducer';
 import paymentReducer from './apiReducers/paymentReducer';
+import quizReducer from './apiReducers/quizReducer';
+import userAnsQuizReducer from './apiReducers/userAnsQuizReducer';
+import trainingSlideReducer from './apiReducers/trainingSlideReducer';
 
 export {
   themeReducer,
@@ -24,4 +27,7 @@ export {
   binReducer,
   binOrderReducer,
   paymentReducer,
+  quizReducer,
+  userAnsQuizReducer,
+  trainingSlideReducer,
 };

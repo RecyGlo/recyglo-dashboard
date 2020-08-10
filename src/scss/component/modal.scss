@@ -3,7 +3,7 @@
 }
 
 .modal-dialog {
-  max-width: 385px;
+  max-width: 800px;
 }
 
 .modal-content {
@@ -77,6 +77,15 @@
   .modal__title-icon {
     color: $color-accent;
   }
+}
+
+.modal-dialog--info {
+
+  .modal__title-icon {
+    color: $color-accent;
+  }
+  width: 1000px !important;
+  max-width: 1000px !important;
 }
 
 .modal-dialog--warning {
@@ -189,3 +198,4 @@
     background-color: $color-red;
   }
 }
+

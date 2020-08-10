@@ -101,7 +101,7 @@
   display: block;
   font-family: Montserrat !important;
   font-size: 30px !important;
-  color: #258ba5 !important;
+  color: #17a2b8 !important;
 }
 
 .training-list-content {
@@ -110,17 +110,29 @@
   margin-right: 20px;
   padding: 50px;
   position: relative;
-  border: 10px solid #edf5ff;
+  border: 5px solid #edf5ff;
   transition: all 0.3s ease 0s;
-  background-color:rgb(224, 240, 250);
-  border-radius: 15px;
+  background-color:#f5feff;
+  border-radius: 10px;
 }
 
 .training-list-content:hover {
-  border: 10px solid #36a7c4;
+  border: 5px solid #17a3b886;
 }
 
 .training__name {
-  color: #ebba0b !important;
+  color: burlywood !important;
   text-decoration: solid bold;
+}
+
+.training__reference {
+  height: 30px;
+  width: 30px;
+  margin: 0 0 0 auto;
+  cursor: pointer;
+}
+
+// Hide Stepper Buttons
+.stepper-container {
+  display: none;
 }

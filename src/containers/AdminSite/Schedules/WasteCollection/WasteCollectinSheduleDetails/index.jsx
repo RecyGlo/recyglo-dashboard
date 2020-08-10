@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import EditWasteCollectionForm from './EditWasteCollectionForm';
 import { getDriverList, getOperationTeamList } from '../../../../../redux/actions/apiActions/userActions';
-import { getLogisticsScheduleDetail, updateLogiostics } from '../../../../../redux/actions/apiActions/logisticsActions';
+import { getLogisticsScheduleDetail, updateLogistics } from '../../../../../redux/actions/apiActions/logisticsActions';
 
 class WasteCollectionScheduleDetail extends React.Component {
   state={
@@ -34,6 +34,10 @@ class WasteCollectionScheduleDetail extends React.Component {
       if (logisticsDetail.wayNumber) {
         logistics.wayNumber = logisticsDetail.wayNumber;
       }
+      logistics.wayType = {
+        label: logisticsDetail.wayType,
+        value: logisticsDetail.wayType,
+      };
       if (logisticsDetail.vehicle) {
         logistics.vehicle = logisticsDetail.vehicle;
         if (logisticsDetail.vehicle.driver) {
@@ -129,12 +133,18 @@ class WasteCollectionScheduleDetail extends React.Component {
       data.wayNumber = 0;
     }
 
+    if (values.wayType) {
+      data.wayType = values.wayType;
+    } else {
+      data.wayType = '';
+    }
+
     if (values.remark) {
       data.remark = values.remark;
     } else {
       data.remark = ' ';
     }
-    this.props.updateLogiostics(data, this.props.match.params.logisticsId);
+    this.props.updateLogistics(data, this.props.match.params.logisticsId);
   }
 
   render() {
@@ -179,8 +189,8 @@ const mapDispatchToProps = dispatch => ({
   getOperationTeamList: () => {
     dispatch(getOperationTeamList());
   },
-  updateLogiostics: (data, logisticsId) => {
-    dispatch(updateLogiostics(data, logisticsId));
+  updateLogistics: (data, logisticsId) => {
+    dispatch(updateLogistics(data, logisticsId));
   },
 });
 

@@ -11,7 +11,7 @@ import renderSelectField from '../../../../../shared/components/form/Select';
 import history from '../../../../../shared/utils/history';
 
 const redirectToListingPage = () => {
-  history.push('/schedules/trainings');
+  history.push('/schedule/trainings');
   window.location.reload();
 };
 

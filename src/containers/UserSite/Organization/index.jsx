@@ -36,7 +36,9 @@ class OrganizationPage extends React.Component {
       values,
       // eslint-disable-next-line no-underscore-dangle
       this.state.organization._id,
+      this.props.organizations.location,
     );
+    // window.alert(this.props.organizations.location);
   }
 
   render() {
@@ -46,6 +48,7 @@ class OrganizationPage extends React.Component {
         <Row>
           <Card>
             <CardBody>
+              {console.log(organization)}
               <h2>Update your organization detail information</h2>
               {organization &&
                 <EditOrganizationForm
@@ -62,6 +65,7 @@ class OrganizationPage extends React.Component {
                   contactPersonPhoneNumber: organization.contactPersonPhoneNumber,
                   address: organization.address,
                   logo: organization.logo,
+                  location: organization.location,
                 }}
                   onSubmit={this.handleSubmit}
                 />
@@ -75,9 +79,11 @@ class OrganizationPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateOrganization: (data, organizationId) => {
-    dispatch(updateOrganization(data, organizationId));
+  updateOrganization: (data, organizationId, location) => {
+    dispatch(updateOrganization(data, organizationId, location));
   },
 });
-
-export default connect(null, mapDispatchToProps)(OrganizationPage);
+const mapStateToProps = state => ({
+  organizations: state.organizations,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationPage);

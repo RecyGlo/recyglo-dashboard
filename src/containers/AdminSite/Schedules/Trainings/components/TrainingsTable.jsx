@@ -112,7 +112,7 @@ class TrainingTable extends PureComponent {
   );
 
   redirectToEditPage = (trainingId) => {
-    history.push(`/schedules/trainings/${trainingId}`);
+    history.push(`/schedule/trainings/${trainingId}`);
     window.location.reload(true);
   }
 

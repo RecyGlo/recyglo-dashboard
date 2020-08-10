@@ -1,6 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-alert */
+/* eslint-disable max-len */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-nested-ternary */
+
 import React from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -59,7 +63,9 @@ class ScheduleCalendar extends React.Component {
       const events = [];
       Object.keys(logistics).forEach((key) => {
         const startDate = new Date(logistics[key].pickUpTime);
+        // console.log(logistics.wayType);
         const event = {
+          className: logistics[key].wayType !== 'undefined' && logistics[key].wayType === 'Dry' ? 'schedule_wayType_blue' : (logistics[key].wayType === 'Organic' ? 'schedule_wayType_green' : ''),
           title: logistics[key].organizationId.name,
           logistics: logistics[key],
           start: startDate,
@@ -69,6 +75,7 @@ class ScheduleCalendar extends React.Component {
           textColor: '#fff',
         };
         events.push(event);
+        // logistics[key].wayType !== null && console.log(logistics[key].wayType);
       });
       if (this.state.calendarEvents !== events) {
         this.updateEvents(events);

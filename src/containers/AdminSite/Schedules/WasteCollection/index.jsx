@@ -22,7 +22,7 @@ const Logistics = props => (
           color="success"
           style={{ float: 'right' }}
           // eslint-disable-next-line react/prop-types
-          onClick={() => props.history.push('/schedules/waste-collection/calendar')}
+          onClick={() => props.history.push('/schedule/waste-collection/calendar')}
         >
           <p>
             <FaCalendarAlt /> Go To Schedule

@@ -48,8 +48,7 @@ class RadioButtonField extends PureComponent {
 
     return (
       <label
-        // className={`${RadioButtonClass}${className ? ` radio-btn--${className}` : ''}`}
-        className={`${RadioButtonClass}`}
+        className={`${RadioButtonClass}${className ? ` radio-btn--${className}` : ''}`}
       >
         <input
           className="radio-btn__radio"
@@ -59,9 +58,7 @@ class RadioButtonField extends PureComponent {
           checked={value === radioValue}
           disabled={disabled}
         />
-        <span
-          className={`${className ? `radio-btn__radio-${className}` : 'radio-btn__radio-custom'}`}
-        />
+        <span className="radio-btn__radio-custom" />
         {className === 'button'
           ? (
             <span className="radio-btn__label-svg">
@@ -69,12 +66,7 @@ class RadioButtonField extends PureComponent {
               <CloseIcon className="radio-btn__label-uncheck" />
             </span>
           ) : ''}
-        <span
-          // className="radio-btn__label"
-          className={`${className ? `radio-btn__label-${className}` : 'radio-btn__label'}`}
-        >
-          {label}
-        </span>
+        <span className={`${className ? `radio-btn__label-${className}` : 'radio-btn__label'}`}>{label}</span>
       </label>
     );
   }

@@ -34,9 +34,22 @@ class SidebarContent extends Component {
           route="/"
           onClick={this.hideSidebar}
         />
-        <SidebarLink icon="calendar-full" title="Schedules" route="/schedules" onClick={this.hideSidebar} />
+        <SidebarLink icon="calendar-full" title="Schedule" route="/schedule" onClick={this.hideSidebar} />
+        <SidebarLink icon="database" title="Data Table" route="/data_table" onClick={this.hideSidebar} />
         <SidebarLink icon="graduation-hat" title="Training" route="/training" onClick={this.hideSidebar} />
         <SidebarLink icon="book" title="Reports" route="/reporting" onClick={this.hideSidebar} />
+        <SidebarLink
+          title="Contact"
+          icon="phone"
+          route="/contact"
+          onClick={this.hideSidebar}
+        />
+        <SidebarLink
+          title="Terms & conditions"
+          icon="license"
+          route="/terms_and_conditions"
+          onClick={this.hideSidebar}
+        />
         {/* <SidebarLink
           icon="pencil"
           title="On Demand Request"

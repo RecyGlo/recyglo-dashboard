@@ -94,6 +94,7 @@ class EditWasteCollectionForm extends PureComponent {
   state= {
     status: ['REQUESTED', 'CONFIRMED', 'CANCELLED', 'ONHOLD', 'COMPLETED'],
     productTypes: ['Papers', 'Plastics', 'Cans', 'Glasses', 'E-waste', 'Organic'],
+    WayType: ['Dry', 'Organic', 'Dry + Organic'],
     aWeekAgo: new Date().setDate(new Date().getDate() - 7),
   }
 
@@ -150,6 +151,21 @@ class EditWasteCollectionForm extends PureComponent {
           type="text"
           placeholder="Way Number"
         />
+        <div className="form__form-group">
+          <span className="form__form-group-label">Way Type</span>
+          <div className="form__form-group-field">
+            <Field
+              name="wayType"
+              placeholder="Way Type"
+              component={renderSelectField}
+              options={this.state.WayType
+                && this.state.WayType.map((prop, key) => (
+                  { key, label: prop, value: prop }
+                ))
+              }
+            />
+          </div>
+        </div>
         <div className="form__form-group">
           <span className="form__form-group-label">Driver</span>
           <div className="form__form-group-field">

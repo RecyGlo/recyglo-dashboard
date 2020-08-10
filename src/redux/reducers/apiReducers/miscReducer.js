@@ -4,6 +4,8 @@ import {
   GET_TREND,
   GET_TOTAL_WASTE_DATA,
   GET_TOTAL_WASTE_BY_ORGANIZATION,
+  GET_TOTAL_PICKUPS_BY_ORGANIZATION,
+  GET_CONTRACT_DURATION_FOR_EACH_ORGANIZATION,
   GET_MONTHLY_WASTE_DATA,
   CHANGE_FILTER_ORGANIZATION,
   GET_CONTRACT_EXPRIES,
@@ -16,6 +18,8 @@ const INITIAL_STATE = {
   trend: null,
   totalWastes: null,
   totalWastesByOrganization: null,
+  totalPickupsByOrganization: null,
+  contractDurationByOrganization: null,
   monthlyWaste: null,
   trendlineWaste: null,
   filterOrganization: null,
@@ -34,6 +38,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, totalWastes: action.payload };
     case GET_TOTAL_WASTE_BY_ORGANIZATION:
       return { ...state, totalWastesByOrganization: action.payload };
+    case GET_TOTAL_PICKUPS_BY_ORGANIZATION:
+      return { ...state, totalPickupsByOrganization: action.payload };
+    case GET_CONTRACT_DURATION_FOR_EACH_ORGANIZATION:
+      return { ...state, contractDurationByOrganization: action.payload };
     case GET_MONTHLY_WASTE_DATA:
       return { ...state, monthlyWaste: action.payload };
     case GET_TRENDLINE_WASTE_DATA:

@@ -99,6 +99,19 @@ class ReportingForm extends React.Component {
     return comparison;
   }
 
+  sortTrendlineData = (a, b) => {
+    // Use toUpperCase() to ignore character casing
+    const valueA = new Date(a.date);
+    const valueB = new Date(b.date);
+    let comparison = 0;
+    if (valueA > valueB) {
+      comparison = 1;
+    } else if (valueA < valueB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
   createGenerationData = (value) => {
     const data = value.ways;
     const generationData = {};
@@ -107,6 +120,7 @@ class ReportingForm extends React.Component {
     let totalKg = 0;
     let maxMonth = null;
     let minMonth = null;
+    const dates = [];
     // // calculate total weight and create data for bar chart
     for (const key in data) {
       const productTypes = {};
@@ -114,6 +128,8 @@ class ReportingForm extends React.Component {
       generationData[key] = { total: 0 };
       for (let i = 0; i < data[key].length; i += 1) {
         let date = new Date(data[key][i].pickUpTime);
+        date.setDate(1);
+
         if (maxMonth === null || minMonth === null) {
           maxMonth = date;
           minMonth = date;
@@ -126,6 +142,10 @@ class ReportingForm extends React.Component {
           }
         }
         date = date.toLocaleDateString();
+
+        if (!dates.includes(date)) {
+          dates.push(date);
+        }
         for (let j = 0; j < data[key][i].items.length; j += 1) {
           totalKg += data[key][i].items[j].quantity;
 
@@ -140,35 +160,52 @@ class ReportingForm extends React.Component {
               name: WASTES[productType],
               value: parseFloat(data[key][i].items[j].quantity.toFixed(2)),
             });
-            totalCompositionData[productType] = data[key][i].items[j].quantity;
           } else {
             // eslint-disable-next-line operator-assignment
             tmp[productTypes[productType]].value += data[key][i].items[j].quantity;
             tmp[productTypes[productType]].value =
             parseFloat((tmp[productTypes[productType]].value).toFixed(2));
-            totalCompositionData[productType] += data[key][i].items[j].quantity;
           }
 
           // Create Trendline Data
+          const quantity = parseFloat(data[key][i].items[j].quantity.toFixed(2));
           if (!Object.keys(trendlineData).includes(productType)) {
-            trendlineData[productType] = { data: [{ date, value: data[key][i].items[j].quantity }], total: data[key][i].items[j].quantity };
+            totalCompositionData[productType] = quantity;
+            trendlineData[productType] = { data: [{ date, value: quantity }], total: quantity };
           } else {
+            let dateContained = false;
+            totalCompositionData[productType] += quantity;
             for (let k = 0; k < trendlineData[productType].data.length; k += 1) {
               if (trendlineData[productType].data[k].date === date) {
-                trendlineData[productType].data[k].value += data[key][i].items[j].quantity;
-                trendlineData[productType].total += data[key][i].items[j].quantity;
-                break;
-              } else {
-                trendlineData[productType].data.push({ date, value: data[key][i].items[j].quantity });
-                trendlineData[productType].total += data[key][i].items[j].quantity;
+                trendlineData[productType].data[k].value += quantity;
+                trendlineData[productType].data[k].value = parseFloat(trendlineData[productType].data[k].value.toFixed(2));
+                trendlineData[productType].total += quantity;
+                dateContained = true;
                 break;
               }
+            }
+            if (dateContained === false) {
+              trendlineData[productType].data.push({ date, value: quantity });
+              trendlineData[productType].total += quantity;
             }
           }
         }
       }
       generationData[key].chartData = tmp;
       tmp = [];
+    }
+
+    // Adding 0 data
+    for (const key in trendlineData) {
+      const tmp = [];
+      for (let i = 0; i < trendlineData[key].data.length; i += 1) {
+        tmp.push(trendlineData[key].data[i].date);
+      }
+      const filteredDate = dates.filter(item => !tmp.includes(item));
+      for (const date in filteredDate) {
+        trendlineData[key].data.push({ date: filteredDate[date], value: 0 });
+      }
+      trendlineData[key].data.sort(this.sortTrendlineData);
     }
 
     const tmp = [];
@@ -316,6 +353,13 @@ class ReportingForm extends React.Component {
       <Col md={12} lg={12}>
         <Card>
           <CardBody>
+            {/* <CardTitle>Card title</CardTitle> */}
+            {/* eslint-disable-next-line max-len */}
+            <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterlysince the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
+            {/* <p>Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterlysince the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p> */}
+            <p>You can download the resulting quarterly reports containing the quantity and qualityof the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
+            <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
+            <hr />
             {organization &&
               <CreateQuarterModal
                 organization={organization._id}

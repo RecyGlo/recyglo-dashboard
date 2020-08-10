@@ -41,7 +41,7 @@ class TotalComposition extends PureComponent {
           <div className="total-composition-title">
             <div style={{ width: '70%', float: 'left' }}>
               <h5>Waste Composition (%) </h5>
-              <h4>Monthly Waste Audit Waste Composition Percentage</h4>
+              <h4>Overall Waste Composition</h4>
             </div>
             <div style={{ width: '30%' }}>
               {quarters.length > 1 ?

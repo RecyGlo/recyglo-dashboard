@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-nested-ternary */
+
 import React from 'react';
 import moment from 'moment';
 import { Calendar, CalendarControls } from 'react-yearly-calendar';
@@ -19,11 +22,16 @@ import history from '../../../../shared/utils/history';
 class YearlyCalendar extends React.Component {
   state = {
     year: new Date().getFullYear(),
-    pickupDates: null,
+    Cancelled: null,
+    OnHold: null,
+    Confirmed: null,
+    Completed: null,
+    Requested: null,
     logistics: null,
     logisticsDetails: {},
     isOpen: false,
     pickedDate: null,
+    updated: false,
   };
 
   componentWillMount() {
@@ -32,21 +40,45 @@ class YearlyCalendar extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.logistics.list && this.props.logistics.list !== this.state.logistics) {
+    this.props.getLogisticsByOrganization(this.props.organizationId);
+    if (this.props.logistics.list && this.props.logistics.list !== this.state.logistics && this.state.updated === false) {
       const logistics = this.props.logistics.list;
-      const pickupDates = [];
+      const Confirmed = [];
+      const Cancelled = [];
+      const OnHold = [];
+      const Completed = [];
+      const Requested = [];
       const logisticsDetails = {};
       Object.keys(logistics).forEach((key) => {
         let pickupDate = new Date(logistics[key].pickUpTime);
         pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)}`;
         // console.log(pickupDate);
+        logistics[key].status && logistics[key].status === 'REQUESTED' ?
+          // console.log(logistics[key].statuss)
+          Requested.push(pickupDate)
+          :
+          (logistics[key].status === 'COMPLETED' ?
+            Completed.push(pickupDate)
+            :
+            (logistics[key].status === 'CANCELLED' ?
+              Cancelled.push(pickupDate)
+              :
+              (logistics[key].status === 'CONFIRMED' ?
+                Confirmed.push(pickupDate)
+                :
+                OnHold.push(pickupDate)
+              )
+            )
+          );
+        // console.log('cm');
+        // console.log(Completed + Requested);
         logisticsDetails[pickupDate] = logistics[key];
-        pickupDates.push(pickupDate);
       });
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
-        pickupDates, logistics, logisticsDetails,
+        logistics, logisticsDetails, Completed, Requested, Confirmed, OnHold, Cancelled, updated: true,
       });
+      // console.log(Requested);
     }
   }
 
@@ -92,13 +124,19 @@ class YearlyCalendar extends React.Component {
   goToDetail = () => {
     const date = this.state.pickedDate.split(' ')[0];
     const logisticsId = this.state.logisticsDetails[date]._id;
-    history.push(`/schedules/waste-collection/${logisticsId}`);
+    history.push(`/schedule/waste-collection/${logisticsId}`);
     window.location.reload();
   }
 
 
   render() {
-    const { year, pickupDates, isOpen } = this.state;
+    const {
+      year, Completed, Requested, isOpen, Confirmed, OnHold, Cancelled,
+    } = this.state;
+    console.log(Requested);
+    const { logistics } = this.props;
+    let pickupData = null;
+    // console.log(pickupDates);
     return (
       <div>
         <CalendarControls
@@ -108,12 +146,54 @@ class YearlyCalendar extends React.Component {
           onNextYear={() => this.onNextYear()}
           goToToday={() => this.goToToday()}
         />
-        {pickupDates &&
+        {/* { Completed &&
           <Calendar
             year={year}
             // showDaysOfWeek={false}
-            customClasses={{ pickupDates }}
+            customClasses={{ Completed }}
             onPickDate={(date, classes) => this.datePicked(date, classes)}
+            // className={logistics.list &&
+            //   Object.keys(logistics.list).forEach((key) => {
+            //     let pickupDate = new Date(logistics.list[key].pickUpTime);
+            //     pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)} ${pickupDate.getHours()}:${pickupDate.getMinutes() < 10 ? '0' : ''}${pickupDate.getMinutes()}`;
+            //     // console.log(pickupDate);
+            //     pickupDate === this.state.pickedDate ?
+            //     (logistics.list[key].status === 'Requsted' ?
+            //       (logistics.list[key].wayType && logistics.list[key].wayType === 'Dry' ? 'schedule_wayType_blue' : (logistics.list[key].wayType === 'Organic' ? 'schedule_wayType_green' : ''))
+            //       :
+            //       console.log('no'))
+            //     :
+            //     console.log('no');
+            //   })
+            // }
+            // className="test"
+            style={{ color: 'red' }}
+          />
+        } */}
+        {/* {console.log(Completed)} */}
+        {Requested && Completed && Confirmed && Cancelled && OnHold &&
+          <Calendar
+            year={year}
+            // showDaysOfWeek={false}
+            customClasses={{
+              Requested, Completed, Confirmed, Cancelled, OnHold,
+            }}
+            onPickDate={(date, classes) => this.datePicked(date, classes)}
+            // className={logistics.list &&
+            //   Object.keys(logistics.list).forEach((key) => {
+            //     let pickupDate = new Date(logistics.list[key].pickUpTime);
+            //     pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)} ${pickupDate.getHours()}:${pickupDate.getMinutes() < 10 ? '0' : ''}${pickupDate.getMinutes()}`;
+            //     // console.log(pickupDate);
+            //     pickupDate === this.state.pickedDate ?
+            //     (logistics.list[key].status === 'Requsted' ?
+            //       (logistics.list[key].wayType && logistics.list[key].wayType === 'Dry' ? 'schedule_wayType_blue' : (logistics.list[key].wayType === 'Organic' ? 'schedule_wayType_green' : ''))
+            //       :
+            //       console.log('no'))
+            //     :
+            //     console.log('no');
+            //   })
+            // }
+            // className="test"
           />
         }
         <Modal
@@ -124,9 +204,23 @@ class YearlyCalendar extends React.Component {
             <button className="lnr lnr-cross modal__close-btn" type="button" onClick={this.closeModal} />
             <h4 className="bold-text  modal__title">Pickup Time</h4>
           </div>
-          {this.state.pickedDate &&
+          {this.state.pickedDate && logistics.list &&
             <div className="modal__body">
               <p>{new Date(this.state.pickedDate).toDateString()} {new Date(this.state.pickedDate).toLocaleTimeString()} - {new Date(new Date(this.state.pickedDate).setMinutes(new Date(this.state.pickedDate).getMinutes() + 30)).toLocaleTimeString()}</p>
+              {/* <p>{logistics}</p> */}
+              <div>
+                {
+                Object.keys(logistics.list).forEach((key) => {
+                  let pickupDate = new Date(logistics.list[key].pickUpTime);
+                  pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)} ${pickupDate.getHours()}:${pickupDate.getMinutes() < 10 ? '0' : ''}${pickupDate.getMinutes()}`;
+                  // console.log(pickupDate);
+                  pickupDate === this.state.pickedDate ? (pickupData = logistics.list[key].status) : console.log('no');
+                })
+                }
+              </div>
+              {/* {console.log(logistics.list)} */}
+              {/* {console.log(this.state.pickedDate)} */}
+              <p>{pickupData}</p>
               <Button
                 className="icon"
                 color="success"

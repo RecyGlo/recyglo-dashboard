@@ -124,3 +124,24 @@
 .page-link{
   color: #00c0d4;
 }
+
+.dashboard_wayType_green {
+  td{
+    color: #0fbd0f !important;
+  }
+}
+
+.dashboard_wayType_blue {
+  td{
+    color: rgb(47, 115, 240) !important;
+  }
+}
+.schedule_wayType_green {
+  background-color: #0fbd0f !important;
+  border-color: #067a0b !important;
+}
+
+.schedule_wayType_blue {
+  background-color: rgb(47, 115, 240) !important;
+  border-color: #0731bb !important;
+}

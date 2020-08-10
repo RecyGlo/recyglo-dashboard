@@ -1,4 +1,8 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable max-len */
+/* eslint-disable no-nested-ternary */
+
+
 import React from 'react';
 import { Badge, Table } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -25,9 +29,11 @@ class TodaySchedule extends React.Component {
             </tr>
           </thead>
           <tbody>
+            {console.log(logistics.wayType)}
             {logistics.today && logistics.today.length > 0 ?
               logistics.today.map((prop, key) => (
-                <tr>
+                <tr className={prop.wayType !== 'undefined' && prop.wayType === 'Dry' ? 'dashboard_wayType_blue' : (prop.wayType === 'Organic' ? 'dashboard_wayType_green' : '')}>
+                  {/* {console.log(logistics.wayType)} */}
                   <td>{key + 1}</td>
                   <td>{prop.organizationId.name}</td>
                   <td>{new Date(prop.pickUpTime).toLocaleString()}</td>

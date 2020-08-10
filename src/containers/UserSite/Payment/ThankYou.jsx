@@ -3,7 +3,7 @@ import { Container, Row, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import thankyou from '../../../shared/img/ThankYou/thankyou.png';
 import facebook from '../../../shared/img/ThankYou/facebook.png';
-import linkedin from '../../../shared/img/ThankYou/linkedin.png';
+import linkedin from '../../../shared/img/ThankYou/linked-in.png';
 import mail from '../../../shared/img/ThankYou/mail.png';
 import web from '../../../shared/img/ThankYou/Web.png';
 import history from '../../../shared/utils/history';

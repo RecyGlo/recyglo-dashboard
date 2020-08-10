@@ -15,6 +15,7 @@ $themes: (
     colorBubbleActive: rgba(234, 238, 255, 0.6),
     colorScrollbar: #B4BFD0,
     colorFitness: #646777,
+    accentColor: #17737e,
   ),
   dark: (
     colorBackground: #232329,
@@ -31,7 +32,8 @@ $themes: (
     colorBubble: rgba(68, 79, 97, 0.65),
     colorBubbleActive: rgba(92, 104, 156, 0.6),
     colorScrollbar: #606071,
-    colorFitness: #ffffff
+    colorFitness: #ffffff,
+    accentColor: #17737e,
   )
 );
 

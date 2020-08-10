@@ -6,14 +6,32 @@ import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend,
 } from 'recharts';
 
+// const data = [
+//   { name: 'Group A', value: 400 },
+//   { name: 'Group B', value: 1 },
+//   { name: 'Group C', value: 300 },
+//   { name: 'Group D', value: 200 },
+// ];
+
 const COLORS = {
-  Papers: '#5886a5',
-  Plastics: '#de425b',
-  Cans: '#78ab63',
-  Glasses: '#ffb700',
+  Paper: '#5886a5',
+  Plastic: '#de425b',
+  Can: '#78ab63',
+  Glass: '#FFF314',
   'E-waste': '#FF7F00',
   Organic: '#654321',
 };
+
+// const wastes = {
+//   Papers: 'Paper',
+//   Plastics: 'Plastic',
+//   Cans: 'Can',
+//   Glasses: 'Glass',
+//   'E-waste': 'E-waste',
+//   Organic: 'Organic',
+// };
+
+// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -32,24 +50,24 @@ const renderCustomizedLabel = ({
 
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
-  state = {
-    data: [],
-  }
+  // state = {
+  //   data: [],
+  // }
 
-  componentWillMount() {
-    const { data } = this.props;
-    const tmp = [];
-    for (const key in data) {
-      tmp.push({
-        name: key,
-        value: data[key],
-      });
-    }
-    this.setState({ data: tmp });
-  }
+  // componentWillMount() {
+  //   const { data } = this.props;
+  //   const tmp = [];
+  //   for (const key in data) {
+  //     tmp.push({
+  //       name: wastes[key],
+  //       value: data[key],
+  //     });
+  //   }
+  //   this.setState({ data: tmp });
+  // }
 
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
     return (
       <ResponsiveContainer width={550} height={350}>
         {data.length > 0 &&
@@ -61,7 +79,10 @@ export default class Example extends PureComponent {
               cy={150}
               labelLine
               label={renderCustomizedLabel}
-              outerRadius={120}
+              // outerRadius={120}
+              innerRadius={40}
+              outerRadius={100}
+              stroke=""
               fill="#8884d8"
               dataKey="value"
             >

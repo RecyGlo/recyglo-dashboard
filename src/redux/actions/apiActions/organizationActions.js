@@ -89,11 +89,13 @@ export const getOrganizationDetail = organizationId => (dispatch) => {
     });
 };
 
-export const addNewOrganization = (data, startDate) => (dispatch) => {
+export const addNewOrganization = (data, startDate, location) => (dispatch) => {
+  console.log(data);
   if (data.companyType) {
     data.companyType = data.companyType.value;
   }
   data.startDate = startDate;
+  if (location) { data.location = location; }
   axios({
     method: 'post',
     headers: {
@@ -110,6 +112,7 @@ export const addNewOrganization = (data, startDate) => (dispatch) => {
       if (response.status === INSERT_SUCCESS) {
         // console.log(response.data);
         window.alert(response.data.message);
+        // console.log(response.data);
         dispatch({
           type: ADD_NEW_ORGANIZATION,
           payload: response.data.message,
@@ -122,11 +125,13 @@ export const addNewOrganization = (data, startDate) => (dispatch) => {
       }
     })
     .catch((error) => {
-      window.alert(error);
+      window.alert(error.response.data);
+      // console.log(Object.keys(error));
+      console.log(error.response);
     });
 };
 
-export const updateOrganization = (data, organizationId, startDate, expiredDate) => (dispatch) => {
+export const updateOrganization = (data, organizationId, location, startDate, expiredDate) => (dispatch) => {
   if (checkJWTExpire()) {
     refreshJWTToken();
   }
@@ -144,6 +149,10 @@ export const updateOrganization = (data, organizationId, startDate, expiredDate)
   if (expiredDate) {
     // eslint-disable-next-line no-param-reassign
     data.expiredDate = new Date(expiredDate);
+  }
+  if (location) {
+    // eslint-disable-next-line no-param-reassign
+    data.location = location;
   }
 
   if (data.logo && typeof data.logo !== 'string') {

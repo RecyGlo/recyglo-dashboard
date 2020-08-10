@@ -50,3 +50,12 @@
   top: -90px;
   left: -65px;
 }
+
+.marker {
+  background-image: url('../shared/img/marker.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 0%;
+  cursor: pointer;
+}
