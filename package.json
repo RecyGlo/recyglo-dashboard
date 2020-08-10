@@ -103,7 +103,8 @@
   "scripts": {
     "start": "npm start",
     "build": "npm build",
-    "test": "npm test"
+    "test": "npm test",
+    "eb:prod": "npm run build && npm run start:prod"
   },
   "devDependencies": {
     "@babel/core": "7.1.0",
