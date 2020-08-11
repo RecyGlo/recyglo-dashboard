@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.test.recyglo.info';
+export const BASE_URL = 'https://api.recyglo.info';
 // export const BASE_URL = 'http://localhost:3000';
 
 export const END_POINT_REPORTS = `${BASE_URL}/reports`;
