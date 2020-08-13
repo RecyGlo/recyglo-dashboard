@@ -23,12 +23,11 @@ import TrendLineGraph from './TrendLineGraph';
 import ItemsFound from './ItemsFound';
 import Composition from './Composition';
 import TotalComposition from './TotalComposition';
-import CreateSummaryForm from './CreateSummaryForm';
 import Summary from './Summary';
 
-// const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
-//   'July', 'August', 'September', 'October', 'November', 'December',
-// ];
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
 
 const WASTES = {
   Papers: 'Paper',
@@ -39,7 +38,7 @@ const WASTES = {
   Organic: 'Organic',
 };
 
-class ReportingForm extends React.Component {
+class ReportingFormWithAutoSummary extends React.Component {
   state = {
     organization: null,
     data: {},
@@ -49,7 +48,6 @@ class ReportingForm extends React.Component {
     findings: null,
     recommendations: null,
     reportId: null,
-    reportData: null,
   }
 
   componentWillMount() {
@@ -102,7 +100,7 @@ class ReportingForm extends React.Component {
     const generationData = {};
     const trendlineData = {};
     let totalCompositionData = {};
-    // let totalKg = 0;
+    let totalKg = 0;
     let maxMonth = null;
     let minMonth = null;
     const dates = [];
@@ -131,7 +129,7 @@ class ReportingForm extends React.Component {
           dates.push(date);
         }
         for (let j = 0; j < data[key][i].items.length; j += 1) {
-          // totalKg += data[key][i].items[j].quantity;
+          totalKg += data[key][i].items[j].quantity;
 
           const { productType } = data[key][i].items[j];
 
@@ -208,67 +206,74 @@ class ReportingForm extends React.Component {
 
     totalCompositionData.sort(this.sortCompositionData);
 
-    // const findings = [
-    //   `${this.state.organization.value.name} recycled ${totalKg.toFixed(2)} Kg of waste from ${MONTH_NAMES[minMonth.getMonth()]} ${minMonth.getFullYear()} to ${MONTH_NAMES[maxMonth.getMonth()]} ${maxMonth.getFullYear()}.`,
-    //   `The most commonly found waste was ${totalCompositionData[0].name.toLowerCase()}.`,
-    //   `No mixed trash was found in the audit which states that ${this.state.organization.name} is strong in segregation.`,
-    //   `The most common percentage of waste was ${totalCompositionData[0].name.toLowerCase()} occupying ${((totalCompositionData[0].value / totalKg) * 100).toFixed(2)} % of total waste
-    //   ${totalCompositionData.length > 1 && ', followed by '} ${totalCompositionData.slice(1, totalCompositionData.length).map(key => ` ${key.name.toLowerCase()} with ${((key.value / totalKg) * 100).toFixed(2)}%`)}.`,
-    // ];
+    const findings = [
+      `${this.state.organization.value.name} recycled ${totalKg.toFixed(2)} Kg of waste from ${MONTH_NAMES[minMonth.getMonth()]} ${minMonth.getFullYear()} to ${MONTH_NAMES[maxMonth.getMonth()]} ${maxMonth.getFullYear()}.`,
+      `The most commonly found waste was ${totalCompositionData[0].name.toLowerCase()}.`,
+      `No mixed trash was found in the audit which states that ${this.state.organization.name} is strong in segregation.`,
+      `The most common percentage of waste was ${totalCompositionData[0].name.toLowerCase()} occupying ${((totalCompositionData[0].value / totalKg) * 100).toFixed(2)} % of total waste
+      ${totalCompositionData.length > 1 && ', followed by '} ${totalCompositionData.slice(1, totalCompositionData.length).map(key => ` ${key.name.toLowerCase()} with ${((key.value / totalKg) * 100).toFixed(2)}%`)}.`,
+    ];
 
-    // const ALL_RECOMMENDATIONS = {
-    //   Papers: [
-    //     'Paper waste can be significantly minimized by setting policies such as to print only when absolutely necessary, to print on both sides of paper, to reserve one- sided paper for reuse and repurpose.',
-    //     'Efficient use of web resources such as Google Docs or Slide Share, and electronic devices such as tablets and computers can also reduce the generation of paper waste.',
-    //     'Digitalization can be integrated into the operations to promote “Green Office” and “Paperless Office” concepts.',
-    //     'Paper waste can be reduced by printing only what is needed and storing soft office copies rather than hard copies.',
-    //     'Reducing the font size and printing margins will also help to reduce paper waste resulting from printing.',
-    //   ],
-    //   Plastics: [
-    //     'Consumption of plastic can be reduced by using water containers and water refill systems. Cups that can be used multiple times are recommended.',
-    //     'Using water bottles, reusable shopping bags, and containers such as lunch boxes are good strategies to reduce plastic.',
-    //     'More compostable and reusable options should be used for common for commonly found single-use materials such as straws or coffee filters.',
-    //     'Employees should be encouraged to use their own bottles instead of buying water PET bottles.',
-    //   ],
-    //   Glasses: [
-    //     'Glass waste can be reduced by reusing glass bottles in different ways.',
-    //   ],
-    //   Organic: [
-    //     'The generation of compostable waste should be monitored and waste composting makes the company more sustainable.',
-    //     'Some important notes about composting are: organic material should be chopped into smaller pieces. Water and oil should be avoided as much as possible. Absorbent materials such as newspaper and used tissues are recommended to be put inside the barrel to absorb the moisture from the food scraps. Bokashi bran should be added to every two inches of compost in order to accelerate the composting process.',
-    //   ],
-    //   '3r': [
-    //     'Keeping the good practices of 3Rs – Reducing, Reusing, and Recycling – is highly recommended.',
-    //     'According to the waste hierarchy practice, waste prevention should be prioritized first, then recovery, and finally recycling to maximize economic and environmental benefits.',
-    //     '3Rs “Reducing, Reusing, and Recycling” should be encouraged as much as possible. ',
-    //     'Awareness orientations and trainings should be provided to the employees to introduce the 5R Policies (Reducing, Reusing, Recycling, Repurposing, and Refusing).',
-    //   ],
-    //   General: [
-    //     'According to the waste hierarchy practice, waste prevention should be prioritized first, then recovery, and finally recycling to maximize economic and environmental benefits.',
-    //     'Providing waste management training to employees can improve the overall waste recycling efficiency and reduces the contamination of the recyclables.',
-    //     'To prevent non-recyclable waste mixing with the recyclable ones, signage and clear instructions should be displayed near the waste bins.',
-    //     'Recycling tips and awareness posters can be posted around the office to engage more people in recycling.',
-    //     'Sustainable alternatives such as looking for products with less packaging or refusing to use disposable products should be promoted to reduce waste generation.',
-    //     '“Green office” and “Zero Landfill” concepts can be introduced to the employees with in-house policies, trainings, orientations and waste awareness campaign.',
-    //     'New sustainable waste management solutions such as composting can be integrated into your operations to be an eco-friendly enterprise.',
-    //   ],
-    // };
+    const ALL_RECOMMENDATIONS = {
+      Papers: [
+        'Paper waste can be significantly minimized by setting policies such as to print only when absolutely necessary, to print on both sides of paper, to reserve one- sided paper for reuse and repurpose.',
+        'Efficient use of web resources such as Google Docs or Slide Share, and electronic devices such as tablets and computers can also reduce the generation of paper waste.',
+        'Digitalization can be integrated into the operations to promote “Green Office” and “Paperless Office” concepts.',
+        'Paper waste can be reduced by printing only what is needed and storing soft office copies rather than hard copies.',
+        'Reducing the font size and printing margins will also help to reduce paper waste resulting from printing.',
+      ],
+      Plastics: [
+        'Consumption of plastic can be reduced by using water containers and water refill systems. Cups that can be used multiple times are recommended.',
+        'Using water bottles, reusable shopping bags, and containers such as lunch boxes are good strategies to reduce plastic.',
+        'More compostable and reusable options should be used for common for commonly found single-use materials such as straws or coffee filters.',
+        'Employees should be encouraged to use their own bottles instead of buying water PET bottles.',
+      ],
+      Glasses: [
+        'Glass waste can be reduced by reusing glass bottles in different ways.',
+      ],
+      Organic: [
+        'The generation of compostable waste should be monitored and waste composting makes the company more sustainable.',
+        'Some important notes about composting are: organic material should be chopped into smaller pieces. Water and oil should be avoided as much as possible. Absorbent materials such as newspaper and used tissues are recommended to be put inside the barrel to absorb the moisture from the food scraps. Bokashi bran should be added to every two inches of compost in order to accelerate the composting process.',
+      ],
+      '3r': [
+        'Keeping the good practices of 3Rs – Reducing, Reusing, and Recycling – is highly recommended.',
+        'According to the waste hierarchy practice, waste prevention should be prioritized first, then recovery, and finally recycling to maximize economic and environmental benefits.',
+        '3Rs “Reducing, Reusing, and Recycling” should be encouraged as much as possible. ',
+        'Awareness orientations and trainings should be provided to the employees to introduce the 5R Policies (Reducing, Reusing, Recycling, Repurposing, and Refusing).',
+      ],
+      General: [
+        'According to the waste hierarchy practice, waste prevention should be prioritized first, then recovery, and finally recycling to maximize economic and environmental benefits.',
+        'Providing waste management training to employees can improve the overall waste recycling efficiency and reduces the contamination of the recyclables.',
+        'To prevent non-recyclable waste mixing with the recyclable ones, signage and clear instructions should be displayed near the waste bins.',
+        'Recycling tips and awareness posters can be posted around the office to engage more people in recycling.',
+        'Sustainable alternatives such as looking for products with less packaging or refusing to use disposable products should be promoted to reduce waste generation.',
+        '“Green office” and “Zero Landfill” concepts can be introduced to the employees with in-house policies, trainings, orientations and waste awareness campaign.',
+        'New sustainable waste management solutions such as composting can be integrated into your operations to be an eco-friendly enterprise.',
+      ],
+    };
 
 
-    // const recommendations = [];
-    // while (recommendations.length < 3) {
-    //   for (const key in trendlineData) {
-    //     if (recommendations.length < 3) {
-    //       if (Object.keys(ALL_RECOMMENDATIONS).includes(key)) {
-    //         recommendations.push(ALL_RECOMMENDATIONS[key][0]);
-    //         ALL_RECOMMENDATIONS[key].shift();
-    //       }
-    //     }
-    //   }
-    // }
-    // recommendations.push(ALL_RECOMMENDATIONS['3r'][Math.floor(Math.random() * ALL_RECOMMENDATIONS['3r'].length)]);
-    // recommendations.push(ALL_RECOMMENDATIONS.General[Math.floor(Math.random() * ALL_RECOMMENDATIONS.General.length)]);
+    const recommendations = [];
+    while (recommendations.length < 3) {
+      for (const key in trendlineData) {
+        if (recommendations.length < 3) {
+          if (Object.keys(ALL_RECOMMENDATIONS).includes(key)) {
+            recommendations.push(ALL_RECOMMENDATIONS[key][0]);
+            ALL_RECOMMENDATIONS[key].shift();
+          }
+        }
+      }
+    }
+    recommendations.push(ALL_RECOMMENDATIONS['3r'][Math.floor(Math.random() * ALL_RECOMMENDATIONS['3r'].length)]);
+    recommendations.push(ALL_RECOMMENDATIONS.General[Math.floor(Math.random() * ALL_RECOMMENDATIONS.General.length)]);
 
+    this.setState({
+      generationData,
+      trendlineData,
+      totalCompositionData,
+      findings,
+      recommendations,
+    });
     const reportData = {
       data: value,
       reportTitle: value.quarter,
@@ -278,16 +283,12 @@ class ReportingForm extends React.Component {
       generationData,
       trendlineData,
       totalCompositionData,
+      findings,
+      recommendations,
       minMonth,
       maxMonth,
     };
-
-    this.setState({
-      generationData,
-      trendlineData,
-      totalCompositionData,
-      reportData,
-    });
+    this.savePdf(reportData);
   }
 
   savePdf = (data) => {
@@ -323,19 +324,6 @@ class ReportingForm extends React.Component {
       // window.open(`/pdf_report/${reportId}`, '_blank');
       window.open(`https://www.sejda.com/html-to-pdf?save-link=https://recyglo.info/pdf_report/${reportId}&pageSize=legal&viewportWidth=1440&pageOrientation=landscape`);
     }
-  }
-
-  createSummary = (value) => {
-    const { findings, recommendations } = value;
-    const { reportData } = this.state;
-    reportData.findings = findings;
-    reportData.recommendations = recommendations;
-    this.savePdf(reportData);
-    this.setState({
-      findings,
-      recommendations,
-      reportData,
-    });
   }
 
   handleOrganizationChange = (value) => {
@@ -411,9 +399,6 @@ class ReportingForm extends React.Component {
             {JSON.stringify(data) !== '{}' && generationData &&
               <TotalComposition months={Object.keys(data.ways)} organization={organization.value.name} data={totalCompositionData} quarter={data.quarter} />
             }
-            {JSON.stringify(data) !== '{}' &&
-              <CreateSummaryForm onSubmit={this.createSummary} />
-            }
             {JSON.stringify(data) !== '{}' && findings && recommendations &&
               <Summary
                 organization={organization.value.name}
@@ -447,4 +432,4 @@ const mapStateToProps = state => ({
   organizations: state.organizations,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportingForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ReportingFormWithAutoSummary);
