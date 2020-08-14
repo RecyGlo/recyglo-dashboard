@@ -162,7 +162,9 @@ class ReportingForm extends React.Component {
             for (let k = 0; k < trendlineData[productType].data.length; k += 1) {
               if (trendlineData[productType].data[k].date === date) {
                 trendlineData[productType].data[k].value += quantity;
+                trendlineData[productType].data[k].value = parseFloat(trendlineData[productType].data[k].value.toFixed(2));
                 trendlineData[productType].total += quantity;
+                trendlineData[productType].total = parseFloat(trendlineData[productType].total.toFixed(2));
                 dateContained = true;
                 break;
               }
@@ -175,6 +177,7 @@ class ReportingForm extends React.Component {
             if (dateContained === false) {
               trendlineData[productType].data.push({ date, value: quantity });
               trendlineData[productType].total += quantity;
+              trendlineData[productType].total = parseFloat(trendlineData[productType].total.toFixed(2));
             }
           }
         }
