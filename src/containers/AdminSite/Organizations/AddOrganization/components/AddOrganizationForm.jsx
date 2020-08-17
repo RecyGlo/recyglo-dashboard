@@ -26,31 +26,57 @@ import plus_icon from '../../../../../shared/img/plus_icon.png';
 import minus_icon from '../../../../../shared/img/minus_icon.png';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhd2NoYXciLCJhIjoiY2theGNiMWhhMDU0NTJ5bm45d3JpdTZhbyJ9.jirgP7Ok6gUmSSBQpZWL9A';
+// const COMPANY_TYPES = [
+//   'Advertising',
+//   'Bank',
+//   'Beverages Manufacture', // /
+//   'Building Communities', // /
+//   'Business Building',
+//   'Car Rental & Transportation', // \
+//   'Clinic',
+//   'Consultancy of Businesses Transformation & Sustainability',
+//   'Consultant',
+//   'Embassy',
+//   'Fashion',
+//   'Garment Industries', // \
+//   'Hotel',
+//   'Households',
+//   'International Finance Corporation',
+//   'International School',
+//   'Microfinance',
+//   'Midea & Advertising',
+//   'NGO',
+//   'Restaurant', // /
+//   'Shopping Mall', // /
+//   'Startup Hostel',
+//   'Synapse Original', // \
+//   'Telecommunication',
+//   'Trading',
+//   'Travel & Tour',
+// ];
+
 const COMPANY_TYPES = [
-  'Advertising',
-  'Bank',
+  'Banking',
   'Beverages Manufacture',
   'Building Communities',
-  'Business Building',
   'Car Rental & Transportation',
   'Clinic',
-  'Consultancy of Businesses Transformation & Sustainability',
-  'Consultant',
-  'Embassy',
-  'Fashion',
-  'Garment Industries',
+  'Construction',
+  'Cooperate',
+  'Education',
+  'Entrepreneurial community',
+  'Hospital',
   'Hotel',
   'Households',
-  'International Finance Corporation',
-  'International School',
-  'Maha Awba Agriculture Microfinance',
-  'Midea & Advertising',
+  'INGO',
+  'Law firm',
+  'Media & Advertising',
+  'Micro finance',
   'NGO',
-  'RJE & Valentis Group',
-  'Restaurant',
+  'Public Administration (i.e. Embassy)',
+  'Restaraunt',
+  'Services',
   'Shopping Mall',
-  'Startup Hostel',
-  'Synapse Original',
   'Telecommunication',
   'Trading',
   'Travel & Tour',
