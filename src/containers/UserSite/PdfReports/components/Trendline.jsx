@@ -59,7 +59,7 @@ class Trendline extends PureComponent {
                 <Col key={key} md={6} lg={6} style={{ marginTop: '10px' }}>
                   <h5 style={{ textAlign: 'center' }}>{wastes[item].charAt(0).toUpperCase() + wastes[item].slice(1)}</h5>
                   <TrendLineChart data={data[item].data} color={colors[item]} />
-                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste</li></ul>
+                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste.</li></ul>
                 </Col>
               ))}
             </Row>

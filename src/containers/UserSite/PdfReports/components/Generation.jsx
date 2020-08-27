@@ -3,7 +3,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import Header from './Header';
 import Footer from './Footer';
 import BarChart from './BarChart';
@@ -33,17 +33,17 @@ class Generation extends Component {
               <p>{title}</p>
             </div>
           </div>
-          <Container className="dashboard">
+          <div className="dashboard">
             <Row>
               {data && Object.keys(data).map((item, key) => (
                 <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
                   <p style={{ textAlign: 'center', marginLeft: 0 }}>Pick Up ({item})</p>
                   <BarChart data={data[item].chartData} />
-                  <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '430px' }}>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable waste in {item}.</li></ul>
+                  <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '500px' }}>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable waste in {item}.</li></ul>
                 </Col>
               ))}
             </Row>
-          </Container>
+          </div>
         </div>
         <Footer totalPages={totalPages} currentPage={currentPage} />
       </div>
