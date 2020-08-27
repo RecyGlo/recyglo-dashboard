@@ -42,8 +42,8 @@ export default class Example extends Component {
       //     <p>{JSON.stringify(data)}</p>
       //   }
       // </div>
-      <ResponsiveContainer width={500} height={250}>
-        {data.length > 0 &&
+      data.length > 0 ?
+        <ResponsiveContainer width={500} height={250}>
           <BarChart
             // width={500}
             // height={250}
@@ -72,8 +72,9 @@ export default class Example extends Component {
               }
             </Bar>
           </BarChart>
-        }
-      </ResponsiveContainer>
+        </ResponsiveContainer>
+        :
+        <p style={{ textAlign: 'center', lineHeight: '250px' }}>No Data</p>
     );
   }
 }

@@ -27,7 +27,7 @@ class CreateQuarterModal extends React.PureComponent {
   componentWillMount() {
     getLogisticsByOrganizationWithPromise(this.props.organization).then((response) => {
       const logisticsByMonths = {};
-      console.log(response);
+      // console.log(response);
       for (let i = 0; i < response.length; i += 1) {
         // eslint-disable-next-line max-len
         const month = `${monthNames[new Date(response[i].pickUpTime).getMonth()]} ${new Date(response[i].pickUpTime).getFullYear()}`;
@@ -37,24 +37,57 @@ class CreateQuarterModal extends React.PureComponent {
           logisticsByMonths[month].push(response[i]);
         }
       }
+      // console.log(logisticsByMonths);
       const monthList = Object.keys(logisticsByMonths).slice().sort((a, b) => new Date(a) - new Date(b));
+      const newMonthList = [];
+      // console.log(monthList);
+      for (let i = 0; i < monthList.length - 1; i += 1) {
+        const currentMonth = new Date(monthList[i]);
+        let nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+        // console.log(currentMonth);
+        // console.log(nextMonth);
+        // console.log(new Date(monthList[i + 1]));
+        // console.log(nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString());
+        newMonthList.push(`${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`);
+        while (monthList[i + 1] && nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString()) {
+          newMonthList.push(`${monthNames[nextMonth.getMonth()]} ${nextMonth.getFullYear()}`);
+          nextMonth = this.getNextMonth(nextMonth);
+        }
+        // if (monthList[i + 1] && nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString()) {
+        //   // monthList.splice(i + 1, 0, nextMonth);
+        //   newMonthList.push(`${monthNames[nextMonth.getMonth()]} ${nextMonth.getFullYear()}`);
+        //   this.getNextMonth(nextMonth);
+        // }
+      }
+      // console.log(newMonthList);
       const logisticsByQuarters = {};
-      for (let j = 0; j < monthList.length - 1; j += 3) {
+      for (let j = 0; j < newMonthList.length - 1; j += 3) {
         const QUARTER_NUMBER = (Object.keys(logisticsByQuarters).length) % 4;
-        logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${monthList[j].split(' ')[1]})`] = {};
+        logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`] = {};
         for (let i = j; i < j + 3; i += 1) {
-          if (Object.keys(logisticsByMonths)[i]) {
+          if (logisticsByMonths[newMonthList[i]]) {
             // eslint-disable-next-line max-len
-            logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${monthList[j].split(' ')[1]})`][monthList[i]] = logisticsByMonths[monthList[i]];
+            logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = logisticsByMonths[newMonthList[i]];
           } else {
-            break;
+            logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = [];
           }
+          // console.log(Object.keys(logisticsByMonths)[i]);
+          // if (Object.keys(logisticsByMonths)[i]) {
+          // eslint-disable-next-line max-len
+          //   logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = logisticsByMonths[newMonthList[i]];
+          // } else {
+          //   break;
+          // }
         }
       }
-      console.log(logisticsByQuarters);
+      // console.log(logisticsByQuarters);
       this.setState({ logisticsByQuarters });
     });
   }
+
+  // getNextMonth = (currentMonth) => {
+  //   return new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+  // }
 
   componentWillUpdate(nextProps) {
     if (nextProps.organization !== this.props.organization) {
@@ -87,6 +120,8 @@ class CreateQuarterModal extends React.PureComponent {
       });
     }
   }
+
+  getNextMonth = currentMonth => new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
 
   // componentDidUpdate() {
   //   console.log('did update');

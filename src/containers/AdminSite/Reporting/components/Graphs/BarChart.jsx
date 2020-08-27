@@ -28,9 +28,10 @@ export default class Example extends Component {
 
   render() {
     const { data } = this.props;
+    console.log(data);
     return (
-      <ResponsiveContainer width={500} height={250}>
-        {data.length > 0 &&
+      data.length > 0 ?
+        <ResponsiveContainer width={500} height={250}>
           <BarChart
             data={data}
             margin={{
@@ -57,8 +58,9 @@ export default class Example extends Component {
               }
             </Bar>
           </BarChart>
-        }
-      </ResponsiveContainer>
+        </ResponsiveContainer>
+        :
+        <p style={{ textAlign: 'center', lineHeight: '250px' }}>No Data</p>
     );
   }
 }

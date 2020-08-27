@@ -51,8 +51,8 @@ export default class Example extends PureComponent {
   render() {
     const { data } = this.props;
     return (
-      <ResponsiveContainer width={464} height={250}>
-        {data.length > 0 &&
+      data.length > 0 ?
+        <ResponsiveContainer width={464} height={250}>
           <PieChart
             margin={{
             top: 0, right: 0, left: 0, bottom: -10,
@@ -78,8 +78,9 @@ export default class Example extends PureComponent {
               }
             </Pie>
           </PieChart>
-        }
-      </ResponsiveContainer>
+        </ResponsiveContainer>
+        :
+        <p style={{ textAlign: 'center', lineHeight: '250px' }}>No Data</p>
     );
   }
 }

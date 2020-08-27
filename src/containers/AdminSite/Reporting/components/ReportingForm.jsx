@@ -99,6 +99,7 @@ class ReportingForm extends React.Component {
 
   createGenerationData = (value) => {
     const data = value.ways;
+    console.log(data);
     const generationData = {};
     const trendlineData = {};
     let totalCompositionData = {};
@@ -284,6 +285,10 @@ class ReportingForm extends React.Component {
       minMonth,
       maxMonth,
     };
+
+    console.log(generationData);
+    console.log(trendlineData);
+    console.log(totalCompositionData);
 
     this.setState({
       generationData,

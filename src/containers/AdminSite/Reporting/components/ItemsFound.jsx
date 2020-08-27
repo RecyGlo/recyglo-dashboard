@@ -25,13 +25,15 @@ class ItemsFound extends PureComponent {
     let cols = [];
     for (let i = 0; i < this.state.maxRow; i += 1) {
       Object.keys(data).map(item => (
-        data[item].map(date => (
-          date.items.length - 1 >= i
-            ?
-            cols.push(<td><i>{date.items[i].productName.charAt(0).toUpperCase() + date.items[i].productName.slice(1)}</i></td>)
-            :
-            cols.push(<td>{}</td>)
-        ))
+        JSON.stringify(data[item]) === '[]' ? cols.push(<td>{}</td>)
+          :
+          data[item].map(date => (
+            date.items.length - 1 >= i
+              ?
+              cols.push(<td><i>{date.items[i].productName.charAt(0).toUpperCase() + date.items[i].productName.slice(1)}</i></td>)
+              :
+              cols.push(<td>{}</td>)
+          ))
       ));
       rows.push(<tr>{cols}</tr>);
       cols = [];
@@ -66,6 +68,8 @@ class ItemsFound extends PureComponent {
             </tr>
             <tr>
               {Object.keys(data.ways).map(item => (
+                JSON.stringify(data.ways[item]) === '[]' ? <td className="date">No Data</td>
+                :
                 data.ways[item].map(date => (
                   <td className="date">{formatDate(new Date(date.pickUpTime))}</td>
                 ))
