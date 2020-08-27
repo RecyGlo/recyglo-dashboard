@@ -43,7 +43,7 @@ export default class Example extends Component {
       //   }
       // </div>
       data.length > 0 ?
-        <ResponsiveContainer width={630} height={250}>
+        <ResponsiveContainer width={600} height={250}>
           <BarChart
             // width={500}
             // height={250}
