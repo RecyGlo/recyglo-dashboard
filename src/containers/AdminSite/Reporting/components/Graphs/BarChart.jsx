@@ -28,7 +28,7 @@ export default class Example extends Component {
 
   render() {
     const { data } = this.props;
-    console.log(data);
+    // console.log(data);
     return (
       data.length > 0 ?
         <ResponsiveContainer width={500} height={250}>

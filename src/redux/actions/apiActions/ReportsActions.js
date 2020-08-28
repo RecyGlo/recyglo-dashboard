@@ -76,7 +76,7 @@ export const addNewReport = data => axios({
 })
   .then((response) => {
     if (response.status === INSERT_SUCCESS) {
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     }
     window.alert('SERVER ERROR FOUND');

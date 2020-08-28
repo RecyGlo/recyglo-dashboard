@@ -60,7 +60,7 @@ class CreateQuarterModal extends React.PureComponent {
         //   this.getNextMonth(nextMonth);
         // }
       }
-      console.log(newMonthList);
+      // console.log(newMonthList);
       const logisticsByQuarters = {};
       for (let j = 0; j < newMonthList.length - 1; j += 3) {
         const QUARTER_NUMBER = (Object.keys(logisticsByQuarters).length) % 4;
@@ -86,7 +86,7 @@ class CreateQuarterModal extends React.PureComponent {
           // }
         }
       }
-      console.log(logisticsByQuarters);
+      // console.log(logisticsByQuarters);
       this.setState({ logisticsByQuarters });
     });
   }

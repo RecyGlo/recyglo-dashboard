@@ -99,7 +99,7 @@ class ReportingForm extends React.Component {
 
   createGenerationData = (value) => {
     const data = value.ways;
-    console.log(data);
+    // console.log(data);
     const generationData = {};
     const trendlineData = {};
     let totalCompositionData = {};
@@ -109,6 +109,10 @@ class ReportingForm extends React.Component {
     const dates = [];
     // // calculate total weight and create data for bar chart
     for (const key in data) {
+      const firstDate = new Date(key).toLocaleDateString();
+      if (!dates.includes(firstDate)) {
+        dates.push(firstDate);
+      }
       const productTypes = {};
       let tmp = [];
       generationData[key] = { total: 0 };
@@ -128,9 +132,9 @@ class ReportingForm extends React.Component {
         }
         date = date.toLocaleDateString();
 
-        if (!dates.includes(date)) {
-          dates.push(date);
-        }
+        // if (!dates.includes(date)) {
+        //   dates.push(date);
+        // }
         for (let j = 0; j < data[key][i].items.length; j += 1) {
           // totalKg += data[key][i].items[j].quantity;
 
@@ -286,9 +290,9 @@ class ReportingForm extends React.Component {
       maxMonth,
     };
 
-    console.log(generationData);
-    console.log(trendlineData);
-    console.log(totalCompositionData);
+    // console.log(generationData);
+    // console.log(trendlineData);
+    // console.log(totalCompositionData);
 
     this.setState({
       generationData,
