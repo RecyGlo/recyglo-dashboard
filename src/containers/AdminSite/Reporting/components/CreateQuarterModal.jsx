@@ -41,8 +41,9 @@ class CreateQuarterModal extends React.PureComponent {
       const monthList = Object.keys(logisticsByMonths).slice().sort((a, b) => new Date(a) - new Date(b));
       const newMonthList = [];
       // console.log(monthList);
-      for (let i = 0; i < monthList.length - 1; i += 1) {
+      for (let i = 0; i < monthList.length; i += 1) {
         const currentMonth = new Date(monthList[i]);
+        // console.log(currentMonth);
         let nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
         // console.log(currentMonth);
         // console.log(nextMonth);
@@ -59,7 +60,7 @@ class CreateQuarterModal extends React.PureComponent {
         //   this.getNextMonth(nextMonth);
         // }
       }
-      // console.log(newMonthList);
+      console.log(newMonthList);
       const logisticsByQuarters = {};
       for (let j = 0; j < newMonthList.length - 1; j += 3) {
         const QUARTER_NUMBER = (Object.keys(logisticsByQuarters).length) % 4;
@@ -68,6 +69,11 @@ class CreateQuarterModal extends React.PureComponent {
           if (logisticsByMonths[newMonthList[i]]) {
             // eslint-disable-next-line max-len
             logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = logisticsByMonths[newMonthList[i]];
+          } else if (!newMonthList[i]) {
+            // console.log(getNextMonth(newMonthList[i-1]));
+            logisticsByQuarters[
+              `${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`
+            ][this.formatMonthYear(this.getNextMonth(new Date(newMonthList[i - 1])))] = [];
           } else {
             logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = [];
           }
@@ -80,7 +86,7 @@ class CreateQuarterModal extends React.PureComponent {
           // }
         }
       }
-      // console.log(logisticsByQuarters);
+      console.log(logisticsByQuarters);
       this.setState({ logisticsByQuarters });
     });
   }
@@ -122,6 +128,8 @@ class CreateQuarterModal extends React.PureComponent {
   }
 
   getNextMonth = currentMonth => new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+
+  formatMonthYear = date => `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
 
   // componentDidUpdate() {
   //   console.log('did update');
