@@ -31,7 +31,7 @@ class Trendline extends PureComponent {
   render() {
     // const { total } = this.state;
     const {
-      data, quarters, organization,
+      data, months, organization,
     } = this.props;
     return (
       <div className="reporting-page">
@@ -42,10 +42,10 @@ class Trendline extends PureComponent {
               <h4>Recycling Trend Line</h4>
             </div>
             <div style={{ width: '30%' }}>
-              {quarters.length > 1 ?
-                <p>Total ({quarters.length}) Quarters</p>
+              {months.length > 1 ?
+                <p>Total ({months.length}) Months</p>
               :
-                quarters.map(item => (
+                months.map(item => (
                   <p>{item}</p>
                 ))
               }

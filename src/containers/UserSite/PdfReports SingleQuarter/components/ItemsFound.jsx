@@ -28,17 +28,15 @@ class ItemsFound extends PureComponent {
     let cols = [];
     for (let i = 0; i < this.state.maxRow; i += 1) {
       Object.keys(data).map(item => (
-        Object.keys(data[item]).map(month => (
-          JSON.stringify(data[item][month]) === '[]' ? cols.push(<td>{}</td>)
-            :
-            data[item][month].map(date => (
-              date.items.length - 1 >= i
-                ?
-                cols.push(<td><i>{date.items[i].productName.charAt(0).toUpperCase() + date.items[i].productName.slice(1)}</i></td>)
-                :
-                cols.push(<td>{}</td>)
-            ))
-        ))
+        JSON.stringify(data[item]) === '[]' ? cols.push(<td>{}</td>)
+          :
+          data[item].map(date => (
+            date.items.length - 1 >= i
+              ?
+              cols.push(<td><i>{date.items[i].productName.charAt(0).toUpperCase() + date.items[i].productName.slice(1)}</i></td>)
+              :
+              cols.push(<td>{}</td>)
+          ))
       ));
       rows.push(<tr>{cols}</tr>);
       cols = [];
@@ -58,8 +56,11 @@ class ItemsFound extends PureComponent {
             <div style={{ width: '70%', float: 'left' }}>
               <h5>Common Items found in waste audits</h5>
               <h4>
-                Waste audit has been performed for ({Object.keys(data.ways).length} quarters period)
+                Waste audit has been performed for ({Object.keys(data.ways).length} months period)
               </h4>
+            </div>
+            <div style={{ width: '30%' }}>
+              <p>{data.quarter}</p>
             </div>
           </div>
           <table id="items-table">
@@ -70,10 +71,10 @@ class ItemsFound extends PureComponent {
             </tr>
             <tr>
               {Object.keys(data.ways).map(item => (
-                Object.keys(data.ways[item]).map(month => (
-                  data.ways[item][month].map(date => (
-                    <td className="date">{formatDate(new Date(date.pickUpTime))}</td>
-                  ))
+                JSON.stringify(data.ways[item]) === '[]' ? <td className="date">No Data</td>
+                :
+                data.ways[item].map(date => (
+                  <td className="date">{formatDate(new Date(date.pickUpTime))}</td>
                 ))
               ))}
             </tr>

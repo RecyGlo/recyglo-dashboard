@@ -32,7 +32,7 @@ class TotalComposition extends PureComponent {
               <h4>Overall Waste Composition</h4>
             </div>
             <div style={{ width: '30%' }}>
-              <p>Total ({quarter.length}) quarters</p>
+              <p>{quarter}</p>
               {/* {quarters.length > 1 ?
                 <p>Total ({quarters.length}) Quarter{quarters.length > 1 && 's'}</p> :
                 quarters.map(item => (
@@ -48,7 +48,7 @@ class TotalComposition extends PureComponent {
             }
             <ul>
               <li style={{ textAlign: 'justify' }}>
-                During the ({months.length * 3}) months of the waste audit, the total amount of waste collected from {organization} was {this.calTotal(data).toFixed(2)} KG which included
+                During the ({months.length}) months of the waste audit, the total amount of waste collected from {organization} was {this.calTotal(data).toFixed(2)} KG which included
                 {data.map((item, i) => (
                   <span> {((item.value / this.calTotal(data)) * 100).toFixed(2)} % of {item.name}{i < (data.length - 1) && <span>,</span>} {i === (data.length - 2) && <span>and</span>}</span>
                 ))}.

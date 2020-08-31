@@ -6,7 +6,9 @@
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import { Row, Col } from 'reactstrap';
-import TrendLineChart from './Graphs/TrendLineChart';
+import Header from './Header';
+import Footer from './Footer';
+import TrendLineChart from './TrendLineChart';
 import '../../../../scss/report/Generation.scss';
 
 const colors = {
@@ -29,12 +31,12 @@ const wastes = {
 
 class Trendline extends PureComponent {
   render() {
-    // const { total } = this.state;
     const {
-      data, quarters, organization,
+      data, months, totalPages, currentPage, organization, reportDate,
     } = this.props;
     return (
-      <div className="reporting-page">
+      <div className="generation-page">
+        <Header date={reportDate} />
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '70%', float: 'left' }}>
@@ -42,10 +44,10 @@ class Trendline extends PureComponent {
               <h4>Recycling Trend Line</h4>
             </div>
             <div style={{ width: '30%' }}>
-              {quarters.length > 1 ?
-                <p>Total ({quarters.length}) Quarters</p>
+              {months.length > 1 ?
+                <p>Total ({months.length}) Months</p>
               :
-                quarters.map(item => (
+                months.map(item => (
                   <p>{item}</p>
                 ))
               }
@@ -57,12 +59,13 @@ class Trendline extends PureComponent {
                 <Col key={key} md={6} lg={6} style={{ marginTop: '10px' }}>
                   <h5 style={{ textAlign: 'center' }}>{wastes[item].charAt(0).toUpperCase() + wastes[item].slice(1)}</h5>
                   <TrendLineChart data={data[item].data} color={colors[item]} />
-                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste</li></ul>
+                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste.</li></ul>
                 </Col>
               ))}
             </Row>
           </div>
         </div>
+        <Footer totalPages={totalPages} currentPage={currentPage} />
       </div>
     );
   }

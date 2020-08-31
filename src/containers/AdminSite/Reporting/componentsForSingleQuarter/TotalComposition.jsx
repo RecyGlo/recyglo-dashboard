@@ -4,9 +4,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import TotalPieChart from './TotalPieChart';
+import TotalPieChart from './Graphs/TotalPieChart';
 import '../../../../scss/report/TotalComposition.scss';
 
 class TotalComposition extends PureComponent {
@@ -20,11 +18,10 @@ class TotalComposition extends PureComponent {
 
   render() {
     const {
-      data, totalPages, currentPage, quarter, months, organization, reportDate,
+      data, quarter, months, organization,
     } = this.props;
     return (
       <div className="total-composition-page">
-        <Header date={reportDate} />
         <div className="total-composition-content">
           <div className="total-composition-title">
             <div style={{ width: '70%', float: 'left' }}>
@@ -32,7 +29,7 @@ class TotalComposition extends PureComponent {
               <h4>Overall Waste Composition</h4>
             </div>
             <div style={{ width: '30%' }}>
-              <p>Total ({quarter.length}) quarters</p>
+              <p>{quarter}</p>
               {/* {quarters.length > 1 ?
                 <p>Total ({quarters.length}) Quarter{quarters.length > 1 && 's'}</p> :
                 quarters.map(item => (
@@ -48,9 +45,10 @@ class TotalComposition extends PureComponent {
             }
             <ul>
               <li style={{ textAlign: 'justify' }}>
-                During the ({months.length * 3}) months of the waste audit, the total amount of waste collected from {organization} was {this.calTotal(data).toFixed(2)} KG which included
+                During the ({months.length}) months of the waste audit, the total amount of waste collected from {organization} was {this.calTotal(data).toFixed(2)} KG which included
                 {data.map((item, i) => (
                   <span> {((item.value / this.calTotal(data)) * 100).toFixed(2)} % of {item.name}{i < (data.length - 1) && <span>,</span>} {i === (data.length - 2) && <span>and</span>}</span>
+                  // <span>{JSON.stringify(i)}</span>
                 ))}.
               </li>
               <li>
@@ -59,7 +57,6 @@ class TotalComposition extends PureComponent {
             </ul>
           </div>
         </div>
-        <Footer totalPages={totalPages} currentPage={currentPage} />
       </div>
     );
   }

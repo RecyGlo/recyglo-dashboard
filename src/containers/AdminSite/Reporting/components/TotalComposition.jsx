@@ -29,7 +29,7 @@ class TotalComposition extends PureComponent {
               <h4>Overall Waste Composition</h4>
             </div>
             <div style={{ width: '30%' }}>
-              <p>{quarter}</p>
+              <p>Total ({quarter.length}) Quarters</p>
               {/* {quarters.length > 1 ?
                 <p>Total ({quarters.length}) Quarter{quarters.length > 1 && 's'}</p> :
                 quarters.map(item => (

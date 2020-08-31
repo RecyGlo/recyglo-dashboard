@@ -3,8 +3,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-
 import React, { PureComponent } from 'react';
 import CryptoJS from 'crypto-js';
 import { getReportDetail } from '../../../redux/actions/apiActions/ReportsActions';
@@ -113,16 +111,14 @@ class Reporting extends PureComponent {
               currentPage={4}
             />
             {generationData &&
-              Object.keys(generationData).map(key => (
-                <Generation
-                  organization={organization.name}
-                  data={generationData[key]}
-                  title={key}
-                  totalPages={totalPages}
-                  currentPage={5}
-                  date={new Date(reportDate).toLocaleDateString()}
-                />
-              ))
+              <Generation
+                organization={organization.name}
+                data={generationData}
+                // title={item}
+                totalPages={totalPages}
+                currentPage={5}
+                date={new Date(reportDate).toLocaleDateString()}
+              />
             }
             <FigureCoverPage
               sectionTitle="Common Items Found in Waste Audit"
@@ -144,12 +140,10 @@ class Reporting extends PureComponent {
                 <Trendline organization={organization.name} data={item} months={Object.keys(data.ways)} totalPages={totalPages} currentPage={9 + key} reportDate={new Date(reportDate).toLocaleDateString()} />
               ))
             }
+            {/* <Trendline organization={organization.name} data={trendlineData} months={Object.keys(data.ways)} totalPages={totalPages} currentPage={9} reportDate={new Date(reportDate).toLocaleDateString()} /> */}
             <FigureCoverPage sectionTitle="Waste Composition in Percentage" pageTitle="Figures and Data" Number="4" totalPages={totalPages} currentPage={10 + (trendLineListData.length - 1)} />
-            {generationData &&
-              Object.keys(generationData).map(key =>
-                <Composition data={generationData[key]} title={key} totalPages={totalPages} currentPage={11 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />)
-            }
-            <TotalComposition months={Object.keys(data.ways)} organization={organization.name} data={totalCompositionData} quarter={Object.keys(data.ways)} totalPages={totalPages} currentPage={12 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />
+            <Composition data={generationData} title={data.quarter} totalPages={totalPages} currentPage={11 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />
+            <TotalComposition months={Object.keys(data.ways)} organization={organization.name} data={totalCompositionData} quarter={data.quarter} totalPages={totalPages} currentPage={12 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />
             <FigureCoverPage sectionTitle="Paper, Plastic, Cans and Glass Waste Recycling" pageTitle="What Happened To Your Waste?" Number="5" totalPages={totalPages} currentPage={13 + (trendLineListData.length - 1)} />
             <PaperRecycling totalPages={totalPages} currentPage={14 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />
             <PlasticRecycling totalPages={totalPages} currentPage={15 + (trendLineListData.length - 1)} reportDate={new Date(reportDate).toLocaleDateString()} />

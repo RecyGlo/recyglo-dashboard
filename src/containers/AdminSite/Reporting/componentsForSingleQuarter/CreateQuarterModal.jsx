@@ -97,10 +97,9 @@ class CreateQuarterModal extends React.PureComponent {
 
   componentWillUpdate(nextProps) {
     if (nextProps.organization !== this.props.organization) {
-      getLogisticsByOrganizationWithPromise(this.props.organization).then((response) => {
+      getLogisticsByOrganizationWithPromise(nextProps.organization).then((response) => {
         const logisticsByMonths = {};
-        // console.log(response);
-        for (let i = 0; i < response.length; i += 1) {
+        for (let i = 0; i < response.length - 1; i += 1) {
           // eslint-disable-next-line max-len
           const month = `${monthNames[new Date(response[i].pickUpTime).getMonth()]} ${new Date(response[i].pickUpTime).getFullYear()}`;
           if (!Object.keys(logisticsByMonths).includes(month)) {
@@ -109,58 +108,20 @@ class CreateQuarterModal extends React.PureComponent {
             logisticsByMonths[month].push(response[i]);
           }
         }
-        // console.log(logisticsByMonths);
         const monthList = Object.keys(logisticsByMonths).slice().sort((a, b) => new Date(a) - new Date(b));
-        const newMonthList = [];
-        // console.log(monthList);
-        for (let i = 0; i < monthList.length; i += 1) {
-          const currentMonth = new Date(monthList[i]);
-          // console.log(currentMonth);
-          let nextMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
-          // console.log(currentMonth);
-          // console.log(nextMonth);
-          // console.log(new Date(monthList[i + 1]));
-          // console.log(nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString());
-          newMonthList.push(`${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`);
-          while (monthList[i + 1] && nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString()) {
-            newMonthList.push(`${monthNames[nextMonth.getMonth()]} ${nextMonth.getFullYear()}`);
-            nextMonth = this.getNextMonth(nextMonth);
-          }
-          // if (monthList[i + 1] && nextMonth.toDateString() !== new Date(monthList[i + 1]).toDateString()) {
-          //   // monthList.splice(i + 1, 0, nextMonth);
-          //   newMonthList.push(`${monthNames[nextMonth.getMonth()]} ${nextMonth.getFullYear()}`);
-          //   this.getNextMonth(nextMonth);
-          // }
-        }
-        // console.log(newMonthList);
         const logisticsByQuarters = {};
-        for (let j = 0; j < newMonthList.length - 1; j += 3) {
+        for (let j = 0; j < monthList.length - 1; j += 3) {
           const QUARTER_NUMBER = (Object.keys(logisticsByQuarters).length) % 4;
-          logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`] = {};
+          logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${monthList[j].split(' ')[1]})`] = {};
           for (let i = j; i < j + 3; i += 1) {
-            if (logisticsByMonths[newMonthList[i]]) {
+            if (Object.keys(logisticsByMonths)[i]) {
               // eslint-disable-next-line max-len
-              logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = logisticsByMonths[newMonthList[i]];
-            } else if (!newMonthList[i]) {
-              // console.log(getNextMonth(newMonthList[i-1]));
-              logisticsByQuarters[
-                `${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`
-              ][this.formatMonthYear(this.getNextMonth(new Date(newMonthList[i - 1])))] = [];
+              logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${monthList[j].split(' ')[1]})`][monthList[i]] = logisticsByMonths[monthList[i]];
             } else {
-              logisticsByQuarters[
-                `${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`
-              ][newMonthList[i]] = [];
+              break;
             }
-            // console.log(Object.keys(logisticsByMonths)[i]);
-            // if (Object.keys(logisticsByMonths)[i]) {
-            // eslint-disable-next-line max-len
-            //   logisticsByQuarters[`${quarters[QUARTER_NUMBER]} (${newMonthList[j].split(' ')[1]})`][newMonthList[i]] = logisticsByMonths[newMonthList[i]];
-            // } else {
-            //   break;
-            // }
           }
         }
-        // console.log(logisticsByQuarters);
         this.setState({ logisticsByQuarters });
       });
     }
@@ -193,12 +154,9 @@ class CreateQuarterModal extends React.PureComponent {
     //     quarter: null,
     //   });
     // }
-    const ways = {};
-    for (let i = 0; i < quarter.length; i += 1) {
-      ways[quarter[i].value] = logisticsByQuarters[quarter[i].value];
-    }
     this.props.createQuarter({
-      ways,
+      quarter: quarter.value,
+      ways: logisticsByQuarters[quarter.value],
     });
   }
 
@@ -304,7 +262,6 @@ class CreateQuarterModal extends React.PureComponent {
               <div className="form__form-group-input-wrap">
                 {logisticsByQuarters &&
                   <Select
-                    isMulti
                     name="ways"
                     options={
                       Object.keys(logisticsByQuarters).map((prop, key) => (
