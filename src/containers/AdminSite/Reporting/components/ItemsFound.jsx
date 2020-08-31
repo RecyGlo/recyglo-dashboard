@@ -26,8 +26,7 @@ class ItemsFound extends PureComponent {
     for (let i = 0; i < this.state.maxRow; i += 1) {
       Object.keys(data).map(item => (
         Object.keys(data[item]).map(month => (
-          JSON.stringify(data[item][month]) === '[]' ? cols.push(<td>{}</td>)
-            :
+          JSON.stringify(data[item][month]) !== '[]' &&
             data[item][month].map(date => (
               date.items.length - 1 >= i
                 ?
@@ -47,6 +46,7 @@ class ItemsFound extends PureComponent {
     const {
       data,
     } = this.props;
+    console.log(data);
     return (
       <div className="reporting-page">
         <div className="generation-content">
@@ -61,7 +61,8 @@ class ItemsFound extends PureComponent {
           <table id="items-table">
             <tr>
               {Object.keys(data.ways).map(item => (
-                <th colSpan={Object.keys(data.ways[item]).length}>{item}</th>
+                // <th colSpan={Object.keys(data.ways[item]).length}>{item}</th>
+                <th colSpan={Object.keys(data.ways[item]).reduce((totalWays, way) => totalWays + data.ways[item][way].length, 0)}>{item}</th>
               ))}
             </tr>
             <tr>
