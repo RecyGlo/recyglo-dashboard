@@ -115,7 +115,20 @@ class ReportingForm extends React.Component {
     for (const quarter in data) {
       generationData[quarter] = {};
       for (const key in data[quarter]) {
-        console.log(data[quarter][key].length);
+
+        // Calculate Min Month and Max Month
+        if (maxMonth === null || minMonth === null) {
+          maxMonth = new Date(key);
+          minMonth = new Date(key);
+        } else {
+          if (maxMonth < new Date(key)) {
+            maxMonth = new Date(key);
+          }
+          if (minMonth > new Date(key)) {
+            minMonth = new Date(key);
+          }
+        }
+
         const firstDate = new Date(key).toLocaleDateString();
         if (!dates.includes(firstDate)) {
           dates.push(firstDate);
@@ -126,17 +139,6 @@ class ReportingForm extends React.Component {
         for (let i = 0; i < data[quarter][key].length; i += 1) {
           let date = new Date(data[quarter][key][i].pickUpTime);
           date.setDate(1);
-          if (maxMonth === null || minMonth === null) {
-            maxMonth = date;
-            minMonth = date;
-          } else {
-            if (maxMonth < date) {
-              maxMonth = date;
-            }
-            if (minMonth > date) {
-              minMonth = date;
-            }
-          }
           date = date.toLocaleDateString();
 
           // if (!dates.includes(date)) {
