@@ -115,7 +115,6 @@ class ReportingForm extends React.Component {
     for (const quarter in data) {
       generationData[quarter] = {};
       for (const key in data[quarter]) {
-
         // Calculate Min Month and Max Month
         if (maxMonth === null || minMonth === null) {
           maxMonth = new Date(key);
