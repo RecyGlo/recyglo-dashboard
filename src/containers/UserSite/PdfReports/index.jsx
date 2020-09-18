@@ -74,6 +74,7 @@ class Reporting extends PureComponent {
       minMonth,
       maxMonth,
     } = this.state.decryptedData;
+    console.log(this.state.decryptedData);
     const { totalPages, trendLineListData } = this.state;
     return (
       <div className="landing">
