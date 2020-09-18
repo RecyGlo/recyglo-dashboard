@@ -9,11 +9,11 @@ import '../../../../scss/report/Intro.scss';
 const logo = `${process.env.PUBLIC_URL}/logo.png`;
 
 // const sortDates = (a, b) => a.getTime() - b.getTime();
-const months = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
+// const months = ['January', 'February', 'March', 'April', 'May', 'June',
+//   'July', 'August', 'September', 'October', 'November', 'December',
+// ];
 // const formatDate = date => `${date.getDate()} ${months[date.getMonth() + 1]} ${date.getFullYear()}`;
-const formatDate = date => `${months[date.getMonth()]} ${date.getFullYear()}`;
+const formatDate = date => `${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`;
 
 class Intro extends PureComponent {
   render() {
