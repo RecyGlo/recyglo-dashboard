@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Button } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import thankyou from '../../../shared/img/ThankYou/thankyou.png';
 import facebook from '../../../shared/img/ThankYou/facebook.png';
@@ -19,7 +19,7 @@ class ThankYou extends React.Component {
 
   render() {
     return (
-      <Container style={{ overflow: 'hidden', height: 'fit-content' }}>
+      <Container style={{ overflow: 'hidden', height: 'fit-content', marginTop: 20 }}>
         <Row>
           <img src={thankyou} alt="thankyou icon" className="thankyou__logo" />
         </Row>
@@ -36,9 +36,9 @@ class ThankYou extends React.Component {
             &nbsp;or call <color style={{ color: '#59adff' }}>+95-9-404245800</color>.
           </p>
         </Row>
-        <Row>
+        {/* <Row>
           <Button className="thankyou__button" onClick={() => this.redirectToHomePage()}>Back to Home Page</Button>
-        </Row>
+        </Row> */}
         <Row>
           <h5 className="thankyou_contact-us">Contact Us</h5>
         </Row>

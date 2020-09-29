@@ -11,4 +11,5 @@ const renderInputField = ({
     </div>
   </div>
 );
+
 export default renderInputField;

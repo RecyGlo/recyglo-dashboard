@@ -18,6 +18,8 @@ class CheckBoxField extends PureComponent {
     disabled: PropTypes.bool,
     className: PropTypes.string,
     color: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
+    meta: PropTypes.object,
   };
 
   static defaultProps = {
@@ -26,6 +28,7 @@ class CheckBoxField extends PureComponent {
     disabled: false,
     className: '',
     color: '',
+    meta: {},
   };
 
   componentDidMount() {
@@ -34,7 +37,7 @@ class CheckBoxField extends PureComponent {
 
   render() {
     const {
-      disabled, className, name, value, onChange, label, color,
+      disabled, className, name, value, onChange, label, color, meta: { touched, error, warning },
     } = this.props;
     const CheckboxClass = classNames({
       'checkbox-btn': true,
@@ -42,34 +45,37 @@ class CheckBoxField extends PureComponent {
     });
 
     return (
-      <label
-        className={`${CheckboxClass} ${className ? ` checkbox-btn--${className}` : ''}`}
-        htmlFor={name}
-      >
-        <input
-          className="checkbox-btn__checkbox"
-          type="checkbox"
-          id={name}
-          name={name}
-          onChange={onChange}
-          checked={value}
-          disabled={disabled}
-        />
-        <span
-          className="checkbox-btn__checkbox-custom"
-          style={color ? { background: color, borderColor: color } : {}}
+      <div>
+        <label
+          className={`${CheckboxClass} ${className ? ` checkbox-btn--${className}` : ''}`}
+          htmlFor={name}
         >
-          <CheckIcon />
-        </span>
-        {className === 'button' ?
-          <span className="checkbox-btn__label-svg">
-            <CheckIcon className="checkbox-btn__label-check" />
-            <CloseIcon className="checkbox-btn__label-uncheck" />
-          </span> : ''}
-        <span className="checkbox-btn__label">
-          {label}
-        </span>
-      </label>
+          <input
+            className="checkbox-btn__checkbox"
+            type="checkbox"
+            id={name}
+            name={name}
+            onChange={onChange}
+            checked={value}
+            disabled={disabled}
+          />
+          <span
+            className="checkbox-btn__checkbox-custom"
+            style={color ? { background: color, borderColor: color } : {}}
+          >
+            <CheckIcon />
+          </span>
+          {className === 'button' ?
+            <span className="checkbox-btn__label-svg">
+              <CheckIcon className="checkbox-btn__label-check" />
+              <CloseIcon className="checkbox-btn__label-uncheck" />
+            </span> : ''}
+          <span className="checkbox-btn__label">
+            {label}
+          </span>
+        </label>
+        {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
     );
   }
 }
@@ -82,6 +88,7 @@ const renderCheckBoxField = props => (
     disabled={props.disabled}
     className={props.className}
     color={props.color}
+    meta={props.meta}
   />
 );
 
@@ -99,6 +106,8 @@ renderCheckBoxField.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   color: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  meta: PropTypes.object,
 };
 
 renderCheckBoxField.defaultProps = {
@@ -107,6 +116,7 @@ renderCheckBoxField.defaultProps = {
   disabled: false,
   className: '',
   color: '',
+  meta: {},
 };
 
 export default renderCheckBoxField;

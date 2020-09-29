@@ -8,6 +8,8 @@ import LogIn from '../LogIn/index';
 import PasswordResetRequest from '../LogIn/PasswordResetRequest';
 import PasswordReset from '../LogIn/PasswordReset';
 
+import PublicPaymentPage from '../AdminSite/Payment/GeneralPayment/PaymentPage';
+
 // Layouts
 import AdminLayout from '../Layouts/AdminLayout/index';
 import UserLayout from '../Layouts/UserLayout/index';
@@ -218,6 +220,8 @@ const Router = () => (
         <Route exact path="/password_reset" component={PasswordResetRequest} />
         <Route exact path="/password_reset/:link" component={PasswordReset} />
         <Route exact path="/landing" component={Landing} />
+        <Route exact path="/payment" component={PublicPaymentPage} />
+        <Route exact path="/thankyou" component={ThankYou} />
         {/* <Route exact path="/report" component={ExactReport} /> */}
         <Route exact path="/report" component={Report} />
         <Route path="/report/:reportId" component={ExactReport} />
