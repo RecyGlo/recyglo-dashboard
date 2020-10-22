@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import thankyou from '../../../shared/img/ThankYou/thankyou.png';
 import facebook from '../../../shared/img/ThankYou/facebook.png';
@@ -42,7 +42,7 @@ class ThankYou extends React.Component {
         <Row>
           <h5 className="thankyou_contact-us">Contact Us</h5>
         </Row>
-        <Row>
+        <Row style={{ marginBottom: 30 }}>
           <div style={{ display: 'inlineBlock', margin: '0 auto' }}>
             <a href="https://www.facebook.com/recyglo/">
               <img src={facebook} alt="facebook icon" className="thankyou__social-media" />
@@ -58,6 +58,15 @@ class ThankYou extends React.Component {
             </a>
           </div>
 
+        </Row>
+        <Row>
+          <Button
+            className="btn btn-success"
+            style={{ margin: '0 auto', color: 'white' }}
+            href="https://www.recyglo.com/"
+          >
+            Go to RecyGlo Website
+          </Button>
         </Row>
       </Container>
     );
