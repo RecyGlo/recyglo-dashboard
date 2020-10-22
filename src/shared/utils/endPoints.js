@@ -20,3 +20,4 @@ export const END_POINT_PAYMENT = `${BASE_URL}/payment`;
 export const END_POINT_QUIZ = `${BASE_URL}/quiz`;
 export const END_POINT_USER_ANS_QUIZ = `${BASE_URL}/user_ans_quiz`;
 export const END_POINT_TRAINING_SLIDES = `${BASE_URL}/training_slide`;
+export const END_POINT_ORDERS = `${BASE_URL}/orders`;

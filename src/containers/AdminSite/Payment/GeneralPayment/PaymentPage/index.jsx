@@ -12,6 +12,7 @@ import CryptoJS from 'crypto-js';
 import renderInputField from '../../../../../shared/components/form/FieldComponents';
 import renderSelectField from '../../../../../shared/components/form/Select';
 import renderCheckBoxField from '../../../../../shared/components/form/CheckBox';
+import addNewOrder from '../../../../../redux/actions/apiActions/OrderActions';
 
 const convertCurrency = {
   840: 'USD',
@@ -53,7 +54,7 @@ class PaymentPage extends React.Component {
     const merchant_id = '104104000000387';
     // const secret_key = 'DE8473B19F8B8E2F84838522A218B84D2D598DA5879225388A1E47B9E06ADBFC';
     const secret_key = 'B4BDE1B91B054445C14A349C913BB2411FBD921C297DA7AD12053B57A6638B77';
-    const payment_description = value.description;
+    const payment_description = value.productDescription;
     // const order_id = value.order_id;
 
     // Convert currency
@@ -65,7 +66,7 @@ class PaymentPage extends React.Component {
 
     // Convert Amount
     const pad = '000000000000';
-    const str = (value.amount * 100).toString();
+    const str = (value.totalAmount * 100).toString();
     const amount = pad.substring(0, pad.length - str.length) + str;
 
     const version = '8.5';
@@ -84,7 +85,7 @@ class PaymentPage extends React.Component {
         payment_description,
         order_id,
         currency,
-        original_amount: value.amount,
+        original_amount: value.totalAmount,
         amount,
         version,
         payment_url,
@@ -100,7 +101,13 @@ class PaymentPage extends React.Component {
     console.log(values);
     const order_id = new Date().getTime().toString().substring(12, 0);
     this.getPaymentData(values, order_id);
+    const data = values;
+    data._id = parseInt(order_id, 0);
+    data.totalAmount = parseInt(values.totalAmount, 0);
+    data.currency = values.currency.label;
+    delete data.tnc;
     this.setState({ customer_data: values });
+    addNewOrder(data);
   }
 
   render() {
@@ -124,21 +131,21 @@ class PaymentPage extends React.Component {
               <form className="form" onSubmit={handleSubmit(this.handleSubmit)}>
                 <h4 style={{ marginBottom: 20 }}>Contact Information</h4>
                 <Field
-                  name="customer_name"
+                  name="customerName"
                   type="text"
                   component={renderInputField}
                   label="Full Name"
                   placeholder="Enter Full Name"
                 />
                 <Field
-                  name="customer_email"
+                  name="customerEmail"
                   type="email"
                   component={renderInputField}
                   label="Email Address"
                   placeholder="Enter Email Address"
                 />
                 <Field
-                  name="customer_phno"
+                  name="customerPhno"
                   type="text"
                   component={renderInputField}
                   label="Contact Number"
@@ -146,14 +153,14 @@ class PaymentPage extends React.Component {
                 />
                 <h4 style={{ marginBottom: 20 }}>Payment Information</h4>
                 <Field
-                  name="description"
+                  name="productDescription"
                   type="text"
                   component={renderInputField}
                   label="Payment Description"
                   placeholder="Enter Payment Description"
                 />
                 <Field
-                  name="amount"
+                  name="totalAmount"
                   type="text"
                   component={renderInputField}
                   label="Amount"
@@ -195,9 +202,9 @@ class PaymentPage extends React.Component {
               </form>
               :
               <div>
-                <p>Full Name : {customer_data.customer_name}</p>
-                <p>Email : {customer_data.customer_email}</p>
-                <p>Phone Number : {customer_data.customer_phno}</p>
+                <p>Full Name : {customer_data.customerName}</p>
+                <p>Email : {customer_data.customerEmail}</p>
+                <p>Phone Number : {customer_data.customerPhno}</p>
               </div>
             }
             {data &&
@@ -287,20 +294,20 @@ class PaymentPage extends React.Component {
 
 const validate = (values) => {
   const errors = {};
-  if (!values.customer_name) {
-    errors.customer_name = 'Required';
+  if (!values.customerName) {
+    errors.customerName = 'Required';
   }
-  if (!values.customer_email) {
-    errors.customer_email = 'Required';
+  if (!values.customerEmail) {
+    errors.customerEmail = 'Required';
   }
-  if (!values.customer_phno) {
-    errors.customer_phno = 'Required';
+  if (!values.customerPhno) {
+    errors.customerPhno = 'Required';
   }
-  if (!values.description) {
-    errors.description = 'Required';
+  if (!values.productDescription) {
+    errors.productDescription = 'Required';
   }
-  if (!values.amount) {
-    errors.amount = 'Required';
+  if (!values.totalAmount) {
+    errors.totalAmount = 'Required';
   }
   if (!values.currency) {
     errors.currency = 'Required';
