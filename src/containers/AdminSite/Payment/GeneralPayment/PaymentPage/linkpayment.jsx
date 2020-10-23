@@ -103,7 +103,7 @@ class PaymentPage extends React.Component {
     console.log(values);
     const order_id = new Date().getTime().toString().substring(12, 0);
     const currency = 840;
-    const totalAmount = parseInt(values.quantity, 0) * 100;
+    const totalAmount = (parseInt(values.quantity, 0) * 100) + (parseInt(values.quantity, 0) * 100 * 0.05);
     this.getPaymentData(values, order_id, currency, totalAmount);
     const data = values;
     data._id = parseInt(order_id, 0);
@@ -154,11 +154,15 @@ class PaymentPage extends React.Component {
                   <tr>
                     <td>{customer_data.productDescription}</td>
                     <td>{customer_data.quantity}</td>
-                    <td>{customer_data.totalAmount} ({customer_data.currency})</td>
+                    <td>${parseInt(customer_data.quantity, 0) * 100} ({customer_data.currency})</td>
+                  </tr>
+                  <tr>
+                    <td colSpan={2}><h5>Tax</h5></td>
+                    <td><h5>${parseInt(customer_data.quantity, 0) * 100 * 0.05} ({customer_data.currency})</h5></td>
                   </tr>
                   <tr>
                     <td colSpan={2}><h5>Total</h5></td>
-                    <td><h5>{customer_data.totalAmount} ({customer_data.currency})</h5></td>
+                    <td><h5>${customer_data.totalAmount} ({customer_data.currency})</h5></td>
                   </tr>
                 </Table>
               </div>

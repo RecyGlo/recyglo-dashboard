@@ -52,10 +52,18 @@ let PaymentForm = (props) => {
           placeholder="Enter Quantity"
         />
         {quantity &&
-          <div className="form__form-group">
-            <span className="form__form-group-label">Total Amount</span>
-            <div className="form__form-group-field">
-              <p>{parseInt(quantity, 0) * 100} USD</p>
+          <div>
+            <div className="form__form-group">
+              <span className="form__form-group-label">Tax</span>
+              <div className="form__form-group-field">
+                <p>${parseInt(quantity, 0) * 100 * 0.05}</p>
+              </div>
+            </div>
+            <div className="form__form-group">
+              <span className="form__form-group-label">Total Amount</span>
+              <div className="form__form-group-field">
+                <p>${(parseInt(quantity, 0) * 100) + (parseInt(quantity, 0) * 100 * 0.05)} (USD)</p>
+              </div>
             </div>
           </div>
         }
