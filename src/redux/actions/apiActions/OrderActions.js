@@ -13,6 +13,10 @@ import {
 
 const addNewOrder = (data) => {
   console.log(data);
+  if (data.certificate) {
+    delete data.certificate;
+  }
+
   axios({
     method: 'post',
     headers: {

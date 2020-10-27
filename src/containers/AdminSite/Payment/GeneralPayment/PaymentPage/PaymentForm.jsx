@@ -12,6 +12,7 @@ let PaymentForm = (props) => {
   const {
     handleSubmit,
     quantity,
+    certificate,
   } = props;
   return (
     <Container>
@@ -53,20 +54,32 @@ let PaymentForm = (props) => {
         />
         {quantity &&
           <div>
-            <div className="form__form-group">
+            {/* <div className="form__form-group">
               <span className="form__form-group-label">Tax</span>
               <div className="form__form-group-field">
                 <p>${parseInt(quantity, 0) * 100 * 0.05}</p>
               </div>
-            </div>
+            </div> */}
             <div className="form__form-group">
               <span className="form__form-group-label">Total Amount</span>
               <div className="form__form-group-field">
-                <p>${(parseInt(quantity, 0) * 100) + (parseInt(quantity, 0) * 100 * 0.05)} (USD)</p>
+                {certificate ?
+                  <p>${(parseInt(quantity, 0) * 150)} (USD)</p>
+                  :
+                  <p>${(parseInt(quantity, 0) * 100)} (USD)</p>
+                }
               </div>
             </div>
           </div>
         }
+        <div className="form__form-group">
+          <Field
+            name="certificate"
+            component={renderCheckBoxField}
+            label="Certificate of Recycling ($50 for each box)"
+            className="colored-click"
+          />
+        </div>
         <div className="form__form-group">
           <Field
             name="tnc"
@@ -117,8 +130,10 @@ PaymentForm = reduxForm({
 const selector = formValueSelector('payment_information_form'); // <-- same as form name
 PaymentForm = connect((state) => {
   const quantity = selector(state, 'quantity');
+  const certificate = selector(state, 'certificate');
   return {
     quantity,
+    certificate,
   };
 })(PaymentForm);
 

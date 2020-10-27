@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import { Col, Container, Row, Card, CardBody, Table } from 'reactstrap';
 import { Tab, Nav } from 'react-bootstrap';
@@ -103,15 +104,21 @@ class PaymentPage extends React.Component {
     console.log(values);
     const order_id = new Date().getTime().toString().substring(12, 0);
     const currency = 840;
-    const totalAmount = (parseInt(values.quantity, 0) * 100) + (parseInt(values.quantity, 0) * 100 * 0.05);
+    let totalAmount = (parseInt(values.quantity, 0) * 100);
+    if (values.certificate && values.certificate === true) {
+      totalAmount += 50 * parseInt(values.quantity, 0);
+    }
     this.getPaymentData(values, order_id, currency, totalAmount);
-    const data = values;
+    values.totalAmount = totalAmount;
+    this.setState({ customer_data: values });
+    const data = JSON.parse(JSON.stringify(values));
     data._id = parseInt(order_id, 0);
     data.productDescription = 'Battery Recycling Service';
     data.totalAmount = totalAmount;
+    data.quantity = parseInt(values.quantity, 0);
     data.currency = 'USD';
+    // delete data.certificate;
     delete data.tnc;
-    this.setState({ customer_data: values });
     addNewOrder(data);
   }
 
@@ -152,17 +159,21 @@ class PaymentPage extends React.Component {
                     <td>Amount</td>
                   </thead>
                   <tr>
-                    <td>{customer_data.productDescription}</td>
+                    <td>Battery Recycling Service</td>
                     <td>{customer_data.quantity}</td>
-                    <td>${parseInt(customer_data.quantity, 0) * 100} ({customer_data.currency})</td>
+                    <td>${parseInt(customer_data.quantity, 0) * 100} (USD)</td>
                   </tr>
+                  {/* {JSON.stringify(customer_data.certificate)} */}
+                  {customer_data.certificate &&
+                    <tr>
+                      <td>Certificate of Recycling</td>
+                      <td>{customer_data.quantity}</td>
+                      <td>${parseInt(customer_data.quantity, 0) * 50} (USD)</td>
+                    </tr>
+                  }
                   <tr>
-                    <td colSpan={2}><h5>Tax</h5></td>
-                    <td><h5>${parseInt(customer_data.quantity, 0) * 100 * 0.05} ({customer_data.currency})</h5></td>
-                  </tr>
-                  <tr>
-                    <td colSpan={2}><h5>Total</h5></td>
-                    <td><h5>${customer_data.totalAmount} ({customer_data.currency})</h5></td>
+                    <td colSpan={2}><h4>Total (VAT inclusive at 5%)</h4></td>
+                    <td><h4>${customer_data.totalAmount} (USD)</h4></td>
                   </tr>
                 </Table>
               </div>
@@ -205,11 +216,12 @@ class PaymentPage extends React.Component {
                     Dry Cell Battery Recycling Service
                   </p>
                   <ul style={{ color: 'rgb(87 112 131)', font: 'normal normal normal 15px/1.4em avenir-lt-w01_35-light1475496,sans-serif' }}>
-                    <li style={{ lineHeight: '1.8em' }}>Dry Cell Battery Recycling Drop-off Box with User Guide.</li>
-                    <li style={{ lineHeight: '1.8em' }}>Safely Collection and Shipping Instruction back to RecyGlo.</li>
-                    <li style={{ lineHeight: '1.8em' }}>RecyGlo&apos;s Recycling Guideline Poster</li>
-                    <li style={{ lineHeight: '1.8em' }}>Door to Door Delivery and Pickup on request. (Only in Yangon).</li>
-                    <li style={{ lineHeight: '1.8em' }}>Certificate of Recycling of Batteries is available upon request</li>
+                    <li style={{ lineHeight: '1.8em' }}>Dry Cell Battery Recycling Drop-off Box with User Guide</li>
+                    <li style={{ lineHeight: '1.8em' }}>Weight Capacity 5kg Maximum per Box</li>
+                    <li style={{ lineHeight: '1.8em' }}>Shipping Instruction to RecyGlo</li>
+                    <li style={{ lineHeight: '1.8em' }}>Recycling Guideline Poster</li>
+                    <li style={{ lineHeight: '1.8em' }}>Door to Door Delivery</li>
+                    {/* <li style={{ lineHeight: '1.8em' }}>Certificate of Recycling of Batteries is available upon request</li> */}
                   </ul>
                   <div style={{ display: 'inline-block' }}>
                     <p
