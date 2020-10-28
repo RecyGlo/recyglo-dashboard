@@ -257,60 +257,62 @@ class PaymentPage extends React.Component {
             </Table> */}
             {/* <h5>15,000 (USD)</h5> */}
           </Col>
-          <Col md={12}>
-            <Tab.Container defaultActiveKey="link-1">
-              <br />
-              <h4>Available Payment Options</h4>
-              <br />
-              <Nav variant="tabs" defaultActiveKey="/home">
-                <Nav.Item>
-                  <Nav.Link eventKey="link-1">Credit/Debit Counter</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="link-2">Over the Counter</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="link-3">Bank Channels</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="link-4">MPU Card</Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content style={{ paddingTop: 10 }}>
-                <Tab.Pane eventKey="link-1">
-                  <img src={img1_link1} alt="img1_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img2_link1} alt="img2_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
-                </Tab.Pane>
-                <Tab.Pane eventKey="link-2">
-                  <img src={img1_link2} alt="img1_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img2_link2} alt="img2_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img3_link2} alt="img3_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img4_link2} alt="img4_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img5_link2} alt="img5_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img6_link2} alt="img6_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img7_link2} alt="img7_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img8_link2} alt="img8_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img9_link2} alt="img9_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img10_link2} alt="img10_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img11_link2} alt="img11_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img12_link2} alt="img12_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img13_link2} alt="img13_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img14_link2} alt="img14_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img15_link2} alt="img15_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img16_link2} alt="img16_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img17_link2} alt="img17_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                </Tab.Pane>
-                <Tab.Pane eventKey="link-3">
-                  <img src={img1_link3} alt="img1_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img2_link3} alt="img2_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                  <img src={img3_link3} alt="img3_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
-                </Tab.Pane>
-                <Tab.Pane eventKey="link-4">
-                  <img src={img1_link4} alt="img1_link4" />
-                </Tab.Pane>
-              </Tab.Content>
-            </Tab.Container>
-          </Col>
+          {customer_data &&
+            <Col md={12}>
+              <Tab.Container defaultActiveKey="link-1">
+                <br />
+                <h4>Available Payment Options</h4>
+                <br />
+                <Nav variant="tabs" defaultActiveKey="/home">
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-1">Credit/Debit Counter</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-2">Over the Counter</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-3">Bank Channels</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="link-4">MPU Card</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <Tab.Content style={{ paddingTop: 10 }}>
+                  <Tab.Pane eventKey="link-1">
+                    <img src={img1_link1} alt="img1_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img2_link1} alt="img2_link1" style={{ width: '60px', marginLeft: '10px', marginBottom: '10px' }} />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="link-2">
+                    <img src={img1_link2} alt="img1_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img2_link2} alt="img2_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img3_link2} alt="img3_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img4_link2} alt="img4_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img5_link2} alt="img5_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img6_link2} alt="img6_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img7_link2} alt="img7_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img8_link2} alt="img8_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img9_link2} alt="img9_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img10_link2} alt="img10_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img11_link2} alt="img11_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img12_link2} alt="img12_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img13_link2} alt="img13_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img14_link2} alt="img14_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img15_link2} alt="img15_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img16_link2} alt="img16_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img17_link2} alt="img17_link2" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="link-3">
+                    <img src={img1_link3} alt="img1_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img2_link3} alt="img2_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                    <img src={img3_link3} alt="img3_link3" style={{ width: '100px', marginLeft: '10px', marginBottom: '10px' }} />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="link-4">
+                    <img src={img1_link4} alt="img1_link4" />
+                  </Tab.Pane>
+                </Tab.Content>
+              </Tab.Container>
+            </Col>
+          }
         </Row>
       </Container>
     );

@@ -64,9 +64,9 @@ let PaymentForm = (props) => {
               <span className="form__form-group-label">Total Amount</span>
               <div className="form__form-group-field">
                 {certificate ?
-                  <p>${(parseInt(quantity, 0) * 150)} (USD)</p>
+                  <p>${(parseInt(quantity, 0) * 150)} USD (VAT Inclusive)</p>
                   :
-                  <p>${(parseInt(quantity, 0) * 100)} (USD)</p>
+                  <p>${(parseInt(quantity, 0) * 100)} USD (VAT Inclusive)</p>
                 }
               </div>
             </div>
@@ -106,6 +106,9 @@ const validate = (values) => {
   }
   if (!values.customerPhno) {
     errors.customerPhno = 'Required';
+    /* eslint-disable-next-line no-restricted-globals */
+  } else if (values.customerPhno && isNaN(Number(values.customerPhno))) {
+    errors.customerPhno = 'Please enter valid phone number.';
   }
   if (!values.quantity) {
     errors.quantity = 'Required';
