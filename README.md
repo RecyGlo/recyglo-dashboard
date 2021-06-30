@@ -73,7 +73,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 To get started follow this steps:
 
 - Install [Node](https://nodejs.org/en/).
-- Download and open this project (`cd path/to/easydev-seed`).
+- Download and open this project (`cd path/to/recyglo-dashboard`).
 - Install packages: `npm install` or `yarn install`.
 - Start the project locally: `npm start` or `yarn start` (running on port 3000).
 
