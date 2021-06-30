@@ -81,4 +81,12 @@ To get started follow this steps:
 
 To build the app for production run `npm run build` or `yarn build`
 
+## Project Structure
+
+    .
+    ├── build                   # Built files
+    ├── public                  # Public files
+    ├── src                     # Source files
+    ├── scripts                 # Automated scripts
+    └── README.md
 
