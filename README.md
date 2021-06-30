@@ -13,6 +13,7 @@ RecyGlo React is based on [Create React App](https://github.com/facebook/create-
   - [npm run eject](#npm-run-eject)
 - [Installing and Running Code](#installing-and-running-code)
 - [Building Project](#building-project)
+- [Project Structure](#project-structure)
 
 ## Updating to New Releases
 
@@ -87,6 +88,11 @@ To build the app for production run `npm run build` or `yarn build`
     ├── build                   # Built files
     ├── public                  # Public files
     ├── src                     # Source files
+    │   ├── containers          # Layout Files
+    │   ├── redux               # React Redux Files
+    │   ├── scss                # Stylesheets
+    │   ├── shared              # Shared information
+    │   └── ...  
     ├── scripts                 # Automated scripts
     └── README.md
 
