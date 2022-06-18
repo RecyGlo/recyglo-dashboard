@@ -32,7 +32,7 @@ class PlasticRecycling extends PureComponent {
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '100%', float: 'right' }}>
-              <p>What Happended to Your Plastic Waste?</p>
+              <p>What Happened to Your Plastic Waste?</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -56,14 +56,10 @@ class PlasticRecycling extends PureComponent {
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
-                {/* <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Raw Material</h3></th>
-                <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Final Product</h3></th> */}
               </tr>
               <tr>
                 <td style={{
                   display: 'block',
-                  // flexDirection: 'row',
-                  // padding: '20px',
                   alignItems: 'center',
                   justifyContent: 'center',
                   }}
@@ -116,26 +112,11 @@ class PlasticRecycling extends PureComponent {
                     src={plastic8}
                     alt="image1"
                   />
-                  {/* <img
-                    style={{
-                      display: 'block', padding: '5px', margin: '0 auto', width: '100px',
-                    }}
-                    src={plastic9}
-                    alt="image1"
-                  /> */}
                   <div style={{ width: '-webkit-fit-content', margin: '5px auto' }}>
                     <img style={{ width: '150px' }} src={plastic9} alt="image2" />
                     <img style={{ width: '150px' }} src={plastic10} alt="image2" />
                   </div>
                 </td>
-                {/* <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
-                  <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={img4} alt="image4" />
-                </td> */}
               </tr>
             </table>
             <p style={{ color: '#00b0f0', marginLeft: '30px' }}>* This are just the sample image of the product. The design and type of the product can be changed accordingly.</p>

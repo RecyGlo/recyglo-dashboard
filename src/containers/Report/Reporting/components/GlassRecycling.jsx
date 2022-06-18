@@ -25,18 +25,17 @@ class GlassRecycling extends PureComponent {
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '100%', float: 'right' }}>
-              <p>What Happended to Your Glass Waste?</p>
+              <p>What Happened to Your Glass Waste?</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <table style={{ marginTop: '5px', width: '100%' }}>
               <tr>
                 <th style={{
-                  // paddingLeft: '5px', paddingRight: '5px', textAlign: 'center',
                   textAlign: 'center',
                   }}
                 >
-                  <h3 style={{ backgroundColor: '#aaaaaa' }}>Paper Recycling</h3>
+                  <h3 style={{ backgroundColor: '#aaaaaa' }}>Glass Recycling</h3>
                 </th>
                 <th style={{
                   paddingLeft: '5px', paddingRight: '5px', textAlign: 'center',
@@ -50,8 +49,6 @@ class GlassRecycling extends PureComponent {
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
-                {/* <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Raw Material</h3></th>
-                <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Final Product</h3></th> */}
               </tr>
               <tr>
                 <td style={{
@@ -66,19 +63,12 @@ class GlassRecycling extends PureComponent {
                   <img style={{ width: '300px', margin: '5px' }} src={glass2} alt="image2" height="300" />
                 </td>
                 <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
                   padding: '30px',
                   }}
                 >
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={glass3} alt="image3" />
                 </td>
-                <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
+                <td style={{ padding: '30px' }}>
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={glass4} alt="image4" />
                 </td>
               </tr>

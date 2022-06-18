@@ -21,6 +21,7 @@
     }],
     "max-len": ["error", {"code": 120, "ignoreRegExpLiterals": true, "tabWidth": 2}],
     "no-console": [1],
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "quotes": "off"
   }
 }

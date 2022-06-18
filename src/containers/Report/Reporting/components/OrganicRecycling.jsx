@@ -23,7 +23,7 @@ class OrganicRecycling extends PureComponent {
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '100%', float: 'right' }}>
-              <p>What Happended to Your Organic Waste?</p>
+              <p>What Happened to Your Organic Waste?</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -41,24 +41,12 @@ class OrganicRecycling extends PureComponent {
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Products</h3>
                 </th>
-                {/* <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Raw Material</h3></th>
-                <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Final Product</h3></th> */}
               </tr>
               <tr>
-                <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
+                <td style={{ padding: '30px' }}>
                   <img style={{ width: '500px', display: 'block', margin: '0 auto' }} src={organic1} alt="image3" />
                 </td>
-                <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
+                <td style={{ padding: '30px' }}>
                   <img style={{ width: '500px', display: 'block', margin: '0 auto' }} src={organic2} alt="image4" />
                 </td>
               </tr>

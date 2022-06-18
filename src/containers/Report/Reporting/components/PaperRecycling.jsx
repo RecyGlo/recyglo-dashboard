@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable quote-props */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable max-len */
+/* eslint-disable quotes */
+
 import React, { PureComponent } from 'react';
 import Header from './Header';
 import Footer from './Footer';
@@ -25,7 +26,7 @@ class PaperRecycling extends PureComponent {
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '100%', float: 'right' }}>
-              <p>What Happended to Your Paper Waste?</p>
+              <p>What Happened to Your Paper Waste?</p>
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -49,8 +50,6 @@ class PaperRecycling extends PureComponent {
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
-                {/* <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Raw Material</h3></th>
-                <th style={{ textAlign: 'center', backgroundColor: '#aaaaaa' }}><h3>Final Product</h3></th> */}
               </tr>
               <tr>
                 <td style={{
@@ -64,20 +63,10 @@ class PaperRecycling extends PureComponent {
                   <img style={{ width: '300px', margin: '5px' }} src={img1} alt="image1" height="150" />
                   <img style={{ width: '300px', margin: '5px' }} src={img2} alt="image2" height="300" />
                 </td>
-                <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
+                <td style={{ padding: '30px' }}>
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={img3} alt="image3" />
                 </td>
-                <td style={{
-                  // display: 'flex',
-                  // flexDirection: 'column',
-                  padding: '30px',
-                  }}
-                >
+                <td style={{ padding: '30px' }}>
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={img4} alt="image4" />
                 </td>
               </tr>
