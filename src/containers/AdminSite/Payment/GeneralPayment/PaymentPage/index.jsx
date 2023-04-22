@@ -72,8 +72,8 @@ class PaymentPage extends React.Component {
     const version = '8.5';
     // const payment_url = 'https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment';
     const payment_url = 'https://t.2c2p.com/RedirectV3/payment';
-    const result_url_1 = 'https://api.recyglo.info/payment/2c2p';
-    const result_url_2 = 'https://api.recyglo.info/payment/2c2p/get';
+    const result_url_1 = 'https://api.recyglo.net/payment/2c2p';
+    const result_url_2 = 'https://api.recyglo.net/payment/2c2p/get';
     // eslint-disable-next-line max-len
     const params = `${version}${merchant_id}${payment_description}${order_id}${currency}${amount}${result_url_1}${result_url_2}`;
     const hash = CryptoJS.HmacSHA256(params, secret_key, false);
