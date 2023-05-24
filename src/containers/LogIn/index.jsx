@@ -15,7 +15,7 @@ const LogIn = ({ dispatch }) => (
           <h3 className="account__title">Welcome to
             <span className="account__logo-accent"> RecyGlo</span>
           </h3>
-          <h4 className="account__subhead subhead">Making Myanmar a Cleaner Place</h4>
+          <h4 className="account__subhead subhead">Making The World a Cleaner Place</h4>
         </div>
         <LogInForm onSubmit={values => dispatch(login(values))} />
         {/* <div className="account__or">
