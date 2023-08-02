@@ -26,6 +26,7 @@ import ItemsFound from './ItemsFound';
 import Composition from './Composition';
 import TotalComposition from './TotalComposition';
 import Summary from './Summary';
+import about from '../../../../shared/img/background/about.png';
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -355,18 +356,60 @@ class ReportingForm extends React.Component {
           <CardBody>
             {/* <CardTitle>Card title</CardTitle> */}
             {/* eslint-disable-next-line max-len */}
-            <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterlysince the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
-            {/* <p>Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterlysince the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p> */}
-            <p>You can download the resulting quarterly reports containing the quantity and qualityof the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
-            <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
-            <hr />
-            {organization &&
-              <CreateQuarterModal
-                organization={organization._id}
-                createQuarter={this.createQuarter}
-              />
-            }
-            <hr />
+            <form className="form form--horizontal">
+              <div className="form__form-group">
+                <span className="form__form-group-label"><img alt="about" src={about} /></span>
+                <div className="form__form-group-field">
+                  <div className="form__form-group-input-block"><h4>About Report</h4>
+                    <br />
+                    <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract.</p>
+                    <br />
+                    <p> We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
+                    <br />
+                    <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
+                    <br />
+                    <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div className="animation-block">
+              <h1 className="heading-animation">
+                IDENTIFICATION
+              </h1>
+              <h1 className="heading-animation2">
+                ANALYSIS
+              </h1>
+              <h1 className="heading-animation">
+                QUANTIFICATION
+              </h1>
+            </div>
+            <div className="report-block">
+              <div className="report-blockmini">
+                <h3>Get Started</h3>
+                <div className="form__form-group-input-wrap">
+                  {organization &&
+                    <CreateQuarterModal
+                      organization={organization._id}
+                      createQuarter={this.createQuarter}
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+            {/* <div className="report-block">
+              <div className="report-blockmini">
+                <h3>Get Started</h3>
+                <div className="form__form-group-input-wrap">
+                  {organization &&
+                    <CreateQuarterModal
+                      organization={organization._id}
+                      createQuarter={this.createQuarter}
+                    />
+                  }
+                </div>
+              </div>
+            </div> */}
             {JSON.stringify(data) !== '{}' && generationData &&
               <Generation data={generationData} title={data.quarter} organization={organization.name} />
             }

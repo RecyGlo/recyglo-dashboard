@@ -1,11 +1,11 @@
 .table {
 
   &:last-child {
-    margin-bottom: 0;
+    margin-bottom: 30px;
   }
 
-  tbody td, th {
-    border: none;
+  tbody td {
+    border: 1px solid #004225;
     padding: 10px;
 
     @include themify($themes) {
@@ -14,9 +14,13 @@
   }
 
   thead th {
+    background-color: #004225;
+  }
+
+  thead th {
 
     @include themify($themes) {
-      color: themed('colorText');
+      color: #ffffff;
       border-bottom-color: themed('colorBorder');
     }
   }

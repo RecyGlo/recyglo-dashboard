@@ -5,11 +5,11 @@ import {
 } from 'reactstrap';
 
 const TotalWays = ({ ways }) => (
-  <Col md={12} xl={3} lg={6} xs={12}>
-    <Card>
+  <Col md={12} xl={12} lg={6} xs={12}>
+    <Card className="dash-card">
       <CardBody className="dashboard__booking-card">
         <div className="dashboard__booking-total-container">
-          <h5 className="dashboard__booking-total-title dashboard__booking-total-title--blue">{ways}</h5>
+          <h4 className="dashboard__booking-total-title dashboard__booking-total-title--blue">{ways}</h4>
         </div>
         <h5 className="dashboard__booking-total-description">Total Pickups</h5>
         {/* <div className="progress-wrap progress-wrap--small progress-wrap--blue-gradient progress-wrap--rounded">

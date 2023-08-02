@@ -39,7 +39,6 @@ class TotalComposition extends PureComponent {
             </div>
           </div>
           <div className="total-composition-detail">
-            <h5 style={{ marginTop: 40 }}>Waste Composition (%)</h5>
             {data &&
               <TotalPieChart data={data} />
             }

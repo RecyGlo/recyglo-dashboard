@@ -1,5 +1,6 @@
 .panel {
   transition: 0.3s;
+  height: 600px !important;
 
   &.panel--collapse {
     height: 108px;
@@ -193,7 +194,10 @@
   transition: 0.3s;
 
   h5 {
-    font-size: 13px;
+    color: #000000;
+    line-height: 30px;
+    font-size: 16px;
+    font-family: Abhaya Libre ExtraBold;
   }
 
   .subhead {

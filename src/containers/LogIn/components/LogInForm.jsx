@@ -65,7 +65,7 @@ class LogInForm extends PureComponent {
           </div>
         </div>
         <a href="password_reset" style={{ marginBottom: 10 }}>Forget Password?</a>
-        <Button className="btn btn-primary account__btn account__btn--small" color="primary">Sign In</Button>
+        <Button className="btn btn-primary account__btn account__btn--small" color="secondary">Sign In</Button>
       </form>
     );
   }

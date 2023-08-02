@@ -10,10 +10,10 @@ import ReportingForm from './components/ReportingForm';
 class Reporting extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="theme-bg">
         <Row>
           <Col md={12}>
-            <h3 className="page-title">Report</h3>
+            <h3 className="page-title">Waste Management Report</h3>
             {/* eslint-disable-next-line max-len */}
             {/* <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterlysince the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.You can download the resulting quarterly reports containing the quantity and qualityof the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace.We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at contact@recyglo.comor +95-9-40424-5800.</p> */}
           </Col>

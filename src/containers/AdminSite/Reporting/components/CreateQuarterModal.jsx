@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import classNames from 'classnames';
 import { Button } from 'reactstrap';
-import { FaPlus } from 'react-icons/fa';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import { getLogisticsByOrganizationWithPromise } from '../../../../redux/actions/apiActions/logisticsActions';
@@ -161,6 +160,7 @@ class CreateQuarterModal extends React.PureComponent {
           }
         }
         // console.log(logisticsByQuarters);
+
         this.setState({ logisticsByQuarters });
       });
     }
@@ -223,109 +223,28 @@ class CreateQuarterModal extends React.PureComponent {
     return (
       <div className="modal__body">
         <form className="form form--horizontal">
-          {/* <div className="form__form-group">
-            <span className="form__form-group-label">Quarter</span>
-            <div className="form__form-group-field">
-              <div className="form__form-group-input-wrap">
-                <Select
-                  name="organizations"
-                  options={[
-                    { label: 'First Quarter', value: 'First Quarter' },
-                    { label: 'Second Quarter', value: 'Second Quarter' },
-                    { label: 'Third Quarter', value: 'Third Quarter' },
-                    { label: 'Forth Quarter', value: 'Forth Quarter' },
-                  ]}
-                  value={quarter}
-                  onChange={this.handleQuarterChange}
-                  clearable={false}
-                  className="react-select"
-                  placeholder="Choose Quarter"
-                  classNamePrefix="react-select"
-                />
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className="form__form-group">
-            <span className="form__form-group-label">Ways</span>
-            <div className="form__form-group-field">
-              <div className="form__form-group-input-wrap">
-                {logistics.list &&
-                  <Select
-                    isMulti
-                    name="ways"
-                    options={logistics.list
-                      && logistics.list.map((prop, key) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        { key, label: new Date(prop.pickUpTime).toDateString(), value: prop._id }
-                      ))
-                    }
-                    value={ways}
-                    onChange={this.handleWaysChange}
-                    clearable={false}
-                    className="react-select"
-                    placeholder="Choose Quarter"
-                    classNamePrefix="react-select"
-                  />
-                }
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="form__form-group">
-            <span className="form__form-group-label">Months</span>
-            <div className="form__form-group-field">
-              <div className="form__form-group-input-wrap">
-                {logisticsByMonths &&
-                  <Select
-                    isMulti
-                    name="ways"
-                    options={logisticsByMonths
-                      // eslint-disable-next-line max-len
-                      && Object.keys(logisticsByMonths).slice().sort((a, b)
-                       => new Date(b) - new Date(a)).map((prop, key) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        { key, label: prop, value: prop }
-                      ))
-                    }
-                    value={months}
-                    onChange={this.handleMonthChange}
-                    clearable={false}
-                    className="react-select"
-                    placeholder="Choose Quarter"
-                    classNamePrefix="react-select"
-                  />
-                }
-              </div>
-            </div>
-          </div> */}
-          <div className="form__form-group">
-            <span className="form__form-group-label">Quarters</span>
-            <div className="form__form-group-field">
-              <div className="form__form-group-input-wrap">
-                {logisticsByQuarters &&
-                  <Select
-                    isMulti
-                    name="ways"
-                    options={
-                      Object.keys(logisticsByQuarters).map((prop, key) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        { key, label: `${prop} ${JSON.stringify(Object.keys(logisticsByQuarters[prop]))}`, value: prop }
-                      ))
-                    }
-                    value={quarter}
-                    onChange={this.handleQuarterChange}
-                    clearable={false}
-                    className="react-select"
-                    placeholder="Choose Quarter"
-                    classNamePrefix="react-select"
-                  />
-                }
-              </div>
-            </div>
-          </div>
+          {logisticsByQuarters &&
+            <Select
+              isMulti
+              name="ways"
+              options={
+              Object.keys(logisticsByQuarters).map((prop, key) => (
+              // eslint-disable-next-line no-underscore-dangle
+              { key, label: `${prop} ${JSON.stringify(Object.keys(logisticsByQuarters[prop]))}`, value: prop }
+              ))
+              }
+              value={quarter}
+              onChange={this.handleQuarterChange}
+              clearable={false}
+              className="react-select"
+              placeholder="Choose Quarter"
+              classNamePrefix="react-select"
+            />
+          }
+          <br /><br />
           <Button className="icon" color="success" onClick={() => this.handleSubmit()}>
             <p>
-              <FaPlus /> Create Graphs
+              Generate Report →
             </p>
           </Button>
         </form>

@@ -8,6 +8,9 @@ import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import Picker from 'react-month-picker';
+import circle from '../../../shared/img/background/circle.png';
+import span from '../../../shared/img/background/span.png';
+import streams from '../../../shared/img/background/streams-logo.png';
 
 import {
   getTotalWasteByOrganization,
@@ -22,7 +25,7 @@ import TrendLineChart from './components/TrendLineChart';
 import TotalCollectedWaste from './components/TotalCollectedWaste';
 import TotalWays from './components/TotalPickups';
 import ServicPeriod from './components/ServicPeriod';
-import TotalCarbonFootprint from './components/TotalCarbonFootprint';
+// import TotalCarbonFootprint from './components/TotalCarbonFootprint';
 import MonthBox from './components/MonthBox';
 
 const graphs = ['both', 'bar', 'line'];
@@ -139,38 +142,41 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Container className="dashboard">
+      <Container className="dash-theme-bg">
         <Row>
           <Col md={12}>
             <h3 className="page-title">Dashboard</h3>
           </Col>
         </Row>
         <Row>
-          {misc && misc.totalWastesByOrganization &&
-            <TotalCollectedWaste
-              collectedWaste={misc.totalWastesByOrganization}
-            />
-          }
-          {misc && misc.totalPickupsByOrganization &&
-            <TotalWays
-              ways={misc.totalPickupsByOrganization}
-            />
-          }
-          {misc && misc.contractDurationByOrganization &&
-            <ServicPeriod
-              contracts={misc.contractDurationByOrganization}
-            />
-          }
-          <TotalCarbonFootprint
+          <Col md={6}>
+            <div className="dash-content">
+              <h4>Summary</h4>
+              <h3>Unveiling your month in numbers</h3>
+              <img className="circle" alt="about" src={circle} />
+            </div>
+          </Col>
+          <Col md={6}>
+            {misc && misc.totalWastesByOrganization && (
+              <TotalCollectedWaste
+                collectedWaste={misc.totalWastesByOrganization}
+              />
+            )}
+            {misc && misc.totalPickupsByOrganization && (
+              <TotalWays ways={misc.totalPickupsByOrganization} />
+            )}
+            {misc && misc.contractDurationByOrganization && (
+              <ServicPeriod contracts={misc.contractDurationByOrganization} />
+            )}
+            {/* <TotalCarbonFootprint
             co2={202.1}
-          />
+          /> */}
+          </Col>
         </Row>
-
-        <label>
+        <img className="span" alt="about" src={span} />
+        <label className="pick">
           <b>Pick A Span of Months</b>
           <span>(Available years from 2017 to this year)</span>
-        </label>
-        <Row>
           <Col>
             <div className="edit">
               <Picker
@@ -183,7 +189,9 @@ class Dashboard extends React.Component {
                 onDismiss={this.handleRangeDissmis}
               >
                 <MonthBox
-                  value={makeText(rangeValue.from) + ' ~ ' + makeText(rangeValue.to)}
+                  value={
+                    makeText(rangeValue.from) + " ~ " + makeText(rangeValue.to)
+                  }
                   onClick={this._handleClickRangeBox}
                 />
               </Picker>
@@ -191,38 +199,82 @@ class Dashboard extends React.Component {
           </Col>
           <Col lg={1} md={1} sm={1}>
             <button
-              className="btn btn-secondary"
-              style={{ margin: '20px 0px', padding: 10 }}
+              className="btn btn-span"
+              style={{ margin: "20px 0px", padding: 10 }}
               onClick={this.resetDateRange}
             >
               Reset
             </button>
           </Col>
-        </Row>
-        <Row>
-          {misc && misc.totalWastesByOrganization &&
+          {misc && misc.totalWastesByOrganization && (
             <OverviewPieChart
               data={misc.totalWastesByOrganization}
               firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
-              lastMonth={misc.monthlyWaste && misc.monthlyWaste[misc.monthlyWaste.length - 1].month}
+              lastMonth={
+                misc.monthlyWaste &&
+                misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+              }
             />
-          }
+          )}
+        </label>
+        {/* //this is the working code */}
+        {/* <Col>
+          <div className="edit">
+            <Picker
+              ref={this.pickRange}
+              years={years}
+              value={rangeValue}
+              lang={pickerLang}
+              theme="light"
+              onChange={this.handleRangeChange}
+              onDismiss={this.handleRangeDissmis}
+            >
+              <MonthBox
+                value={
+                  makeText(rangeValue.from) + " ~ " + makeText(rangeValue.to)
+                }
+                onClick={this._handleClickRangeBox}
+              />
+            </Picker>
+          </div>
+        </Col>
+        <Col lg={8} md={8} sm={8}>
+          <button
+            className="btn btn-secondary"
+            style={{ margin: "20px 0px", padding: 10 }}
+            onClick={this.resetDateRange}
+          >
+            Reset
+          </button>
+        </Col> */}
+        <Row className="stream">
           <ItemsReportTable
             firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
-            lastMonth={misc.monthlyWaste && misc.monthlyWaste[misc.monthlyWaste.length - 1].month}
+            lastMonth={
+              misc.monthlyWaste &&
+              misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+            }
           />
+          <div className="streams">
+            <h3>Common Waste Streams</h3>
+            <h4>
+              This section displays the waste composition commonly found in
+              waste audits
+            </h4>
+          </div>
+          <img className="circle" alt="about" src={streams} />
         </Row>
-
         <div style={{ margin: 30 }}>
-          <h4>Please select the graph type to be shown.</h4>
+          <h4 className="font">Please select the graph type to be shown.</h4>
           <Row style={{ width: 400, margin: 30 }}>
             <Select
               name="Graphs"
               onChange={this.handleChange}
-              options={graphs.map((prop, key) => (
-                  { key, label: prop, value: prop }
-                ))
-              }
+              options={graphs.map((prop, key) => ({
+                key,
+                label: prop,
+                value: prop,
+              }))}
               clearable={false}
               className="react-select"
               placeholder="Graphs"
@@ -230,18 +282,22 @@ class Dashboard extends React.Component {
             />
           </Row>
         </div>
-        {graph === 'bar' &&
-          <Row><MontlyReportChart /></Row>
-        }
-        {graph === 'line' &&
-          <Row><TrendLineChart /></Row>
-        }
-        {graph === 'both' &&
+        {graph === "bar" && (
+          <Row>
+            <MontlyReportChart />
+          </Row>
+        )}
+        {graph === "line" && (
+          <Row>
+            <TrendLineChart />
+          </Row>
+        )}
+        {graph === "both" && (
           <Row>
             <MontlyReportChart duration={duration} />
             <TrendLineChart />
           </Row>
-        }
+        )}
       </Container>
     );
   }

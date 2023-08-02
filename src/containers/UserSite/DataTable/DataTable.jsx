@@ -159,7 +159,7 @@ class DataTable extends PureComponent {
     const { rows } = this.state;
     return (
       <Col md={12} lg={12}>
-        <Card>
+        <Card className="data-card">
           <CardBody>
             {rows &&
               <ReactBootstrapTable

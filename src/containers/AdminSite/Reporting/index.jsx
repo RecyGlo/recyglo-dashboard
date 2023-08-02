@@ -10,10 +10,10 @@ import ReportingForm from './components/ReportingForm';
 class Reporting extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="theme-bg">
         <Row>
           <Col md={12}>
-            <h3 className="page-title">Report</h3>
+            <h3 className="page-title">Waste Management Report</h3>
           </Col>
         </Row>
         <Row>

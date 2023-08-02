@@ -53,17 +53,22 @@ class Composition extends Component {
     return (
       <div className="reporting-page">
         <div className="generation-content">
-          <div className="generation-title">
-            <div style={{ width: '70%', float: 'left' }}>
-              <h5>Generation and Recycling</h5>
-              <h4>Monthly Waste Collection</h4>
-            </div>
-            <div style={{ width: '30%' }}>
-              <p>{title}</p>
-            </div>
-          </div>
           <Container className="dashboard">
             <Row>
+              {/* {data && Object.keys(data).map((item, key) => (
+                <Col key={key} md={6} lg={2} style={{ paddingTop: '20px' }}>
+                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li className="list-text"><h2 className="weight">{data[item].total.toFixed(2)} <span className="kg"> KG </span></h2> of {item} waste was recycled.</li></ul>
+                </Col>
+              ))} */}
+              <div className="composition-title">
+                <div style={{ width: '70%', float: 'left' }}>
+                  <h5>Generation and Recycling</h5>
+                  <h4>Monthly Waste Collection</h4>
+                </div>
+                <div style={{ width: '30%' }}>
+                  <p>{title}</p>
+                </div>
+              </div>
               {data && Object.keys(data).map((item, key) => (
                 <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
                   <h5 style={{ textAlign: 'center' }}>Waste Composition (%)</h5>

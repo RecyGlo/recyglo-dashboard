@@ -1,6 +1,6 @@
 .btn {
   border-radius: 5px;
-  padding: 10px 25px;
+  padding: 10px 20px;
   margin-bottom: 20px;
   margin-right: 15px;
   transition: all 0.4s;
@@ -31,7 +31,8 @@
     display: flex;
     transition: all 0.3s;
     font-weight: 500;
-    color: #444444;
+    color: #ffffff !important; 
+    font-size: 18px !important;
   }
 
   svg {
@@ -68,12 +69,13 @@
   }
 
   &.icon {
-    padding: 10px 15px;
+    padding: 10px 70px;
+    margin-top: 20px;
 
     &:hover {
 
       p {
-        color: #646777;
+        color: #ffffff;
       }
 
       svg {
@@ -119,13 +121,33 @@
     }
   }
 
+  &.btn-span {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+
+    &:before {
+      background-color: darken(#585858, 10%);
+    }
+
+    &:hover, &:focus, &:active, &:active:focus {
+      border-color: darken(#e7e2e2, 10%);
+      color: #ffffff;
+    }
+
+    &:not([disabled]):not(.disabled):active, &:not([disabled]):not(.disabled).active {
+      background-color: #dddddd;
+      border-color: #dddddd;
+    }
+  }
+
   &.btn-outline-secondary {
     border-color: #e7e2e2;
 
     &, p {
 
       @include themify($themes) {
-        color: themed('colorText');
+        color: #ffffff;
       }
     }
 
@@ -156,7 +178,7 @@
   }
 
   &.btn-primary {
-    background-color: $color-blue;
+    background-color: #FAFAFA;
     border-color: $color-blue;
 
     &:before {
@@ -164,7 +186,7 @@
     }
 
     &:hover, &:focus, &:active, &:active:focus {
-      border-color: $color-blue-hover;
+      border-color: #FAFAFA;
     }
   }
 
@@ -186,15 +208,15 @@
   }
 
   &.btn-success {
-    background-color: $color-accent;
-    border-color: $color-accent;
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255) !important;
 
     &:before {
       background-color: $color-accent-hover;
     }
 
     &:hover, &:focus, &:active, &:active:focus {
-      border-color: $color-accent-hover;
+      border-color: #FAFAFA;
     }
   }
 

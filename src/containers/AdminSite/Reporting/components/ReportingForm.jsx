@@ -28,6 +28,8 @@ import Composition from './Composition';
 import TotalComposition from './TotalComposition';
 import CreateSummaryForm from './CreateSummaryForm';
 import Summary from './Summary';
+import about from '../../../../shared/img/background/about.png';
+import kids from '../../../../shared/img/background/kids.png';
 
 // const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
 //   'July', 'August', 'September', 'October', 'November', 'December',
@@ -331,62 +333,80 @@ class ReportingForm extends React.Component {
       <Col md={12} lg={12}>
         <Card>
           <CardBody>
-            <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
-            <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
-            <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
-            <hr />
             <form className="form form--horizontal">
               <div className="form__form-group">
-                <span className="form__form-group-label">Customer</span>
+                <span className="form__form-group-label"><img alt="about" src={about} /></span>
                 <div className="form__form-group-field">
-                  <div className="form__form-group-input-wrap">
-                    {organizations &&
-                      <Select
-                        name="organizations"
-                        value={organization}
-                        onChange={this.handleOrganizationChange}
-                        options={organizations.list
-                          && organizations.list.map((prop, key) => (
-                          // eslint-disable-next-line no-underscore-dangle
-                          { key, label: prop.name, value: prop }
-                          ))
-                        }
-                        clearable={false}
-                        className="react-select"
-                        placeholder="Choose Customer"
-                        classNamePrefix="react-select"
-                      />
-                    }
+                  <div className="form__form-group-input-block"><h4>About Report</h4>
+                    <br />
+                    <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract.</p>
+                    <br />
+                    <p> We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
+                    <br />
+                    <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
+                    <br />
+                    <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
                   </div>
                 </div>
               </div>
             </form>
-            {organization &&
-              <CreateQuarterModal
-                organization={organization.value._id}
-                createQuarter={this.createQuarter}
-              />
-            }
+            <div className="animation-block">
+              <h1 className="heading-animation">
+                IDENTIFICATION
+              </h1>
+              <h1 className="heading-animation2">
+                ANALYSIS
+              </h1>
+              <h1 className="heading-animation">
+                QUANTIFICATION
+              </h1>
+            </div>
+            <div className="report-block">
+              <div className="report-blockmini">
+                <h3>Get Started</h3>
+                <div className="form__form-group-input-wrap">
+                  {organizations &&
+                    <Select
+                      name="organizations"
+                      value={organization}
+                      onChange={this.handleOrganizationChange}
+                      options={organizations.list
+                        && organizations.list.map((prop, key) => (
+                        // eslint-disable-next-line no-underscore-dangle
+                        { key, label: prop.name, value: prop }
+                        ))
+                      }
+                      clearable={false}
+                      className="react-select"
+                      placeholder="Choose Customer"
+                      classNamePrefix="react-select"
+                    />
+                  }
+                  <br />
+                  {organization &&
+                    <CreateQuarterModal
+                      organization={organization.value._id}
+                      createQuarter={this.createQuarter}
+                    />
+                  }
+                </div>
+              </div>
+            </div>
             <hr />
             {JSON.stringify(data) !== '{}' && generationData &&
-              Object.keys(generationData).map(key =>
-                <Generation data={generationData[key]} title={key} organization={organization.value.name} />)
+              <Generation data={generationData} title={data.quarter} organization={organization.value.name} />
             }
             {trendlineData &&
-              <TrendLineGraph data={trendlineData} quarters={Object.keys(data.ways)} organization={organization.value.name} />
+              <TrendLineGraph data={trendlineData} months={Object.keys(data.ways)} organization={organization.value.name} />
             }
             {JSON.stringify(data) !== '{}' &&
               <ItemsFound data={data} reportDate={new Date()} />
             }
             {JSON.stringify(data) !== '{}' && generationData &&
-              Object.keys(generationData).map(key =>
-                <Composition data={generationData[key]} title={key} />)
+              <Composition data={generationData} title={data.quarter} />
             }
-            {JSON.stringify(data) !== '{}' && totalCompositionData &&
-              <TotalComposition months={Object.keys(data.ways)} organization={organization.value.name} data={totalCompositionData} quarter={Object.keys(data.ways)} />
-            }
-            {JSON.stringify(data) !== '{}' &&
-              <CreateSummaryForm onSubmit={this.createSummary} />
+            {JSON.stringify(data) !== '{}' && generationData &&
+              <TotalComposition months={Object.keys(data.ways)} organization={organization.value.name} data={totalCompositionData} quarter={data.quarter} />
             }
             {JSON.stringify(data) !== '{}' && findings && recommendations &&
               <Summary

@@ -7,16 +7,20 @@ import { Col, Container, Row, Card, CardBody } from 'reactstrap';
 import YearlyCalendar from './components/YearlyCalendar';
 
 const SchedulesPage = () => (
-  <Container className="dashboard">
+  <Container className="schedule-theme">
     <Row>
       <Col md={12}>
         <h3 className="page-title">Schedule</h3>
+        <h4>
+          Schedule calendar is date-based pickup streamlines time management and
+          making scheduling effortless for all users.
+        </h4>
       </Col>
     </Row>
     <Row>
       <Col md={12} lg={12}>
-        <Card>
-          <CardBody style={{ overflowX: 'scroll' }}>
+        <Card className="schedule">
+          <CardBody className="schedule-body" style={{ overflowX: "scroll" }}>
             <YearlyCalendar />
           </CardBody>
         </Card>

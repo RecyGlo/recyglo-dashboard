@@ -120,14 +120,93 @@ blockquote {
   color: #ad4444;
 }
 
+.theme-bg {
+  @include themify($themes) {
+    background-image: themed('bgImg');
+    width: 90%;
+  }
+  background-repeat: no-repeat;
+}
+
+.dash-theme-bg {
+  @include themify($themes) {
+    background-image: themed('dashImg');
+    width: 90%;
+  }
+  background-repeat: no-repeat;
+}
+
+.data-bg {
+  @include themify($themes) {
+    background-image: themed('wave');
+    width: 90%;
+  }
+  background-repeat: no-repeat;
+}
+
+.training-bg {
+  @include themify($themes) {
+    background-image: themed('sunny');
+    width: 100%;
+  }
+  background-repeat: no-repeat;
+}
+
+.contact-bg {
+  @include themify($themes) {
+    background-image: themed('sunny');
+    width: 100%;
+  }
+  background-repeat: no-repeat;
+}
+
+.training-bg h4{
+  font-size: 20px;
+  font-family: 'Abhaya Libre ExtraBold';
+  color: #ffffff !important;
+  width: 35%;
+  margin-left: 100px;
+  margin-top: -50px;
+  margin-bottom: 75px;
+}
+
+.data-bg h4{
+  font-size: 20px;
+  font-family: 'Abhaya Libre ExtraBold';
+  color: #ffffff !important;
+  width: 35%;
+  margin-left: 100px;
+  margin-top: -50px;
+  margin-bottom: 75px;
+}
+
+.schedule-theme {
+  @include themify($themes) {
+    background-image: themed('forrestBg');
+    width: 90%;
+  }
+  background-repeat: no-repeat;
+}
+
+.schedule-theme h4{
+  font-size: 20px;
+  font-family: 'Abhaya Libre ExtraBold';
+  color: #ffffff !important;
+  width: 30%;
+  margin-left: 100px;
+  margin-top: -50px;
+  margin-bottom: 75px;
+}
+
 .page-title {
   font-weight: 500;
   text-transform: capitalize;
-  font-size: 20px;
-
-  &:last-child {
-    margin-bottom: 30px;
-  }
+  font-size: 80px;
+  padding: 70px;
+  font-family: 'Abhaya Libre ExtraBold';
+  color: #ffffff !important;
+  width: 50%;
+  line-height: 80px;
 
   &.page-title--not-last {
     margin-top: 20px;
@@ -146,5 +225,9 @@ blockquote {
 ::selection {
   color: #ffffff;
   background: $color-accent;
+}
+
+.font {
+  font-family: 'Abhaya Libre';
 }
 

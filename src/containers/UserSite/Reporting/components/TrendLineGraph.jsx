@@ -36,12 +36,17 @@ class Trendline extends PureComponent {
     return (
       <div className="reporting-page">
         <div className="generation-content">
-          <div className="generation-title">
-            <div style={{ width: '70%', float: 'left' }}>
-              <h5>Generation and Recycling</h5>
+          <div className="trend-title">
+            <div style={{ width: '100%' }}>
               <h4>Recycling Trend Line</h4>
             </div>
-            <div style={{ width: '30%' }}>
+            <div style={{ width: '100%' }}>
+              <p>The Recycling Trend Line allows for a clear observation of how the recycling rates for specific materials have evolved over the selected quarter. </p>
+            </div>
+          </div>
+          <div className="dashboard">
+            <div className="data">
+              <h3>Summary</h3>
               {months.length > 1 ?
                 <p>Total ({months.length}) Months</p>
               :
@@ -49,18 +54,21 @@ class Trendline extends PureComponent {
                   <p>{item}</p>
                 ))
               }
+              <Row>
+                {data && Object.keys(data).map((item, key) => (
+                  <Col key={key} md={6} lg={2} style={{ paddingTop: '20px' }}>
+                    <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li className="list-text"><h2 className="weight">{data[item].total.toFixed(2)} <span className="kg"> KG </span></h2> of {item} waste was recycled by {organization}.</li></ul>
+                  </Col>
+                ))}
+                {data && Object.keys(data).map((item, key) => (
+                  <Col key={key} md={6} lg={6} style={{ marginTop: '10px' }}>
+                    <h5 style={{ textAlign: 'center' }}>{wastes[item].charAt(0).toUpperCase() + wastes[item].slice(1)}</h5>
+                    <TrendLineChart data={data[item].data} color={colors[item]} />
+                    <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste</li></ul>
+                  </Col>
+                ))}
+              </Row>
             </div>
-          </div>
-          <div className="dashboard">
-            <Row>
-              {data && Object.keys(data).map((item, key) => (
-                <Col key={key} md={6} lg={6} style={{ marginTop: '10px' }}>
-                  <h5 style={{ textAlign: 'center' }}>{wastes[item].charAt(0).toUpperCase() + wastes[item].slice(1)}</h5>
-                  <TrendLineChart data={data[item].data} color={colors[item]} />
-                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste</li></ul>
-                </Col>
-              ))}
-            </Row>
           </div>
         </div>
       </div>

@@ -134,8 +134,8 @@ class OverviewPieChart extends PureComponent {
     const { data } = this.state;
     const { firstMonth, lastMonth } = this.props;
     return (
-      <Col xs={12} md={12} lg={12} xl={6}>
-        <Card>
+      <Col xs={12} md={12} lg={12} xl={12}>
+        <Card className="dash-card">
           <CardBody>
             <div className="card__title">
               <h5 className="bold-text">Waste Composition (%)</h5>

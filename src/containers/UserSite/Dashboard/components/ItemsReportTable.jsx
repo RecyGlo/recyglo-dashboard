@@ -43,11 +43,11 @@ class ItemsReportTable extends PureComponent {
   createData = (items) => {
     const data = [];
     const colors = {
-      Paper: '#658ca6',
-      Plastic: '#db5e73',
+      Paper: '#5886A5',
+      Plastic: '#de425b',
       Can: '#8ac771',
-      Glass: '#FFF314',
-      'E-waste': '#FF7F00',
+      Glass: '#EBA434',
+      'E-waste': '#FFF200',
       Organic: '#a38e79',
     };
     if (items) {
@@ -101,10 +101,9 @@ class ItemsReportTable extends PureComponent {
     const { firstMonth, lastMonth } = this.props;
     return (
       <Panel
-        lg={12}
+        lg={6}
         xl={6}
-        md={12}
-        title="Common Items Found in Waste Audits"
+        md={6}
         panelClass="panel--narrow"
       >
         <p style={{ fontSize: 10 }}>{firstMonth} - {lastMonth}</p>

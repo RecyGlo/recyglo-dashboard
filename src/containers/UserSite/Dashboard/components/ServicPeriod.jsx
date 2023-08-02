@@ -8,14 +8,14 @@ import {
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const ServicePeriod = contracts => (
-  <Col md={12} xl={3} lg={6} xs={12}>
-    <Card>
+  <Col md={12} xl={12} lg={6} xs={12}>
+    <Card className="dash-card">
       <CardBody className="dashboard__booking-card">
         <div className="dashboard__booking-total-container">
-          <h5 className="dashboard__booking-total-title dashboard__booking-total-title--red">
+          <h4 className="dashboard__booking-total-title dashboard__booking-total-title--red">
             {/* eslint-disable jsx-indent */}
             {months[new Date(contracts.contracts.contractStartDate).getMonth()]} {new Date(contracts.contracts.contractStartDate).getFullYear()} - {months[new Date(contracts.contracts.contractEndDate).getMonth()]} {new Date(contracts.contracts.contractEndDate).getFullYear()}
-          </h5>
+          </h4>
         </div>
         <h5 className="dashboard__booking-total-description">Contract Period</h5>
         <div className="progress-wrap progress-wrap--small progress-wrap--pink-gradient progress-wrap--rounded">

@@ -37,19 +37,25 @@ class Plastic extends PureComponent {
       //     // onSubmit={values => addNewUserAnsQuiz(values)}
       //   />
       // </Container>
-      <Container className="dashboard" style={{ overflow: 'hidden' }}>
-        <Row>
-          <Col md={9}>
-            <h3 className="page-title">Training</h3>
-          </Col>
-        </Row>
-        <Row>
-          <TrainingCourseAPI
-            initialValues={pp}
-            training_slides={training_slides}
-            // onSubmit={values => addNewUserAnsQuiz(values)}
-          />
-        </Row>
+      <Container className="dashboard" style={{ overflow: "hidden" }}>
+        <div className="training-bg">
+          <Row>
+            <Col md={9}>
+              <h3 className="page-title">Training</h3>
+              <h4>
+                These training lessons cover waste management topics, including
+                Paper Waste, Plastic Waste, and E-waste Segregation.
+              </h4>
+            </Col>
+          </Row>
+          <Row>
+            <TrainingCourseAPI
+              initialValues={pp}
+              training_slides={training_slides}
+              // onSubmit={values => addNewUserAnsQuiz(values)}
+            />
+          </Row>
+        </div>
       </Container>
     );
   }
