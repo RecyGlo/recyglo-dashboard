@@ -30,37 +30,31 @@ class DataTable extends PureComponent {
         dataField: 'items',
         text: 'Paper ',
         formatter: this.paperFormatter,
-        filter: textFilter(),
       },
       {
         dataField: 'items',
         text: 'Plastic ',
         formatter: this.plasticFormatter,
-        filter: textFilter(),
       },
       {
         dataField: 'items',
         text: 'Can ',
         formatter: this.canFormatter,
-        filter: textFilter(),
       },
       {
         dataField: 'items',
         text: 'Glass ',
         formatter: this.glassFormatter,
-        filter: textFilter(),
       },
       {
         dataField: 'items',
         text: 'Organic ',
         formatter: this.organicFormatter,
-        filter: textFilter(),
       },
       {
         dataField: 'items',
         text: 'E-waste ',
         formatter: this.ewasteFormatter,
-        filter: textFilter(),
       },
     ];
 

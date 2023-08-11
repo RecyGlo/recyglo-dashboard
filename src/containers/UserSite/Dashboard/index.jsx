@@ -178,7 +178,7 @@ class Dashboard extends React.Component {
           <b>Pick A Span of Months</b>
           <span>(Available years from 2017 to this year)</span>
           <Col>
-            <div className="edit">
+            {/* <div className="edit">
               <Picker
                 ref={this.pickRange}
                 years={years}
@@ -204,7 +204,7 @@ class Dashboard extends React.Component {
               onClick={this.resetDateRange}
             >
               Reset
-            </button>
+            </button> */}
           </Col>
           {misc && misc.totalWastesByOrganization && (
             <OverviewPieChart
@@ -218,7 +218,7 @@ class Dashboard extends React.Component {
           )}
         </label>
         {/* //this is the working code */}
-        {/* <Col>
+        <Col lg={6} md={6} sm={6}>
           <div className="edit">
             <Picker
               ref={this.pickRange}
@@ -238,15 +238,15 @@ class Dashboard extends React.Component {
             </Picker>
           </div>
         </Col>
-        <Col lg={8} md={8} sm={8}>
+        <Col lg={1} md={1} sm={1}>
           <button
-            className="btn btn-secondary"
+            className="btn btn-span"
             style={{ margin: "20px 0px", padding: 10 }}
             onClick={this.resetDateRange}
           >
             Reset
           </button>
-        </Col> */}
+        </Col>
         <Row className="stream">
           <ItemsReportTable
             firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
