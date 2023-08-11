@@ -17,8 +17,7 @@ import { connect } from 'react-redux';
 import CryptoJS from 'crypto-js';
 import { getUserDetailWithPromise } from '../../../../redux/actions/apiActions/userActions';
 import { addNewReport } from '../../../../redux/actions/apiActions/ReportsActions';
-// eslint-disable-next-line import/no-named-as-default
-// import downloadPdf from '../../../../redux/actions/apiActions/SejdaActions';
+// eslint-disable-next-line import/no-named-as-default;
 import CreateQuarterModal from './CreateQuarterModal';
 import Generation from './Generation';
 import TrendLineGraph from './TrendLineGraph';
@@ -336,7 +335,7 @@ class ReportingForm extends React.Component {
     const { reportId } = this.state;
     if (reportId) {
       // window.open(`/pdf_report/${reportId}`, '_blank');
-      window.open(`https://www.sejda.com/html-to-pdf?save-link=https://recyglo.info/pdf_report/${reportId}&pageSize=legal&viewportWidth=1440&pageOrientation=landscape`);
+      window.open(`https://www.sejda.com/html-to-pdf?save-link=https://recyglo.net/pdf_report/${reportId}&pageSize=legal&viewportWidth=1440&pageOrientation=landscape`);
     }
   }
   render() {

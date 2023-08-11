@@ -208,8 +208,8 @@
   }
 
   &.btn-success {
-    background-color: transparent;
-    border: 1px solid rgb(255, 255, 255) !important;
+    background-color: #000000ba;
+    border: 1px solid black !important;
 
     &:before {
       background-color: $color-accent-hover;

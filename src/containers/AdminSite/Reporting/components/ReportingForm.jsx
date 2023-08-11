@@ -10,14 +10,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable space-in-parens */
-
 import React from 'react';
 import { Col, Card, CardBody, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { FaDownload } from 'react-icons/fa';
 import Select from 'react-select';
 import CryptoJS from 'crypto-js';
-
 import { getOrganizationList } from '../../../../redux/actions/apiActions/organizationActions';
 import { addNewReport } from '../../../../redux/actions/apiActions/ReportsActions';
 import CreateQuarterModal from './CreateQuarterModal';
@@ -28,13 +26,10 @@ import Composition from './Composition';
 import TotalComposition from './TotalComposition';
 import CreateSummaryForm from './CreateSummaryForm';
 import Summary from './Summary';
-import about from '../../../../shared/img/background/about.png';
-import kids from '../../../../shared/img/background/kids.png';
 
 // const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
 //   'July', 'August', 'September', 'October', 'November', 'December',
 // ];
-
 const WASTES = {
   Papers: 'Paper',
   Plastics: 'Plastic',
@@ -43,7 +38,6 @@ const WASTES = {
   'E-waste': 'E-waste',
   Organic: 'Organic',
 };
-
 class ReportingForm extends React.Component {
   state = {
     organization: null,
@@ -56,13 +50,10 @@ class ReportingForm extends React.Component {
     reportId: null,
     reportData: null,
   }
-
   componentWillMount() {
     this.props.getOrganizationList();
   }
-
   sortNumber = (a, b) => console.log(a - b)
-
   createQuarter = (value) => {
     // const data = {};
     // let ways = [];
@@ -75,7 +66,6 @@ class ReportingForm extends React.Component {
       data: value,
     });
   }
-
   sortCompositionData = (a, b) => {
     // Use toUpperCase() to ignore character casing
     const valueA = a.value;
@@ -88,7 +78,6 @@ class ReportingForm extends React.Component {
     }
     return comparison;
   }
-
   sortTrendlineData = (a, b) => {
     // Use toUpperCase() to ignore character casing
     const valueA = new Date(a.date);
@@ -101,7 +90,6 @@ class ReportingForm extends React.Component {
     }
     return comparison;
   }
-
   createGenerationData = (value) => {
     const data = value.ways;
     console.log(value);
@@ -112,7 +100,6 @@ class ReportingForm extends React.Component {
     let maxMonth = null;
     let minMonth = null;
     const dates = [];
-
     // // calculate total weight and create data for bar chart
     for (const quarter in data) {
       generationData[quarter] = {};
@@ -135,7 +122,6 @@ class ReportingForm extends React.Component {
             minMonth = monthDate;
           }
         }
-
         const firstDate = new Date(key).toLocaleDateString();
         if (!dates.includes(firstDate)) {
           dates.push(firstDate);
@@ -147,17 +133,13 @@ class ReportingForm extends React.Component {
           let date = new Date(data[quarter][key][i].pickUpTime);
           date.setDate(1);
           date = date.toLocaleDateString();
-
           // if (!dates.includes(date)) {
           //   dates.push(date);
           // }
           for (let j = 0; j < data[quarter][key][i].items.length; j += 1) {
             // totalKg += data[key][i].items[j].quantity;
-
             const { productType } = data[quarter][key][i].items[j];
-
             generationData[quarter][key].total += data[quarter][key][i].items[j].quantity; // total weight calculation
-
             // Create Generation Data
             if (!Object.keys(productTypes).includes(productType)) {
               productTypes[productType] = Object.keys(productTypes).length;
@@ -171,7 +153,6 @@ class ReportingForm extends React.Component {
               tmp[productTypes[productType]].value =
               parseFloat((tmp[productTypes[productType]].value).toFixed(2));
             }
-
             // Create Trendline Data
             const quantity = parseFloat(data[quarter][key][i].items[j].quantity.toFixed(2));
             if (!Object.keys(trendlineData).includes(productType)) {
@@ -207,7 +188,6 @@ class ReportingForm extends React.Component {
         tmp = [];
       }
     }
-
     // Adding 0 data
     for (const key in trendlineData) {
       const tmp = [];
@@ -220,9 +200,7 @@ class ReportingForm extends React.Component {
       }
       trendlineData[key].data.sort(this.sortTrendlineData);
     }
-
     const tmp = [];
-
     for (const key in totalCompositionData) {
       tmp.push({
         name: WASTES[key],
@@ -230,14 +208,11 @@ class ReportingForm extends React.Component {
       });
     }
     totalCompositionData = tmp;
-
     totalCompositionData.sort(this.sortCompositionData);
-
     let reportTitle = '';
     for (let i = 0; i < Object.keys(data).length; i += 1) {
       reportTitle = `${reportTitle}${Object.keys(data)[i].split('(')[0]}${i + 1 !== Object.keys(data).length ? ' and ' : ''}`;
     }
-
     const reportData = {
       data: value,
       reportTitle,
@@ -250,11 +225,9 @@ class ReportingForm extends React.Component {
       minMonth,
       maxMonth,
     };
-
     // console.log(generationData);
     // console.log(trendlineData);
     // console.log(totalCompositionData);
-
     this.setState({
       generationData,
       trendlineData,
@@ -262,7 +235,6 @@ class ReportingForm extends React.Component {
       reportData,
     });
   }
-
   savePdf = (data) => {
     console.log(data);
     const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'secret key 123');
@@ -275,7 +247,6 @@ class ReportingForm extends React.Component {
       this.setState({
         reportId: response.data._id,
       });
-
       // downloadPdf(response.data._id);
       // const opts = {
       //   uri: 'https://api.sejda.com/v2/html-pdf',
@@ -290,7 +261,6 @@ class ReportingForm extends React.Component {
       // window.open(`/pdf_report/${response.data._id}`, '_blank');
     });
   }
-
   downloadPdf = () => {
     const { reportId } = this.state;
     if (reportId) {
@@ -298,7 +268,6 @@ class ReportingForm extends React.Component {
       window.open(`https://www.sejda.com/html-to-pdf?save-link=https://recyglo.info/pdf_report/${reportId}&pageSize=legal&viewportWidth=1440&pageOrientation=landscape`);
     }
   }
-
   createSummary = (value) => {
     const { findings, recommendations } = value;
     const { reportData } = this.state;
@@ -311,13 +280,11 @@ class ReportingForm extends React.Component {
       reportData,
     });
   }
-
   handleOrganizationChange = (value) => {
     this.setState({
       organization: value,
     });
   }
-
   render() {
     const {
       organization,
@@ -333,80 +300,62 @@ class ReportingForm extends React.Component {
       <Col md={12} lg={12}>
         <Card>
           <CardBody>
+            <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract. We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
+            <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
+            <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
+            <hr />
             <form className="form form--horizontal">
               <div className="form__form-group">
-                <span className="form__form-group-label"><img alt="about" src={about} /></span>
+                <span className="form__form-group-label">Customer</span>
                 <div className="form__form-group-field">
-                  <div className="form__form-group-input-block"><h4>About Report</h4>
-                    <br />
-                    <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract.</p>
-                    <br />
-                    <p> We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
-                    <br />
-                    <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
-                    <br />
-                    <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
+                  <div className="form__form-group-input-wrap">
+                    {organizations &&
+                      <Select
+                        name="organizations"
+                        value={organization}
+                        onChange={this.handleOrganizationChange}
+                        options={organizations.list
+                          && organizations.list.map((prop, key) => (
+                          // eslint-disable-next-line no-underscore-dangle
+                          { key, label: prop.name, value: prop }
+                          ))
+                        }
+                        clearable={false}
+                        className="react-select"
+                        placeholder="Choose Customer"
+                        classNamePrefix="react-select"
+                      />
+                    }
                   </div>
                 </div>
               </div>
             </form>
-            <div className="animation-block">
-              <h1 className="heading-animation">
-                IDENTIFICATION
-              </h1>
-              <h1 className="heading-animation2">
-                ANALYSIS
-              </h1>
-              <h1 className="heading-animation">
-                QUANTIFICATION
-              </h1>
-            </div>
-            <div className="report-block">
-              <div className="report-blockmini">
-                <h3>Get Started</h3>
-                <div className="form__form-group-input-wrap">
-                  {organizations &&
-                    <Select
-                      name="organizations"
-                      value={organization}
-                      onChange={this.handleOrganizationChange}
-                      options={organizations.list
-                        && organizations.list.map((prop, key) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        { key, label: prop.name, value: prop }
-                        ))
-                      }
-                      clearable={false}
-                      className="react-select"
-                      placeholder="Choose Customer"
-                      classNamePrefix="react-select"
-                    />
-                  }
-                  <br />
-                  {organization &&
-                    <CreateQuarterModal
-                      organization={organization.value._id}
-                      createQuarter={this.createQuarter}
-                    />
-                  }
-                </div>
-              </div>
-            </div>
+            {organization &&
+              <CreateQuarterModal
+                organization={organization.value._id}
+                createQuarter={this.createQuarter}
+              />
+            }
             <hr />
             {JSON.stringify(data) !== '{}' && generationData &&
-              <Generation data={generationData} title={data.quarter} organization={organization.value.name} />
+              Object.keys(generationData).map(key =>
+                <Generation data={generationData[key]} title={key} organization={organization.value.name} />)
             }
             {trendlineData &&
-              <TrendLineGraph data={trendlineData} months={Object.keys(data.ways)} organization={organization.value.name} />
+              <TrendLineGraph data={trendlineData} quarters={Object.keys(data.ways)} organization={organization.value.name} />
             }
             {JSON.stringify(data) !== '{}' &&
               <ItemsFound data={data} reportDate={new Date()} />
             }
             {JSON.stringify(data) !== '{}' && generationData &&
-              <Composition data={generationData} title={data.quarter} />
+              Object.keys(generationData).map(key =>
+                <Composition data={generationData[key]} title={key} />)
             }
-            {JSON.stringify(data) !== '{}' && generationData &&
-              <TotalComposition months={Object.keys(data.ways)} organization={organization.value.name} data={totalCompositionData} quarter={data.quarter} />
+            {JSON.stringify(data) !== '{}' && totalCompositionData &&
+              <TotalComposition months={Object.keys(data.ways)} organization={organization.value.name} data={totalCompositionData} quarter={Object.keys(data.ways)} />
+            }
+            {JSON.stringify(data) !== '{}' &&
+              <CreateSummaryForm onSubmit={this.createSummary} />
             }
             {JSON.stringify(data) !== '{}' && findings && recommendations &&
               <Summary
@@ -430,15 +379,12 @@ class ReportingForm extends React.Component {
     );
   }
 }
-
 const mapDispatchToProps = dispatch => ({
   getOrganizationList: () => {
     dispatch(getOrganizationList());
   },
 });
-
 const mapStateToProps = state => ({
   organizations: state.organizations,
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(ReportingForm);

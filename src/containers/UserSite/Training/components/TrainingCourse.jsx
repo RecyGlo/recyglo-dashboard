@@ -145,15 +145,10 @@ class TrainingCourseAPI extends PureComponent {
             </div>
           </div>
         ))}
-        <div className="training-list-content">
+        {/* <div className="training-list-content">
           <Row>
             <h2 className="training__header">E-waste Segregation Training</h2><br />
           </Row>
-          {/* <StarRatingComponent
-            name="rate3"
-            starCount={5}
-            value={5}
-          /> */}
           <p className="training__name">By May Khine Phyo Shwe</p>
           <Button
             outline
@@ -163,7 +158,7 @@ class TrainingCourseAPI extends PureComponent {
           >
             Learn
           </Button>
-        </div>
+        </div> */}
       </div>
     );
   }
