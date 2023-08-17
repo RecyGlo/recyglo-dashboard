@@ -38,7 +38,7 @@ class Generation extends Component {
               <Container className="dashboard">
                 <Row>
                   {data && Object.keys(data).map((item, key) => (
-                    <Col key={key} md={6} lg={4} style={{ paddingTop: '20px' }}>
+                    <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
                       <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li className="list-text"><h2 className="weight">{data[item].total.toFixed(2)} <span className="kg"> KG </span></h2> of recyclable waste was recycled by {organization} in {item}.</li></ul>
                     </Col>
                     ))}
@@ -53,7 +53,7 @@ class Generation extends Component {
           <Container className="dashboard">
             <Row>
               {data && Object.keys(data).map((item, key) => (
-                <Col key={key} md={6} lg={4} style={{ paddingTop: '20px' }}>
+                <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
                   <p style={{ textAlign: 'center', marginLeft: 30 }}>Pick Up ({item})</p>
                   <BarChart data={data[item].chartData} />
                   <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '430px' }}>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable waste in {item}.</li></ul>
