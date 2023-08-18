@@ -228,6 +228,19 @@
   }
 }
 
+.quiz-card {
+  width: 90%;
+  padding-left: 5%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 100px;
+
+  &.card--not-full-height {
+    height: auto;
+  }
+}
+
 .contact-card {
   width: 100%;
   padding-left: 5%;

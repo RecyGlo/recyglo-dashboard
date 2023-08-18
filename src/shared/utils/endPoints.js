@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://api.recyglo.net';
 // export const BASE_URL = 'https://recyglo-api.ap-southeast-1.elasticbeanstalk.com';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'http://localhost:3000/';
 // export const BASE_URL = 'https://api.test.recyglo.info';
 
 export const END_POINT_REPORTS = `${BASE_URL}/reports`;

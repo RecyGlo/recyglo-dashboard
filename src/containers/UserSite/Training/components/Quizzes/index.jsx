@@ -32,7 +32,7 @@ class Plastic extends PureComponent {
     } = this.state;
     return (
       <Col md={12} lg={12}>
-        <Card>
+        <Card className="quiz-card">
           <CardBody>
             <PlasticTestAPI
               initialValues={pp}
