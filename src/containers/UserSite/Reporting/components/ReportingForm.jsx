@@ -8,8 +8,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Col, Card, CardBody, Button } from 'reactstrap';
-import { FaDownload } from 'react-icons/fa';
+import { Col, Card, CardBody } from 'reactstrap';
+// import { Col, Card, CardBody, Button } from 'reactstrap';
+// import { FaDownload } from 'react-icons/fa';
 import jwtDecode from 'jwt-decode';
 import { connect } from 'react-redux';
 // import { FaPlus } from 'react-icons/fa';
@@ -433,13 +434,13 @@ class ReportingForm extends React.Component {
                 months={Object.keys(data.ways).length}
               />
             }
-            {JSON.stringify(data) !== '{}' &&
+            {/* {JSON.stringify(data) !== '{}' &&
               <Button className="icon" color="success" onClick={() => this.downloadPdf()}>
                 <p>
                   <FaDownload /> Download Report
                 </p>
               </Button>
-            }
+            } */}
           </CardBody>
         </Card>
       </Col>
