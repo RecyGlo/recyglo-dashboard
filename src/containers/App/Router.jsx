@@ -66,6 +66,7 @@ import AddNewInvoicePage from '../AdminSite/Payment/AddNewInvoiceForm';
 import UserDashboard from '../UserSite/Dashboard/index';
 import SchedulesPage from '../UserSite/Schedules/index';
 import DataTable from '../UserSite/DataTable/index';
+import CarbonReport from '../UserSite/CarbonCalculation/index';
 // import TrainingPage from '../UserSite/Training/index';
 import TrainingDetailPage from '../UserSite/Training/TrainingDetails/index';
 import UserProfilePage from '../UserSite/UserProfile/index';
@@ -189,6 +190,7 @@ const userWrappedRoutes = () => (
       <Route exact path="/" component={UserDashboard} />
       <Route exact path="/schedule" component={SchedulesPage} />
       <Route exact path="/data_table" component={DataTable} />
+      <Route exact path="/carbon_report" component={CarbonReport} />
       <Route exact path="/profile" component={UserProfilePage} />
       <Route exact path="/change_password" component={ChangePassword} />
       <Route exact path="/organization" component={OrganizationPage} />

@@ -19,14 +19,9 @@ import CryptoJS from 'crypto-js';
 import { getUserDetailWithPromise } from '../../../../redux/actions/apiActions/userActions';
 import { addNewReport } from '../../../../redux/actions/apiActions/ReportsActions';
 // eslint-disable-next-line import/no-named-as-default;
-import CreateQuarterModal from './CreateQuarterModal';
-import Generation from './Generation';
-import TrendLineGraph from './TrendLineGraph';
+import CreateQuarterModal from '../createquarter';
 import ItemsFound from './ItemsFound';
-import Composition from './Composition';
-import TotalComposition from './TotalComposition';
-import Summary from './Summary';
-import about from '../../../../shared/img/background/about.png';
+import TrendLineGraph from './TrendLineGraph';
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -44,12 +39,8 @@ const WASTES = {
 class ReportingForm extends React.Component {
   state = {
     organization: null,
-    generationData: null,
     data: {},
     trendlineData: null,
-    totalCompositionData: null,
-    findings: null,
-    recommendations: null,
     reportId: null,
   }
 
@@ -282,11 +273,7 @@ class ReportingForm extends React.Component {
     recommendations.push(ALL_RECOMMENDATIONS.General[Math.floor(Math.random() * ALL_RECOMMENDATIONS.General.length)]);
 
     this.setState({
-      generationData,
       trendlineData,
-      totalCompositionData,
-      findings,
-      recommendations,
     });
     const reportData = {
       data: value,
@@ -343,50 +330,17 @@ class ReportingForm extends React.Component {
     const {
       organization,
       data,
-      generationData,
       trendlineData,
-      totalCompositionData,
-      findings,
-      recommendations,
     } = this.state;
     // const { users } = this.props;
     return (
       <Col md={12} lg={12}>
-        <Card>
-          <CardBody>
+        <Card className="carbon-card">
+          <CardBody className="carbon-card-body">
             {/* <CardTitle>Card title</CardTitle> */}
             {/* eslint-disable-next-line max-len */}
-            <form className="form form--horizontal">
-              <div className="form__form-group">
-                <span className="form__form-group-label"><img alt="about" src={about} /></span>
-                <div className="form__form-group-field">
-                  <div className="form__form-group-input-block"><h4>About Report</h4>
-                    <br />
-                    <p>Our Waste Management Report identifies, quantifies, and analyses the composition of the waste stream generated to ensure compliance with the requirements suggested by the ISO 14001-2015 requirement, YCDC, and regional environmental agencies in South East Asia. Our audit methodology collects your waste through bins and we provide you with feedback on the gathered data. Waste audit quarter reports are performed quarterly since the starting date of the contract.</p>
-                    <br />
-                    <p> We illustrate with figures the collected weight and percentage of each type of waste and the total amount of all the categories reflected in the audit for a better understanding of waste trends and facilitate decision-making on office policies.</p>
-                    <br />
-                    <p>You can download the resulting quarterly reports containing the quantity and quality of the recyclable waste in a combination of formats including graphs, charts, and spreadsheets. We also provide you with general recommendations to improve the waste management at the workplace</p>
-                    <br />
-                    <p>We very much welcome your feedback! If you have any suggestion or would love to have any more data reflected on our dashboard let us know at <a href="mailto:contact@recyglo.com">contact@recyglo.com</a> or <a href="tel:+959404245800">+95-9-40424-5800</a>.</p>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <div className="animation-block">
-              <h1 className="heading-animation">
-                IDENTIFICATION
-              </h1>
-              <h1 className="heading-animation2">
-                ANALYSIS
-              </h1>
-              <h1 className="heading-animation">
-                QUANTIFICATION
-              </h1>
-            </div>
-            <div className="report-block">
-              <div className="report-blockmini">
-                <h3>Get Started</h3>
+            <div className="report-carbon">
+              <div className="report-carbonmini">
                 <div className="form__form-group-input-wrap">
                   {organization &&
                     <CreateQuarterModal
@@ -397,6 +351,12 @@ class ReportingForm extends React.Component {
                 </div>
               </div>
             </div>
+            {JSON.stringify(data) !== '{}' &&
+              <ItemsFound data={data} reportDate={new Date()} />
+            }
+            {trendlineData &&
+              <TrendLineGraph data={trendlineData} months={Object.keys(data.ways)} organization={organization.name} />
+            }
             {/* <div className="report-block">
               <div className="report-blockmini">
                 <h3>Get Started</h3>
@@ -410,7 +370,7 @@ class ReportingForm extends React.Component {
                 </div>
               </div>
             </div> */}
-            {JSON.stringify(data) !== '{}' && generationData &&
+            {/* {JSON.stringify(data) !== '{}' && generationData &&
               <Generation data={generationData} title={data.quarter} organization={organization.name} />
             }
             {trendlineData &&
@@ -433,7 +393,7 @@ class ReportingForm extends React.Component {
                 recommendations={recommendations}
                 months={Object.keys(data.ways).length}
               />
-            }
+            } */}
             {/* {JSON.stringify(data) !== '{}' &&
               <Button className="icon" color="success" onClick={() => this.downloadPdf()}>
                 <p>

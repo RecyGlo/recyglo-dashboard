@@ -50,9 +50,9 @@ class ItemsFound extends PureComponent {
     return (
       <div className="reporting-page">
         <div className="generation-content">
-          <div className="generation-title">
+          <div className="audit-title">
             <div style={{ width: '70%', float: 'left' }}>
-              <h5>Common Items found in waste audits</h5>
+              <h5>Waste audits</h5>
               <h4>
                 Waste audit has been performed for ({Object.keys(data.ways).length} quarters period)
               </h4>
