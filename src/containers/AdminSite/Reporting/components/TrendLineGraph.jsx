@@ -5,7 +5,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 import TrendLineChart from './Graphs/TrendLineChart';
 import '../../../../scss/report/Generation.scss';
 
@@ -39,9 +39,21 @@ class Trendline extends PureComponent {
           <div className="generation-title">
             <div style={{ width: '70%', float: 'left' }}>
               <h5>Generation and Recycling</h5>
-              <h4>Recycling Trend Line</h4>
+              <h4>Recycling </h4>
+              <h4>Trend Line</h4>
+              <h5>The Recycling Trend Line allows for a clear observation of how the recycling rates for specific materials have evolved over the selected quarter.</h5>
+              <Container className="dashboard">
+                <Row>
+                  {data && Object.keys(data).map((item, key) => (
+                    <Col key={key} md={6} lg={6} style={{ paddingTop: '20px' }}>
+                      <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li className="list-text"><h2 className="weight">{data[item].total.toFixed(2)} <span className="kg"> KG </span></h2> of recyclable waste was recycled by {organization} in {item}.</li></ul>
+                    </Col>
+                    ))}
+                </Row>
+              </Container>
             </div>
             <div style={{ width: '30%' }}>
+              <h2>Summary</h2>
               {quarters.length > 1 ?
                 <p>Total ({quarters.length}) Quarters</p>
               :

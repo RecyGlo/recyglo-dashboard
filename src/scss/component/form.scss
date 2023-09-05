@@ -449,6 +449,24 @@
   position: absolute;
 }
 
+.report-carbon{
+  width: 100%;
+  @include themify($themes) {
+    height: 100%;
+  }
+}
+
+.report-carbonmini{
+  width: 70%;
+  display: block;
+  margin-top: -140px;
+  margin-left: -250px;
+  @include themify($themes) {
+    background-repeat: no-repeat;
+  }
+  position: absolute;
+}
+
 .heading-animation {
   font-size: 80px;
   position: relative;

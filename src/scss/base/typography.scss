@@ -142,6 +142,26 @@ blockquote {
     width: 90%;
   }
   background-repeat: no-repeat;
+  margin: auto;
+}
+
+.carbon-bg {
+  @include themify($themes) {
+    width: 90%;
+    background-image: themed('ice');
+  }
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+.carbon-bg h4{
+  font-size: 20px;
+  font-family: 'Abhaya Libre ExtraBold';
+  color: #ffffff !important;
+  width: 35%;
+  margin-left: 100px;
+  margin-top: -50px;
+  margin-bottom: 75px;
 }
 
 .training-bg {
@@ -150,6 +170,7 @@ blockquote {
     width: 100%;
   }
   background-repeat: no-repeat;
+  margin: auto;
 }
 
 .contact-bg {
@@ -158,6 +179,7 @@ blockquote {
     width: 100%;
   }
   background-repeat: no-repeat;
+  margin: auto;
 }
 
 .training-bg h4{
