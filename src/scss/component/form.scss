@@ -11,7 +11,7 @@
     font-size: 12px;
     height: 32px;
     transition: border 0.3s;
-    background: transparent;
+    background: white;
 
     &::-webkit-input-placeholder {
       color: $color-additional;
@@ -468,7 +468,7 @@
 }
 
 .heading-animation {
-  font-size: 80px;
+  font-size: 60px;
   position: relative;
   font-weight: 700;
   line-height: 100px;
@@ -490,7 +490,7 @@
 }
 
 .heading-animation2 {
-  font-size: 80px;
+  font-size: 60px;
   position: relative;
   font-weight: 700;
   line-height: 100px;

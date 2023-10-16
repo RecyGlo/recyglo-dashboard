@@ -21,23 +21,16 @@ class ItemsReportTable extends PureComponent {
   }
   componentWillMount() {
     console.log('start');
-    // let items;
     const token = localStorage.getItem('jwt');
     const { id } = jwtDecode(token);
     getUserDetailWithPromise(id).then((response =>
       // eslint-disable-next-line no-underscore-dangle
       getCommonItemsFound(response.organizationId._id).then((res =>
-        // this.setState({
-        //   items: res,
-        // })
-        // items = res
         this.setState({
           items: this.createData(res),
         })
       ))
     ));
-    // const data = [];
-    // console.log(items);
   }
 
   createData = (items) => {
@@ -59,15 +52,6 @@ class ItemsReportTable extends PureComponent {
           data.push({
             label: productName, value: items[key][productName], color: colors[key],
           });
-          // if (productName === key) {
-          //   data.push({
-          //     label: `${productName} `, value: items[key][productName], color: colors[key],
-          //   });
-          // } else {
-          //   data.push({
-          //     label: productName, value: items[key][productName], color: colors[key],
-          //   });
-          // }
         }
       }
     }
@@ -75,28 +59,6 @@ class ItemsReportTable extends PureComponent {
   }
 
   render() {
-    // const data = [
-    //   {
-    //     label: 'Drama',
-    //     value: 12,
-    //     // color: '#B3FAFF',
-    //   },
-    //   {
-    //     label: 'Crime',
-    //     value: 21,
-    //     // color: '#95FF7A',
-    //   },
-    //   {
-    //     label: 'Action',
-    //     value: 16,
-    //     // color: '#FFA3CE',
-    //   },
-    //   {
-    //     label: 'Comedy',
-    //     value: 18,
-    //     // color: '#F1A3FF',
-    //   },
-    // ];
     const { items } = this.state;
     const { firstMonth, lastMonth } = this.props;
     return (
@@ -112,7 +74,6 @@ class ItemsReportTable extends PureComponent {
           <JqxTreeMap
             width="100%"
             source={items}
-            // baseColor="#52CBFF"
           />
         }
       </Panel>

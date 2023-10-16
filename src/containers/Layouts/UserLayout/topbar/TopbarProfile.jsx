@@ -44,7 +44,7 @@ export default class TopbarProfile extends PureComponent {
           <div className="topbar__menu">
             <TopbarMenuBtn title="Account" icon="user" link="/profile" />
             <TopbarMenuBtn title="Organization" icon="apartment" link="/organization" />
-            <TopbarMenuBtn title="Invoice" icon="file-empty" link="/invoice" />
+            {/* <TopbarMenuBtn title="Invoice" icon="file-empty" link="/invoice" /> */}
             <div className="topbar__menu-divider" />
             <TopbarMenuBtn title="Change Password" icon="pencil" link="/change_password" />
             <LogoutBtn title="Log Out" icon="exit" path="/" />

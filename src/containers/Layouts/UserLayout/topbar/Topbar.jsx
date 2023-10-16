@@ -25,7 +25,7 @@ class Topbar extends PureComponent {
             />
             <a className="topbar__logo" href="https://www.recyglo.com" target="_blank" />
             <h4 className="topbar__company_name">RecyGlo</h4>
-            <p style={{ margin: '25px auto auto 0', color: 'teal' }}>beta</p>
+            {/* <p style={{ margin: '25px auto auto 0', color: 'teal' }}>beta</p> */}
           </div>
           <div className="topbar__right">
             <TopbarProfile />

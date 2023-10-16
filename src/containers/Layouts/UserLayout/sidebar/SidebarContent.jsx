@@ -17,17 +17,6 @@ class SidebarContent extends Component {
   render() {
     return (
       <div className="sidebar__content">
-        {/* <ul className="sidebar__block">
-          <SidebarLink title="Log In" icon="exit" route="/log_in" onClick={this.hideSidebar} />
-          <SidebarCategory title="Layout" icon="layers">
-            <button className="sidebar__link" onClick={this.props.changeToLight}>
-              <p className="sidebar__link-title">Light Theme</p>
-            </button>
-            <button className="sidebar__link" onClick={this.props.changeToDark}>
-              <p className="sidebar__link-title">Dark Theme</p>
-            </button>
-          </SidebarCategory>
-        </ul> */}
         <SidebarLink
           title="Dashboard"
           icon="home"
@@ -37,7 +26,8 @@ class SidebarContent extends Component {
         <SidebarLink icon="calendar-full" title="Schedule" route="/schedule" onClick={this.hideSidebar} />
         <SidebarLink icon="database" title="Data Table" route="/data_table" onClick={this.hideSidebar} />
         <SidebarLink icon="graduation-hat" title="Training" route="/training" onClick={this.hideSidebar} />
-        <SidebarLink icon="book" title="Reports" route="/reporting" onClick={this.hideSidebar} />
+        <SidebarLink icon="book" title="Waste Report" route="/reporting" onClick={this.hideSidebar} />
+        <SidebarLink icon="book" title="Carbon Report" route="/carbon_report" onClick={this.hideSidebar} />
         <SidebarLink
           title="Contact"
           icon="phone"

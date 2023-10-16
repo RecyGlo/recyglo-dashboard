@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { PureComponent } from 'react';
 import { Card, CardBody, Col } from 'reactstrap';
-import { textFilter } from 'react-bootstrap-table2-filter';
+// import { textFilter } from 'react-bootstrap-table2-filter';
 import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import ReactBootstrapTable from '../../../shared/components/table/ReactBootstrapTable';
@@ -24,7 +24,7 @@ class DataTable extends PureComponent {
         dataField: 'pickUpTime',
         text: 'Date ',
         formatter: this.dateFormatter,
-        filter: textFilter(),
+        // filter: textFilter(),
       },
       {
         dataField: 'items',

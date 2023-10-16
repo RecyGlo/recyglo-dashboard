@@ -121,9 +121,10 @@ class CreateQuarterModal extends React.PureComponent {
           }
           <Button className="icon" color="success" onClick={() => this.handleSubmit()}>
             <p>
-            Create Report →
+            Show Report →
             </p>
           </Button>
+          <br />
         </form>
       </div>
     );

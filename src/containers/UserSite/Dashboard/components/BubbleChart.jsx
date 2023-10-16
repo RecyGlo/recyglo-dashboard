@@ -14,7 +14,7 @@ const wastes = {
   Organic: "Organic",
 };
 
-class OverviewRadialBarChart extends PureComponent {
+class OverviewBubbleChart extends PureComponent {
   render() {
     const { data } = this.props;
 
@@ -22,34 +22,24 @@ class OverviewRadialBarChart extends PureComponent {
     const chartData = data.map(item => ({
       x: wastes[item.name],
       y: item.quantity,
+      z: item.quantity, // Size of the bubble
     }));
 
     const chartOptions = {
       chart: {
-        type: "radialBar",
+        type: "bubble",
         height: 350, // Adjust the height as needed
       },
-      plotOptions: {
-        radialBar: {
-          startAngle: -135,
-          endAngle: 135,
-          hollow: {
-            size: "70%",
-          },
-          dataLabels: {
-            name: {
-              show: true,
-              fontSize: "16px",
-            },
-            value: {
-              show: true,
-              offsetY: 0, // Adjust the offset as needed
-              fontSize: "20px",
-            },
-          },
+      xaxis: {
+        labels: {
+          show: true,
         },
       },
-      labels: chartData.map(item => item.x),
+      yaxis: {
+        labels: {
+          show: true,
+        },
+      },
     };
 
     return (
@@ -57,8 +47,13 @@ class OverviewRadialBarChart extends PureComponent {
         {chartData.length > 0 && (
           <ReactApexChart
             options={chartOptions}
-            series={chartData.map(item => item.y)}
-            type="radialBar"
+            series={[
+              {
+                name: "Bubble Chart",
+                data: chartData,
+              },
+            ]}
+            type="bubble"
             height={chartOptions.height}
           />
         )}
@@ -67,4 +62,4 @@ class OverviewRadialBarChart extends PureComponent {
   }
 }
 
-export default OverviewRadialBarChart;
+export default OverviewBubbleChart;

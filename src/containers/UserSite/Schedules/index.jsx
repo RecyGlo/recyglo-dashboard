@@ -9,7 +9,7 @@ import YearlyCalendar from './components/YearlyCalendar';
 const SchedulesPage = () => (
   <Container className="schedule-theme">
     <Row>
-      <Col md={12}>
+      <Col md={6}>
         <h3 className="page-title">Schedule</h3>
         <h4>
           Schedule calendar is date-based pickup streamlines time management and

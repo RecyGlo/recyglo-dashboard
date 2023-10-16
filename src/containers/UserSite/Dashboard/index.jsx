@@ -6,11 +6,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import Picker from 'react-month-picker';
 import circle from '../../../shared/img/background/circle.png';
-import span from '../../../shared/img/background/span.png';
-import streams from '../../../shared/img/background/streams-logo.png';
 
 import {
   getTotalWasteByOrganization,
@@ -18,9 +15,12 @@ import {
   getContractDurationForEachOrganization,
 } from '../../../redux/actions/apiActions/miscActions';
 import MontlyReportChart from './components/MontlyReportChart';
-// import CommonItemsFoundGraph from './components/CommonItemsFoundGraph';
-import ItemsReportTable from './components/ItemsReportTable';
+// import ItemsReportTable from './components/ItemsReportTable';
 import OverviewPieChart from './components/OverviewPieChart';
+import OverviewBarChart from './components/OverviewBarChart';
+import OverviewPieChart1 from './components/OverviewPieChart1';
+import OverviewBubbleChart from './components/BubbleChart';
+// import OverviewColumnChart from './components/OverviewColumnChart';
 import TrendLineChart from './components/TrendLineChart';
 import TotalCollectedWaste from './components/TotalCollectedWaste';
 import TotalWays from './components/TotalPickups';
@@ -28,12 +28,11 @@ import ServicPeriod from './components/ServicPeriod';
 // import TotalCarbonFootprint from './components/TotalCarbonFootprint';
 import MonthBox from './components/MonthBox';
 
-const graphs = ['both', 'bar', 'line'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 class Dashboard extends React.Component {
   state = {
-    graph: 'both',
+    // graph: 'both',
     rangeValue: {
       from: { year: 2018, month: 4 },
       to: { year: new Date().getFullYear(), month: new Date().getMonth() },
@@ -91,9 +90,9 @@ class Dashboard extends React.Component {
 
   pickRange = React.createRef()
 
-  handleChange = (value) => {
-    this.setState({ graph: value.value });
-  };
+  // handleChange = (value) => {
+  //   this.setState({ graph: value.value });
+  // };
 
   resetDateRange = () => {
     // console.log(this.state.rangeValue);
@@ -126,7 +125,7 @@ class Dashboard extends React.Component {
   render() {
     const { misc } = this.props;
     const {
-      graph, rangeValue, years, duration,
+      rangeValue, years, duration,
     } = this.state;
     console.log(misc);
     const pickerLang = {
@@ -143,42 +142,77 @@ class Dashboard extends React.Component {
 
     return (
       <Container className="dash-theme-bg">
-        <Row>
-          <Col md={12}>
-            <h3 className="page-title">Dashboard</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <div className="dash-content">
-              <h4>Summary</h4>
-              <h3>Unveiling your month in numbers</h3>
-              <img className="circle" alt="about" src={circle} />
+        <Row className="top-block-row">
+          <Col md={5}>
+            <div className="dashboard-block1">
+              <h3>Overview Pie Chart</h3>
+              {misc && misc.totalWastesByOrganization && (
+                <OverviewPieChart1
+                  data={misc.totalWastesByOrganization}
+                  firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+                  lastMonth={
+                    misc.monthlyWaste &&
+                    misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+                  }
+                />
+              )}
+            </div>
+            <br />
+            <div className="dashboard-block3">
+              <Row>
+                <Col md={6}>
+                  <h3>Dashboard</h3>
+                  <p>This is the summary of total waste collected by RecyGlo</p>
+                </Col>
+                <Col md={6}>
+                  <img className="circle" alt="about" src={circle} />
+                </Col>
+              </Row>
             </div>
           </Col>
-          <Col md={6}>
+          <Col md={7}>
+            <div className="dashboard-block2">
+              <h3>Overview Bar Chart</h3>
+              {misc && misc.totalWastesByOrganization && (
+                <OverviewBarChart
+                  data={misc.totalWastesByOrganization}
+                  firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+                  lastMonth={
+                    misc.monthlyWaste &&
+                    misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+                  }
+                />
+              )}
+            </div>
+          </Col>
+          <Col md={4}>
+            <br />
             {misc && misc.totalWastesByOrganization && (
               <TotalCollectedWaste
                 collectedWaste={misc.totalWastesByOrganization}
               />
             )}
+          </Col>
+          <Col md={4}>
+            <br />
             {misc && misc.totalPickupsByOrganization && (
               <TotalWays ways={misc.totalPickupsByOrganization} />
             )}
+          </Col>
+          <Col md={4}>
+            <br />
             {misc && misc.contractDurationByOrganization && (
               <ServicPeriod contracts={misc.contractDurationByOrganization} />
             )}
-            {/* <TotalCarbonFootprint
-            co2={202.1}
-          /> */}
           </Col>
         </Row>
-        <img className="span" alt="about" src={span} />
         <label className="pick">
           <b>Pick A Span of Months</b>
           <span>(Available years from 2017 to this year)</span>
-          <Col>
-            {/* <div className="edit">
+        </label>
+        <Row>
+          <Col lg={6} md={6} sm={6}>
+            <div className="edit">
               <Picker
                 ref={this.pickRange}
                 years={years}
@@ -197,74 +231,53 @@ class Dashboard extends React.Component {
               </Picker>
             </div>
           </Col>
-          <Col lg={1} md={1} sm={1}>
+          <Col lg={6} md={6} sm={6}>
             <button
               className="btn btn-span"
               style={{ margin: "20px 0px", padding: 10 }}
               onClick={this.resetDateRange}
             >
               Reset
-            </button> */}
+            </button>
           </Col>
-          {misc && misc.totalWastesByOrganization && (
-            <OverviewPieChart
-              data={misc.totalWastesByOrganization}
-              firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
-              lastMonth={
-                misc.monthlyWaste &&
-                misc.monthlyWaste[misc.monthlyWaste.length - 1].month
-              }
-            />
-          )}
-        </label>
-        {/* //this is the working code */}
-        <Col lg={6} md={6} sm={6}>
-          <div className="edit">
-            <Picker
-              ref={this.pickRange}
-              years={years}
-              value={rangeValue}
-              lang={pickerLang}
-              theme="light"
-              onChange={this.handleRangeChange}
-              onDismiss={this.handleRangeDissmis}
-            >
-              <MonthBox
-                value={
-                  makeText(rangeValue.from) + " ~ " + makeText(rangeValue.to)
-                }
-                onClick={this._handleClickRangeBox}
-              />
-            </Picker>
-          </div>
-        </Col>
-        <Col lg={1} md={1} sm={1}>
-          <button
-            className="btn btn-span"
-            style={{ margin: "20px 0px", padding: 10 }}
-            onClick={this.resetDateRange}
-          >
-            Reset
-          </button>
-        </Col>
-        <Row className="stream">
-          <ItemsReportTable
-            firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
-            lastMonth={
-              misc.monthlyWaste &&
-              misc.monthlyWaste[misc.monthlyWaste.length - 1].month
-            }
-          />
-          <div className="streams">
-            <h3>Common Waste Streams</h3>
-            <h4>
-              This section displays the waste composition commonly found in
-              waste audits
-            </h4>
-          </div>
-          <img className="circle" alt="about" src={streams} />
         </Row>
-        <div style={{ margin: 30 }}>
+        <Row className="top-block-row">
+          <Col md={6}>
+            <div className="dashboard-block4">
+              <h3>Overview Radial Bar Chart</h3>
+              {misc && misc.totalWastesByOrganization && (
+                <OverviewPieChart
+                  data={misc.totalWastesByOrganization}
+                  firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+                  lastMonth={
+                    misc.monthlyWaste &&
+                    misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+                  }
+                />
+              )}
+            </div>
+          </Col>
+          <Col md={6}>
+            <div className="dashboard-block4">
+              <h3>Overview Bubble Chart</h3>
+              {misc && misc.totalWastesByOrganization && (
+                <OverviewBubbleChart
+                  data={misc.totalWastesByOrganization}
+                  firstMonth={misc.monthlyWaste && misc.monthlyWaste[0].month}
+                  lastMonth={
+                    misc.monthlyWaste &&
+                    misc.monthlyWaste[misc.monthlyWaste.length - 1].month
+                  }
+                />
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <MontlyReportChart duration={duration} />
+          <TrendLineChart duration={duration} />
+        </Row>
+        {/* <div style={{ margin: 30 }}>
           <h4 className="font">Please select the graph type to be shown.</h4>
           <Row style={{ width: 400, margin: 30 }}>
             <Select
@@ -297,7 +310,7 @@ class Dashboard extends React.Component {
             <MontlyReportChart duration={duration} />
             <TrendLineChart />
           </Row>
-        )}
+        )} */}
       </Container>
     );
   }

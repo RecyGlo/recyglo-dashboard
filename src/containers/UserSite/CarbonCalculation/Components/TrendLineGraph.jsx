@@ -6,6 +6,7 @@
 /* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import "../../../../scss/carbon/report.scss";
+// import Carbongraphs from './CarbonGraphs';
 
 // const wastes = {
 //   Papers: 'paper',
@@ -32,7 +33,7 @@ class Trendline extends PureComponent {
       case "Organic":
         return 0;
       default:
-        return 0; // Default multiplier (1) for other waste types
+        return 0;
     }
   };
   getAvoidedrecycle = (wasteType) => {
@@ -50,7 +51,7 @@ class Trendline extends PureComponent {
       case "Organic":
         return 0;
       default:
-        return 0; // Default multiplier (1) for other waste types
+        return 0;
     }
   };
   getDirectcomposting = (wasteType) => {
@@ -58,7 +59,7 @@ class Trendline extends PureComponent {
       case "Organic":
         return 0.1770;
       default:
-        return 0; // Default multiplier (1) for other waste types
+        return 0;
     }
   };
   getAvoidedfertilizer = (wasteType) => {
@@ -66,7 +67,7 @@ class Trendline extends PureComponent {
       case "Organic":
         return 0.64539;
       default:
-        return 0; // Default multiplier (1) for other waste types
+        return 0;
     }
   };
   getAvoidedlandfilling = (wasteType) => {
@@ -74,7 +75,23 @@ class Trendline extends PureComponent {
       case "Organic":
         return 0.8400;
       default:
-        return 0; // Default multiplier (1) for other waste types
+        return 0;
+    }
+  };
+  getEwaste = (wasteType) => {
+    switch (wasteType) {
+      case "E-waste":
+        return 1.289;
+      default:
+        return 0;
+    }
+  };
+  getEwaste2 = (wasteType) => {
+    switch (wasteType) {
+      case "E-waste":
+        return 0.4408;
+      default:
+        return 0;
     }
   };
   calculateDirectRecycle = (data) => {
@@ -136,6 +153,30 @@ class Trendline extends PureComponent {
 
     return difference.toFixed(2);
   };
+  calculateEwaste = (data) => {
+    let total = 0;
+    Object.keys(data).forEach((item) => {
+      const multiplier = this.getEwaste(item);
+      total += data[item].total * multiplier;
+    });
+    return total.toFixed(2);
+  };
+  calculateEwaste2 = (data) => {
+    let total = 0;
+    Object.keys(data).forEach((item) => {
+      const multiplier = this.getEwaste2(item);
+      total += data[item].total * multiplier;
+    });
+    return total.toFixed(2);
+  };
+  calculateTotalEwaste = (data) => {
+    const plasticEwaste = parseFloat(this.calculateEwaste(data));
+    const metalEwaste = parseFloat(this.calculateEwaste2(data));
+
+    const total = plasticEwaste + metalEwaste;
+
+    return total.toFixed(2);
+  };
   calculateTotalDirect = (data) => {
     const directRecycling = parseFloat(this.calculateDirectRecycle(data));
     const directComposting = parseFloat(this.calculateDirectComposting(data));
@@ -176,8 +217,12 @@ class Trendline extends PureComponent {
     const totalDirect = this.calculateTotalDirect(data);
     const totalAvoided = this.calculateTotalAvoided(data);
     const totalNet = this.calculateTotalNet(data);
+    const totallandfill = 0;
+    const Ewaste = this.calculateTotalEwaste(data);
+
     return (
       <div className="emission-page">
+        {/* <Carbongraphs /> */}
         <div className="generation-content">
           <div className="report-title">
             <div className="total-block">
@@ -190,11 +235,6 @@ class Trendline extends PureComponent {
                   The Monthly Waste Composition report breaks down
                 </h1>
                 <table>
-                  {/* <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-              </tr> */}
                   <tr>
                     <td>Direct GHG emissions from the organization </td>
                     <td>
@@ -304,47 +344,43 @@ class Trendline extends PureComponent {
                       Direct GHG emission from mixed waste landfilling/open
                       dumping
                     </td>
-                    <td>0</td>
-                    <td>kg of CO2-eq/tonne of mixed waste</td>
+                    <td>{totallandfill}kg of CO2-eq/tonne of mixed waste</td>
                   </tr>
                   <tr>
                     <th>Total GHG emissions from landfilling </th>
-                    <th>0</th>
-                    <th>kg of CO2-eq/tonne of mixed waste</th>
+                    <th>{totallandfill}kg of CO2-eq/tonne of mixed waste</th>
                   </tr>
                 </table>
               </div>
-              {/* <h3>Summary</h3>
-              {months.length > 1 ?
-                <p>Total ({months.length}) Months</p>
-              :
-                months.map(item => (
-                  <p>{item}</p>
-                ))
-              }
-              <Row>
-                {data && Object.keys(data).map((item, key) => (
-                  <Col key={key} md={6} lg={2} style={{ paddingTop: '20px' }}>
-                    <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li className="list-text"><h2 className="weight">{(data[item].total.toFixed(2) * this.getMultiplier(item)).toFixed(2)} <span className="kg"> KG </span></h2> of {item} waste was recycled by {organization}.</li></ul>
-                  </Col>
-                ))}
-                {data && Object.keys(data).map((item, key) => (
-                  <Col key={key} md={6} lg={6} style={{ marginTop: '10px' }}>
-                    <h5 style={{ textAlign: 'center' }}>{wastes[item].charAt(0).toUpperCase() + wastes[item].slice(1)}</h5>
-                    <ul style={{ listStyle: 'inside', textAlign: 'center' }}><li>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable {wastes[item]} waste</li></ul>
-                  </Col>
-                ))}
-                <Col md={6} lg={2} style={{ paddingTop: '20px' }}>
-                  <ul style={{ listStyle: 'inside', textAlign: 'center' }}>
-                    <li className="list-text">
-                      <h2 className="weight">
-                        {totalWaste} <span className="kg"> KG </span>
-                      </h2>
-                      Total waste recycled by {organization}.
-                    </li>
-                  </ul>
-                </Col>
-              </Row> */}
+              <div style={{ width: "100%" }}>
+                <h5>GHG Emission from E-waste</h5>
+                {/* <h4>
+              Common Items found in waste audits performed for months period
+            </h4> */}
+                <h1 className="report-content">
+                  The Monthly Waste Composition report breaks down the
+                  percentage of paper, plastic, and cans within the waste
+                  generated each month
+                </h1>
+                <table>
+                  {/* <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+              </tr> */}
+                  <tr>
+                    <td>
+                      Direct GHG emission from mixed waste landfilling/open
+                      dumping
+                    </td>
+                    <td>{Ewaste}kg of CO2-eq/tonne of mixed waste</td>
+                  </tr>
+                  <tr>
+                    <th>Total GHG emissions from landfilling </th>
+                    <th>{Ewaste}kg of CO2-eq/tonne of mixed waste</th>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>

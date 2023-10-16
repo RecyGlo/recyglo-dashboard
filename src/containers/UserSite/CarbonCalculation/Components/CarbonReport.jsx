@@ -20,7 +20,6 @@ import { getUserDetailWithPromise } from '../../../../redux/actions/apiActions/u
 import { addNewReport } from '../../../../redux/actions/apiActions/ReportsActions';
 // eslint-disable-next-line import/no-named-as-default;
 import CreateQuarterModal from '../createquarter';
-import ItemsFound from './ItemsFound';
 import TrendLineGraph from './TrendLineGraph';
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -351,9 +350,6 @@ class ReportingForm extends React.Component {
                 </div>
               </div>
             </div>
-            {JSON.stringify(data) !== '{}' &&
-              <ItemsFound data={data} reportDate={new Date()} />
-            }
             {trendlineData &&
               <TrendLineGraph data={trendlineData} months={Object.keys(data.ways)} organization={organization.name} />
             }
