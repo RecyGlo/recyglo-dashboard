@@ -27,7 +27,7 @@ class Contact extends React.Component {
               <h4>Contact Us</h4>
               <p>
                 At RecyGlo, we’re committed to providing environmentally
-                friendly recycling solutions to Myanmar, and Malaysia. Founded
+                friendly recycling solutions to businesses and organizations. Founded
                 in 2017, our mission is to process your materials in a safe,
                 non-hazardous manner — with an aim to keep the world
                 environmentally clean. We believe in promoting smart recycling

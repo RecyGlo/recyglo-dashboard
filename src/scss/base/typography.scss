@@ -144,22 +144,60 @@ blockquote {
 }
 
 .carbon-bg {
+  background-color: #ffffff;
   @include themify($themes) {
-    width: 90%;
-    background-image: themed('ice');
+    width: 100%;
   }
   background-repeat: no-repeat;
   margin: auto;
 }
 
 .carbon-bg h4{
-  font-size: 20px;
-  font-family: 'Abhaya Libre ExtraBold';
-  color: #ffffff !important;
-  width: 35%;
-  margin-left: 100px;
-  margin-top: -50px;
-  margin-bottom: 75px;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 35px;
+  padding: 70px;
+  font-family: "Montserrat", sans-serif;
+  color: #000000 !important;
+  width: 100%;
+  margin-top: -70px;
+}
+
+.carbon-bg h2{
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  color: #000000 !important;
+  width: 100%;
+}
+
+.carbon-bg span{
+  font-weight: 700;
+  color: #165760 !important;
+}
+
+.carbon-bg li{
+  width: 90%;
+  font-size: 17px;
+}
+
+.paragraph {
+  text-transform: capitalize;
+  font-size: 18px;
+  padding: 70px;
+  font-family: "Montserrat", sans-serif;
+  color: #000000 !important;
+  width: 100%;
+  margin-top: -100px;
+}
+
+.paragraph2 {
+  text-transform: capitalize;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: #000000 !important;
+  width: 90%;
 }
 
 .training-bg {
@@ -255,7 +293,7 @@ blockquote {
   padding: 70px;
   font-family: "Montserrat", sans-serif;
   color: #000000 !important;
-  width: 50%;
+  width: 100%;
   line-height: 80px;
 
   &.page-title--not-last {

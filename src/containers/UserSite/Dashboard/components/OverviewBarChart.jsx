@@ -21,7 +21,6 @@ class OverviewBasicBarChart extends PureComponent {
   render() {
     const { data } = this.props;
 
-    // Define chartData here based on the provided data
     const chartData = data.map(item => ({
       x: wastes[item.name],
       y: item.quantity,
@@ -29,18 +28,17 @@ class OverviewBasicBarChart extends PureComponent {
 
     const chartOptions = {
       chart: {
-        type: 'horizontalBar', // Change to 'horizontalBar' for a horizontal bar chart
-        height: 150, // Adjust the height as needed
+        type: 'horizontalBar',
+        height: 150,
       },
       xaxis: {
         categories: chartData.map(item => item.x),
       },
       plotOptions: {
         bar: {
-          horizontal: true, // Make the bars horizontal
+          horizontal: true,
         },
       },
-      // Customize other options as needed
     };
 
     return (

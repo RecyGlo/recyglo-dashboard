@@ -24,7 +24,6 @@
     "fs-extra": "7.0.0",
     "history": "4.9.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
-    "is-wsl": "3.1.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
@@ -35,7 +34,6 @@
     "mdi-react": "4.4.0",
     "mini-css-extract-plugin": "0.4.3",
     "moment": "2.24.0",
-    "node-sass": "^4.0.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -86,7 +84,6 @@
     "redux-form": "7.4.2",
     "redux-thunk": "2.3.0",
     "resolve": "1.8.1",
-    "sass": "^1.69.3",
     "sejda-js": "2.0.1",
     "slick-carousel": "1.8.1",
     "smooth-scrollbar": "8.3.1",
@@ -118,15 +115,13 @@
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-react": "7.11.1",
+    "node-sass": "4.14.1",
     "react-hot-loader": "^4.3.4",
     "sass-loader": "7.1.0",
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.9",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.2"
-  },
-  "resolutions": {
-    "for-own": "0.1.5"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 
 import history from '../../../../shared/utils/history';
 
-
 class EditUserForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -17,9 +16,14 @@ class EditUserForm extends PureComponent {
   redirectToHomePage = () => {
     history.push('/');
     window.location.reload();
-  }
+  };
+
   render() {
     const { handleSubmit } = this.props;
+
+    const buttonStyle = {
+      color: 'black', // Change this to your desired text color
+    };
 
     return (
       <Col md={12} lg={12}>
@@ -60,7 +64,9 @@ class EditUserForm extends PureComponent {
                 </div>
               </div>
               <ButtonToolbar className="form__button-toolbar">
-                <Button color="primary" type="submit">Change Password</Button>
+                <Button color="primary" type="submit" style={buttonStyle}>
+                  Change Password
+                </Button>
                 <Button color="secondary" onClick={() => this.redirectToHomePage()}>
                   Cancel
                 </Button>

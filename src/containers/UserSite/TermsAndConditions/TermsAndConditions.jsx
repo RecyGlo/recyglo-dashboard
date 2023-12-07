@@ -18,11 +18,11 @@ class TermsAndConditions extends React.Component {
         <CardBody>
           <h1 className="thankyou__header" style={{ fontSize: '35px' }}>TERMS AND CONDITIONS</h1>
           <p style={{ textAlign: 'right' }}>
-          Last updated: [2020-11-06]
+          Last updated: [2023-10-23]
           </p>
           <Collapse className="with-shadow" title="1. Introduction" open="true" >
             <p>
-              Welcome to <strong>RecyGlo Co. Ltd</strong> (“<strong>RecyGlo</strong>” or “<strong>we</strong>” or “<strong>us</strong>”). Founded in 2017, RecyGlo is committed to provide environmentally friendly recycling solutions in  Myanmar and Malaysia. The ultimate mission of RecyGlo is to process waste materials in a safe, non-hazardous manner with an aim to keep the world environmentally clean. RecyGlo believes in promoting smart recycling habits in order to achieve long-lasting results. RecyGlo envisions to become a leading waste management solution platform in Southeast Asia that produces zero waste and zero carbon footprint.
+              Welcome to <strong>RecyGlo Co. Ltd</strong> (“<strong>RecyGlo</strong>” or “<strong>we</strong>” or “<strong>us</strong>”). Founded in 2017, RecyGlo is committed to provide environmentally friendly recycling solutions to businesses and organizations. The ultimate mission of RecyGlo is to process waste materials in a safe, non-hazardous manner with an aim to keep the world environmentally clean. RecyGlo believes in promoting smart recycling habits in order to achieve long-lasting results. RecyGlo envisions to become a leading waste management solution platform in Southeast Asia that produces zero waste and zero carbon footprint.
               <br /><br />
               We thank you for choosing us for efficient waste management and recycling services.
             </p>
