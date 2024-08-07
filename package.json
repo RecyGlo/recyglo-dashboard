@@ -29,6 +29,7 @@
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "jqwidgets-scripts": "9.0.0",
+    "json-stable-stringify-without-jsonify": "^1.0.1",
     "jwt-decode": "2.2.0",
     "lodash.range": "3.2.0",
     "mapbox-gl": "1.10.1",
