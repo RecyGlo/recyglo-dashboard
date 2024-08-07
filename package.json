@@ -3,6 +3,7 @@
   "version": "1.4.0",
   "private": true,
   "dependencies": {
+    "@babel/helper-hoist-variables": "^7.24.7",
     "@fullcalendar/core": "4.2.0",
     "@fullcalendar/daygrid": "4.2.0",
     "@fullcalendar/interaction": "4.2.0",
