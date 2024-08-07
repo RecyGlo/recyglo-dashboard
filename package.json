@@ -86,6 +86,7 @@
     "redux-devtools-extension": "2.13.8",
     "redux-form": "8.3.10",
     "redux-thunk": "2.3.0",
+    "regexpp": "^3.2.0",
     "resolve": "1.8.1",
     "sass": "1.77.8",
     "sejda-js": "2.0.1",
