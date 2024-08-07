@@ -166,7 +166,7 @@ class Reporting extends PureComponent {
                 Object.keys(data.trendLineData).map((item, i) => (
                   <SingleTrendline waste={item} organization={data.organization} data={data.trendLineData[item]} quarters={Object.keys(data.data)} totalPages={totalPages} currentPage={8 + i + Object.keys(data.data).length} reportDate={data.reportDate} />
                 ))
-                :
+              :
               TrendLineDataList &&
                 TrendLineDataList.map((item, i) => (
                   <Trendline organization={data.organization} data={item} quarters={Object.keys(data.data)} totalPages={totalPages} currentPage={8 + i + Object.keys(data.data).length} reportDate={data.reportDate} />

@@ -9,6 +9,7 @@ import { sendPasswordResetLink } from '../../redux/actions/apiActions/AuthAction
 
 class ResetPassword extends PureComponent {
   handleSubmit = (values) => {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.sendPasswordResetLink(values);
     console.log(values.email);
   }

@@ -40,19 +40,19 @@ class PlasticRecycling extends PureComponent {
               <tr>
                 <th style={{
                   textAlign: 'center', width: '520px',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Plastic Recycling</h3>
                 </th>
                 <th style={{
                   paddingLeft: '5px', paddingRight: '5px', textAlign: 'center', width: '350px',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Raw Material</h3>
                 </th>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
@@ -62,7 +62,7 @@ class PlasticRecycling extends PureComponent {
                   display: 'block',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  }}
+                }}
                 >
                   <img style={{ display: 'block', width: '500px', margin: '5px auto' }} src={plastic1} alt="image1" />
                   <div style={{ width: '-webkit-fit-content', margin: '5px auto' }}>
@@ -71,12 +71,12 @@ class PlasticRecycling extends PureComponent {
                   </div>
                 </td>
                 <td style={{
-                  }}
+                }}
                 >
                   <img
                     style={{
-                        display: 'block', padding: '5px', margin: '0 auto', width: '300px',
-                      }}
+                      display: 'block', padding: '5px', margin: '0 auto', width: '300px',
+                    }}
                     src={plastic4}
                     alt="image1"
                   />
@@ -96,12 +96,12 @@ class PlasticRecycling extends PureComponent {
                   />
                 </td>
                 <td style={{
-                  }}
+                }}
                 >
                   <img
                     style={{
-                        display: 'block', padding: '5px', margin: '0 auto', width: '100px',
-                      }}
+                      display: 'block', padding: '5px', margin: '0 auto', width: '100px',
+                    }}
                     src={plastic7}
                     alt="image1"
                   />

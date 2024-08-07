@@ -86,7 +86,7 @@ class MonthlyDataByOrganization extends PureComponent {
             <Line dataKey="E-waste" stroke="#FF7F00" />
           </LineChart>
         </ResponsiveContainer>
-      }
+        }
       </Panel>
     );
   }

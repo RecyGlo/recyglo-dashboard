@@ -46,7 +46,7 @@ class Trendline extends PureComponent {
             <div style={{ width: '30%' }}>
               {months.length > 1 ?
                 <p>Total ({months.length}) Months</p>
-              :
+                :
                 months.map(item => (
                   <p>{item}</p>
                 ))

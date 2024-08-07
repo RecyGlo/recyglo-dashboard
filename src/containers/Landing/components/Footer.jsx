@@ -9,7 +9,8 @@ const Footer = () => (
     <Container>
       <Row>
         <Col md={12}>
-          <p className="landing__footer-text">{'© 2017–2019  '}
+          <p className="landing__footer-text">
+            {'© 2017–2019  '}
             <a href="https://recyglo.com/">RecyGlo Co.Ltd</a>
           </p>
         </Col>

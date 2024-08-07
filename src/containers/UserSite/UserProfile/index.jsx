@@ -11,6 +11,7 @@ import EditUserForm from './components/EditUserForm';
 class EditOrganization extends React.Component {
   componentWillMount() {
     const user = JSON.parse(localStorage.getItem('user'));
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.getUserDetail(user._id);
   }
 
@@ -34,11 +35,13 @@ class EditOrganization extends React.Component {
           </Col>
         </Row>
         <Row>
-          {users.detail &&
-            <EditUserForm
-              initialValues={users.detail}
-              onSubmit={this.handleSubmit}
-            />
+          {users.detail
+            && (
+              <EditUserForm
+                initialValues={users.detail}
+                onSubmit={this.handleSubmit}
+              />
+            )
           }
         </Row>
       </Container>

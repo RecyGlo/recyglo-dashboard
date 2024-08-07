@@ -113,7 +113,7 @@ export default class CustPag extends React.Component {
                   </PaginationLink>
                 </PaginationItem>
               ))
-          }
+              }
               <PaginationItem className="pagination__item" disabled={pageOfItems === pages.length}>
                 <PaginationLink
                   className="pagination__link pagination__link--arrow"
@@ -125,11 +125,11 @@ export default class CustPag extends React.Component {
               </PaginationItem>
             </Pagination>
           )
-          }
+        }
         <div className="pagination-info">
           <span>Showing {`${(itemsToShow * (pageOfItems - 1)) + 1} `}
               to {itemsToShow * pageOfItems > itemsCount ? itemsCount
-            : itemsToShow * pageOfItems} of {itemsCount}
+              : itemsToShow * pageOfItems} of {itemsCount}
           </span>
         </div>
       </div>

@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, ButtonToolbar } from 'reactstrap';

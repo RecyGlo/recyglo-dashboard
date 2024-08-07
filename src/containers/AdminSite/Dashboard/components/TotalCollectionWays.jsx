@@ -10,7 +10,11 @@ const TotalCollectionWays = ({ logistics }) => (
     <Card>
       <CardBody className="dashboard__booking-card">
         <div className="dashboard__booking-total-container">
-          <h5 className="dashboard__booking-total-title dashboard__booking-total-title--red">{logistics} Ways</h5>
+          <h5 className="dashboard__booking-total-title dashboard__booking-total-title--red">
+            {logistics}
+            {' '}
+Ways
+          </h5>
           {/* <TrendingUpIcon className="dashboard__trend-icon" /> */}
         </div>
         <h5 className="dashboard__booking-total-description">Total Collection Ways</h5>

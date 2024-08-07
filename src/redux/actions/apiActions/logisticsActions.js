@@ -35,15 +35,14 @@ export const getLogisticsScheduleList = () => (dispatch) => {
   })
     .then((response) => {
       if (response.status === GET_SUCCESS) {
-        dispatch({
+        return dispatch({
           type: GET_LOGISTICS_SCHEDULE_LIST,
           payload: response.data.data,
         });
-      } else if (response.status === UNAUTHORIZED) {
-        window.alert('UNAUTHORIZED');
-      } else {
-        window.alert('SERVER ERROR FOUND');
+      } if (response.status === UNAUTHORIZED) {
+        return window.alert('UNAUTHORIZED');
       }
+      return window.alert('SERVER ERROR FOUND');
     })
     .catch((error) => {
       window.alert(error);
@@ -106,7 +105,7 @@ export const getLogisticsByOrganizationWithPromise = (organizationId) => {
         //   payload: response.data.data,
         // });
         return response.data.data;
-      } else if (response.status === UNAUTHORIZED) {
+      } if (response.status === UNAUTHORIZED) {
         window.alert('UNAUTHORIZED');
         return null;
       }

@@ -33,19 +33,19 @@ class GlassRecycling extends PureComponent {
               <tr>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Glass Recycling</h3>
                 </th>
                 <th style={{
                   paddingLeft: '5px', paddingRight: '5px', textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Raw Material</h3>
                 </th>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
@@ -57,14 +57,14 @@ class GlassRecycling extends PureComponent {
                   padding: '20px',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  }}
+                }}
                 >
                   <img style={{ width: '300px', margin: '5px' }} src={glass1} alt="image1" height="150" />
                   <img style={{ width: '300px', margin: '5px' }} src={glass2} alt="image2" height="300" />
                 </td>
                 <td style={{
                   padding: '30px',
-                  }}
+                }}
                 >
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={glass3} alt="image3" />
                 </td>

@@ -196,12 +196,12 @@ class YearlyCalendar extends React.Component {
                       </th>
                     </tr>
                     {pickedLogistics.items.map(prop =>
-                    (
-                      <tr>
-                        <td style={{ textAlign: 'left' }}>{prop.productName}</td>
-                        <td style={{ textAlign: 'right' }}>{prop.quantity} kg</td>
-                      </tr>
-                    ))}
+                      (
+                        <tr>
+                          <td style={{ textAlign: 'left' }}>{prop.productName}</td>
+                          <td style={{ textAlign: 'right' }}>{prop.quantity} kg</td>
+                        </tr>
+                      ))}
                   </table>
                 </div>
               }

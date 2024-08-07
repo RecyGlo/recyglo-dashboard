@@ -106,10 +106,10 @@ class CreateQuarterModal extends React.PureComponent {
           <Select
             name="ways"
             options={
-            Object.keys(logisticsByQuarters).map((prop, key) => (
-            // eslint-disable-next-line no-underscore-dangle
-            { key, label: `${prop} ${JSON.stringify(Object.keys(logisticsByQuarters[prop]))}`, value: prop }
-            ))
+              Object.keys(logisticsByQuarters).map((prop, key) => (
+                // eslint-disable-next-line no-underscore-dangle
+                { key, label: `${prop} ${JSON.stringify(Object.keys(logisticsByQuarters[prop]))}`, value: prop }
+              ))
             }
             value={quarter}
             onChange={this.handleQuarterChange}

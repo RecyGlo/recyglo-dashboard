@@ -1,6 +1,7 @@
 import React from 'react';
 
 const renderInputField = ({
+  // eslint-disable-next-line react/prop-types
   input, label, name, placeholder, type, meta: { touched, error, warning },
 }) => (
   <div className="form__form-group">

@@ -11,7 +11,8 @@ const FeatureRequest = () => (
       </Row>
       <Row>
         <Col md={12}>
-          <p className="landing__request">{"We want to make the World better and we appreciate your interests. \
+          <p className="landing__request">
+            {"We want to make the World better and we appreciate your interests. \
           If you want to subscribe our services, please click the request button and let's clean up"}
           </p>
           <div className="landing__center-btn">

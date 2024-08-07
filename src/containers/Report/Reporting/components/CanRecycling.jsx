@@ -33,19 +33,19 @@ class CanRecycling extends PureComponent {
               <tr>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Metal Recycling</h3>
                 </th>
                 <th style={{
                   paddingLeft: '5px', paddingRight: '5px', textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Raw Material</h3>
                 </th>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Product</h3>
                 </th>
@@ -57,14 +57,14 @@ class CanRecycling extends PureComponent {
                   padding: '20px',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  }}
+                }}
                 >
                   <img style={{ width: '300px', margin: '5px' }} src={can1} alt="image1" height="150" />
                   <img style={{ width: '300px', margin: '5px' }} src={can2} alt="image2" height="300" />
                 </td>
                 <td style={{
                   padding: '30px',
-                  }}
+                }}
                 >
                   <img style={{ width: '300px', display: 'block', margin: '0 auto' }} src={can3} alt="image3" />
                 </td>

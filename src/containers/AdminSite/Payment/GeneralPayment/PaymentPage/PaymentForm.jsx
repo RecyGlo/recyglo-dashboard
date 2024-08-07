@@ -87,8 +87,8 @@ let PaymentForm = (props) => {
             label="I have read and agree to the "
             className="colored-click"
           />
-          {/* eslint-disable-next-line react/jsx-no-target-blank */}
-          <a href="https://www.recyglo.com/terms-and-conditions" target="_blank"> &nbsp;<u>Terms and Conditions.</u></a>
+          <a href="https://www.recyglo.com/terms-and-conditions" target="_blank" rel="noopener noreferrer">
+            &nbsp;<u>Terms and Conditions.</u></a>
         </div>
         <Button color="success" type="submit">Continue</Button>
       </form>

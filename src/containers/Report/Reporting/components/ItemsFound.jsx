@@ -102,9 +102,9 @@ class ItemsFound extends PureComponent {
             <div style={{ width: '30%' }}>
               {Object.keys(data).length > 1 ?
                 <p>Total ({Object.keys(data).length}) Quarters</p>
-              :
-              Object.keys(data).map(item => (
-                <p>{item}</p>
+                :
+                Object.keys(data).map(item => (
+                  <p>{item}</p>
                 ))
               }
             </div>

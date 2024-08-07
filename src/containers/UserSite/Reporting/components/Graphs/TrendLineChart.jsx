@@ -50,7 +50,7 @@ export default class TrendLineChart extends PureComponent {
               <LabelList dataKey="value" position="top" />
             </Line>
           </LineChart>
-          }
+        }
       </ResponsiveContainer>
     );
   }

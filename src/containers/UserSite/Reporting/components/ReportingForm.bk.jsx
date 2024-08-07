@@ -275,10 +275,10 @@ class ReportingForm extends React.Component {
             <hr />
             <span
               style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              width: '100%',
-              height: '50px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                width: '100%',
+                height: '50px',
               }}
             >
               {JSON.stringify(quarters) !== '{}' &&
@@ -295,7 +295,7 @@ class ReportingForm extends React.Component {
                   >
                     {item}
                   </Button>
-              ))}
+                ))}
             </span>
 
             {JSON.stringify(quarters) !== '{}' &&

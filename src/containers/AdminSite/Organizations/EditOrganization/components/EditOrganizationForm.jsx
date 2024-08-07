@@ -296,7 +296,7 @@ class EditOrganizationForm extends PureComponent {
                     display: 'inline-block',
                     verticalAlign: 'top',
                     paddingLeft: '15px',
-                    }}
+                  }}
                 >
                   <br /><h4 style={{ textAlign: 'center' }}>Please Select your organization location</h4>
                   <br />

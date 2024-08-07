@@ -119,7 +119,7 @@ class Payment extends React.Component {
                   heads={this.heads}
                   rows={payments}
                 />
-                }
+              }
               {/* <Table responsive className="table--bordered">
                 <thead>
                   <br /><br />

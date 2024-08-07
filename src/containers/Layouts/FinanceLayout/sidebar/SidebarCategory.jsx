@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment, react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { Collapse } from 'reactstrap';
 import PropTypes from 'prop-types';
@@ -38,9 +39,10 @@ export default class SidebarCategory extends Component {
 
     return (
       <div className={categoryClass}>
-        <button className="sidebar__link sidebar__category" onClick={this.toggle}>
+        <button type="button" className="sidebar__link sidebar__category" onClick={this.toggle}>
           {icon ? <span className={`sidebar__link-icon lnr lnr-${icon}`} /> : ''}
-          <p className="sidebar__link-title">{title}
+          <p className="sidebar__link-title">
+            {title}
             {isNew && <span className="sidebar__category-new" />}
           </p>
           <span className="sidebar__category-icon lnr lnr-chevron-right" />

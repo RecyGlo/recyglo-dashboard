@@ -210,12 +210,12 @@ class YearlyCalendar extends React.Component {
               {/* <p>{logistics}</p> */}
               <div>
                 {
-                Object.keys(logistics.list).forEach((key) => {
-                  let pickupDate = new Date(logistics.list[key].pickUpTime);
-                  pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)} ${pickupDate.getHours()}:${pickupDate.getMinutes() < 10 ? '0' : ''}${pickupDate.getMinutes()}`;
-                  // console.log(pickupDate);
-                  pickupDate === this.state.pickedDate ? (pickupData = logistics.list[key].status) : console.log('no');
-                })
+                  Object.keys(logistics.list).forEach((key) => {
+                    let pickupDate = new Date(logistics.list[key].pickUpTime);
+                    pickupDate = `${pickupDate.getFullYear()}-${(`0${pickupDate.getMonth() + 1}`).slice(-2)}-${(`0${pickupDate.getDate()}`).slice(-2)} ${pickupDate.getHours()}:${pickupDate.getMinutes() < 10 ? '0' : ''}${pickupDate.getMinutes()}`;
+                    // console.log(pickupDate);
+                    pickupDate === this.state.pickedDate ? (pickupData = logistics.list[key].status) : console.log('no');
+                  })
                 }
               </div>
               {/* {console.log(logistics.list)} */}

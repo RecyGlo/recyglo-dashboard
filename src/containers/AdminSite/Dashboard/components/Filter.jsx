@@ -60,7 +60,7 @@ class MontlyWasteCollection extends PureComponent {
             classNamePrefix="react-select"
           />
         </Col>
-          }
+        }
       </div>
     );
   }

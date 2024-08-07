@@ -75,7 +75,7 @@ class MonthlyDataByOrganization extends PureComponent {
             <Line dataKey="Glass" stroke="#EBA434" />
           </LineChart>
         </ResponsiveContainer>
-      }
+        }
       </Panel>
     );
   }

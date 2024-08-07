@@ -65,8 +65,8 @@ class AddUserForm extends PureComponent {
                     component={renderSelectField}
                     placeholder="Choose User Type"
                     options={USER_TYPES.map((prop, key) => (
-                        { key, label: prop, value: prop }
-                      ))
+                      { key, label: prop, value: prop }
+                    ))
                     }
                   />
                 </div>

@@ -11,6 +11,7 @@ import { resetPassword } from '../../redux/actions/apiActions/AuthActions';
 class ResetPassword extends PureComponent {
   handleSubmit = (values) => {
     console.log(values.password);
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.resetPassword(values, this.props.match.params.link);
   }
 

@@ -8,25 +8,27 @@ import { getContractExpries } from '../../../../redux/actions/apiActions/miscAct
 
 class ContractExpries extends PureComponent {
   componentWillMount() {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.getContractExpries();
   }
 
   render() {
+    // eslint-disable-next-line react/destructuring-assignment
     const { contractExpries } = this.props.misc;
     return (
       <Panel lg={6} xl={6} md={12} xs={12} title="Contract Expiries" style={{ maxHeight: 500 }}>
         {/* {JSON.stringify(contractExpries)} */}
         <div style={{ maxHeight: 300, overflowY: 'scroll', overflowX: 'hidden' }}>
-          {contractExpries &&
-            contractExpries.map(prop => (
+          {contractExpries
+            && contractExpries.map(prop => (
               <div className="dashboard__competitor">
                 <div className="dashboard__competitor-info">
                   <p className="dashboard__competitor-name">{prop.name}</p>
                   <p
                     className={
-                      new Date(prop.expiredDate) < new Date() ?
-                      'dashboard__competitor-result-red' :
-                      'dashboard__competitor-result-green'}
+                      new Date(prop.expiredDate) < new Date()
+                        ? 'dashboard__competitor-result-red'
+                        : 'dashboard__competitor-result-green'}
                   >
                     {new Date(prop.expiredDate).toDateString()}
                   </p>

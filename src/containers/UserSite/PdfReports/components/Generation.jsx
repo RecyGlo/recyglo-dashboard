@@ -43,7 +43,7 @@ class Generation extends Component {
                     <ul style={{ listStyle: 'inside', textAlign: 'left', marginLeft: 45 }}><li style={{ width: '430px' }}>{organization} recycled {data[item].total.toFixed(2)} KG of recyclable waste in {item}.</li></ul>
                     :
                     <ul style={{ listStyle: 'inside', textAlign: 'center', marginLeft: 45 }}><li style={{ width: '430px' }}>There was no waste pickup in {item}.</li></ul>
-                    }
+                  }
                 </Col>
               ))}
             </Row>

@@ -31,13 +31,13 @@ class OrganicRecycling extends PureComponent {
               <tr>
                 <th style={{
                   paddingRight: '5px', textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Food / Organic Recycling</h3>
                 </th>
                 <th style={{
                   textAlign: 'center',
-                  }}
+                }}
                 >
                   <h3 style={{ backgroundColor: '#aaaaaa' }}>Final Products</h3>
                 </th>

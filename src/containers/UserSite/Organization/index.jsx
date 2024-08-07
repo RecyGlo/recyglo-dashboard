@@ -53,20 +53,20 @@ class OrganizationPage extends React.Component {
               {organization &&
                 <EditOrganizationForm
                   initialValues={{
-                  name: organization.name,
-                  info: organization.info,
-                  companyType: {
-                    label: organization.companyType,
-                    value: organization.companyType,
-                  },
-                  email: organization.email,
-                  officePhoneNumber: organization.officePhoneNumber,
-                  contactPersonName: organization.contactPersonName,
-                  contactPersonPhoneNumber: organization.contactPersonPhoneNumber,
-                  address: organization.address,
-                  logo: organization.logo,
-                  location: organization.location,
-                }}
+                    name: organization.name,
+                    info: organization.info,
+                    companyType: {
+                      label: organization.companyType,
+                      value: organization.companyType,
+                    },
+                    email: organization.email,
+                    officePhoneNumber: organization.officePhoneNumber,
+                    contactPersonName: organization.contactPersonName,
+                    contactPersonPhoneNumber: organization.contactPersonPhoneNumber,
+                    address: organization.address,
+                    logo: organization.logo,
+                    location: organization.location,
+                  }}
                   onSubmit={this.handleSubmit}
                 />
               }

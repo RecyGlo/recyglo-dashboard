@@ -364,7 +364,7 @@ class ReportingFormWithAutoSummary extends React.Component {
                         options={organizations.list
                           && organizations.list.map((prop, key) => (
                           // eslint-disable-next-line no-underscore-dangle
-                          { key, label: prop.name, value: prop }
+                            { key, label: prop.name, value: prop }
                           ))
                         }
                         clearable={false}

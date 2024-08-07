@@ -11,6 +11,7 @@ class SidebarContent extends Component {
   };
 
   hideSidebar = () => {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.onClick();
   };
 

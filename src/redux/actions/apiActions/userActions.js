@@ -107,7 +107,7 @@ export const getUserDetailWithPromise = (userId) => {
         //   payload: response.data.data,
         // });
         return response.data.data;
-      } else if (response.status === UNAUTHORIZED) {
+      } if (response.status === UNAUTHORIZED) {
         window.alert('UNAUTHORIZED');
         return null;
       }

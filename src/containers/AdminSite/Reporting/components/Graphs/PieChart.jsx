@@ -68,7 +68,7 @@ export default class Example extends PureComponent {
         <ResponsiveContainer width={464} height={250}>
           <PieChart
             margin={{
-            top: 0, right: 0, left: 0, bottom: -10,
+              top: 0, right: 0, left: 0, bottom: -10,
             }}
           >
             <Legend />

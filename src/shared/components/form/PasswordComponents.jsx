@@ -2,6 +2,7 @@ import React from 'react';
 import KeyVariantIcon from 'mdi-react/KeyVariantIcon';
 
 const renderPasswordField = ({
+  // eslint-disable-next-line react/prop-types
   input, label, name, placeholder, type, meta: { touched, error, warning },
 }) => (
   <div className="form__form-group">

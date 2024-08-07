@@ -174,8 +174,8 @@ class PaymentPage extends React.Component {
                       placeholder="Enter Currency"
                       component={renderSelectField}
                       options={Object.keys(convertCurrency).map((prop, key) => (
-                          { key, label: convertCurrency[prop], value: prop }
-                        ))
+                        { key, label: convertCurrency[prop], value: prop }
+                      ))
                       }
                     />
                   </div>
@@ -230,7 +230,7 @@ class PaymentPage extends React.Component {
               {customer_data && <button className="btn btn-success" type="submit">Continue Payment</button>}
               {/* <Button color="success">Continue Payment</Button> */}
             </form>
-          }
+            }
           </Col>
           <Col md={12}>
             <Tab.Container defaultActiveKey="link-1">

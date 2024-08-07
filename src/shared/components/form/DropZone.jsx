@@ -59,9 +59,9 @@ class DropZoneField extends PureComponent {
             <div {...getRootProps()} className="dropzone__input">
               {(!files || files.length === 0)
               && (
-              <div className="dropzone__drop-here">
-                <span className="lnr lnr-upload" /> Drop Image here to upload
-              </div>
+                <div className="dropzone__drop-here">
+                  <span className="lnr lnr-upload" /> Drop Image here to upload
+                </div>
               )}
               <input {...getInputProps()} />
             </div>
@@ -69,13 +69,13 @@ class DropZoneField extends PureComponent {
         </Dropzone>
         {files && Array.isArray(files) && files.length > 0
         && (
-        <aside className="dropzone__img">
-          <img src={files[0].preview} alt="drop-img" />
-          <p className="dropzone__img-name">{files[0].name}</p>
-          <button className="dropzone__img-delete" type="button" onClick={e => this.removeFile(0, e)}>
+          <aside className="dropzone__img">
+            <img src={files[0].preview} alt="drop-img" />
+            <p className="dropzone__img-name">{files[0].name}</p>
+            <button className="dropzone__img-delete" type="button" onClick={e => this.removeFile(0, e)}>
             Remove
-          </button>
-        </aside>
+            </button>
+          </aside>
         )}
       </div>
     );
