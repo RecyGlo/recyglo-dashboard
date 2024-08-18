@@ -164,9 +164,9 @@ blockquote {
 }
 
 .carbon-bg h2{
-  font-weight: 700;
   text-transform: capitalize;
-  font-size: 35px;
+  font-size: 40px;
+  padding: 20px 70px;
   font-family: "Montserrat", sans-serif;
   color: #000000 !important;
   width: 100%;
@@ -289,12 +289,8 @@ blockquote {
 .page-title {
   font-weight: 700;
   text-transform: capitalize;
-  font-size: 40px;
-  padding: 70px;
-  font-family: "Montserrat", sans-serif;
-  color: #000000 !important;
-  width: 100%;
-  line-height: 80px;
+  font-size: 20px;
+  padding: 20px 0;
 
   &.page-title--not-last {
     margin-top: 20px;
@@ -402,7 +398,7 @@ blockquote {
 }
 
 .top-block-row {
-  padding: 50px;
+  padding: 30px 0;
 }
 
 .page-subhead {

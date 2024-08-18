@@ -1,10 +1,9 @@
 .card {
-  width: 90%;
-  padding-left: 5%;
-  height: 700px;
+  width: 100%;
+  padding-bottom: 30px;
+  height: 100%;
   border: none;
   background-color: transparent;
-  margin-bottom: 100px;
 
   &.card--not-full-height {
     height: auto;
@@ -311,12 +310,12 @@
 
 .pick b{
   color: #060606;
-  font-family: Abhaya Libre ExtraBold;
-  font-size: 50px;
+  font-size: 20px;
   font-weight: 700;
 }
 
 .pick span{
+  margin-left: 20px;
   color: #060606;
   font-family: Abhaya Libre ExtraBold;
 }

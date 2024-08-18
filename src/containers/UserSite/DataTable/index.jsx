@@ -8,10 +8,10 @@ const Organizations = () => (
       <Row>
         <Col md={9}>
           <h3 className="page-title">Data table</h3>
-          <h4>
+          <p>
             Displays item weights collected on different dates, filterable by
             item type for easy tracking and management.
-          </h4>
+          </p>
         </Col>
       </Row>
       <Row>

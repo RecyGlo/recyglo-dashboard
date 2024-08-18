@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { PureComponent } from 'react';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import Panel from '../../../../shared/components/Panel';
 import { getContractExpries } from '../../../../redux/actions/apiActions/miscActions';
 

@@ -21,7 +21,6 @@
 
     @include themify($themes) {
       color: #ffffff;
-      font-size: 25px;
       border-bottom-color: themed('colorBorder');
     }
   }

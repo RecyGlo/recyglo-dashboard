@@ -41,10 +41,6 @@ class SidebarContent extends Component {
         <ul className="sidebar__block">
           <SidebarLink icon="users" title="Reporting" route="/reporting" onClick={this.hideSidebar} />
         </ul>
-        {/* <ul className="sidebar__block">
-          <SidebarCategory title="Example Pages" icon="diamond">
-          </SidebarCategory>
-        </ul> */}
       </div>
     );
   }

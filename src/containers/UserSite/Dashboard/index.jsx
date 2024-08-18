@@ -54,7 +54,6 @@ class Dashboard extends React.Component {
     this.setState({ organizationId });
     this.props.getTotalWasteByOrganization(organizationId);
     this.props.getTotalPickupsForEachOrganization(organizationId);
-    this.props.getContractDurationForEachOrganization(organizationId);
   }
 
   componentDidUpdate() {
@@ -185,7 +184,7 @@ class Dashboard extends React.Component {
               )}
             </div>
           </Col>
-          <Col md={4}>
+          <Col>
             <br />
             {misc && misc.totalWastesByOrganization && (
               <TotalCollectedWaste
@@ -210,37 +209,33 @@ class Dashboard extends React.Component {
           <b>Pick A Span of Months</b>
           <span>(Available years from 2017 to this year)</span>
         </label>
-        <Row>
-          <Col lg={6} md={6} sm={6}>
-            <div className="edit">
-              <Picker
-                ref={this.pickRange}
-                years={years}
-                value={rangeValue}
-                lang={pickerLang}
-                theme="light"
-                onChange={this.handleRangeChange}
-                onDismiss={this.handleRangeDissmis}
-              >
-                <MonthBox
-                  value={
-                    makeText(rangeValue.from) + " ~ " + makeText(rangeValue.to)
-                  }
-                  onClick={this._handleClickRangeBox}
-                />
-              </Picker>
-            </div>
-          </Col>
-          <Col lg={6} md={6} sm={6}>
-            <button
-              className="btn btn-span"
-              style={{ margin: "20px 0px", padding: 10 }}
-              onClick={this.resetDateRange}
+        <div style={{ display: 'flex', width: '100%' }}>
+          <div style={{ width: '100%' }}>
+            <Picker
+              ref={this.pickRange}
+              years={years}
+              value={rangeValue}
+              lang={pickerLang}
+              theme="light"
+              onChange={this.handleRangeChange}
+              onDismiss={this.handleRangeDissmis}
             >
-              Reset
-            </button>
-          </Col>
-        </Row>
+              <MonthBox
+                value={
+                  makeText(rangeValue.from) + ' ~ ' + makeText(rangeValue.to)
+                }
+                onClick={this._handleClickRangeBox}
+              />
+            </Picker>
+          </div>
+          <button
+            className="btn btn-span"
+            style={{ margin: '20px 0px', padding: 10 }}
+            onClick={this.resetDateRange}
+          >
+            Reset
+          </button>
+        </div>
         <Row className="top-block-row">
           <Col md={6}>
             <div className="dashboard-block4">

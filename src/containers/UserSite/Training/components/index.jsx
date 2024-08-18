@@ -42,10 +42,10 @@ class Plastic extends PureComponent {
           <Row>
             <Col md={9}>
               <h3 className="page-title">Training</h3>
-              <h4>
+              <p>
                 These training lessons cover waste management topics, including
                 Paper Waste, Plastic Waste, and E-waste Segregation.
-              </h4>
+              </p>
             </Col>
           </Row>
           <Row>

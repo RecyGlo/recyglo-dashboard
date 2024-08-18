@@ -33,6 +33,7 @@
     "jqwidgets-scripts": "9.0.0",
     "json-stable-stringify-without-jsonify": "1.0.1",
     "jwt-decode": "2.2.0",
+    "lodash": "4.17.21",
     "lodash.range": "3.2.0",
     "mapbox-gl": "1.10.1",
     "mdi-react": "4.4.0",

@@ -6,36 +6,36 @@ const Organizations = () => (
   <Container className="dashboard">
     <div className="carbon-bg">
       <Row>
-        <h3 className="page-title">Carbon Emission Report</h3>
         <Col md={6}>
+          <h2>Carbon Emission Report</h2>
           <h4>Executive Summary</h4>
           <p className="paragraph">
             <span>Recyglo</span>
-                        , a leading waste management platform, is
-                        dedicated to revolutionizing the waste management landscape by
-                        providing sustainable and efficient solutions. As part of its
-                        commitment to environmental sustainability,
+                  , a leading waste management platform, is
+                  dedicated to revolutionizing the waste management landscape by
+                  providing sustainable and efficient solutions. As part of its
+                  commitment to environmental sustainability,
             <span>Recyglo</span>
             {' '}
-                        has
-                        initiated a comprehensive assessment of the greenhouse gas (GHG)
-                        emissions associated with its waste management services. The primary
-                        purpose of this GHG emission report is to quantify the GHG savings
-                        achieved by recycling and composting waste through
+                  has
+                  initiated a comprehensive assessment of the greenhouse gas (GHG)
+                  emissions associated with its waste management services. The primary
+                  purpose of this GHG emission report is to quantify the GHG savings
+                  achieved by recycling and composting waste through
             {' '}
             <span>Recyglo&apos;s</span>
             {' '}
-                        platform over a specified period.
+                  platform over a specified period.
             <br />
             <br />
-                        By utilizing the Environmental Protection Agency (EPA) GHG
-                        simulation provided by the Institute for Global Environmental
-                        Strategies (IGES),
+                  By utilizing the Environmental Protection Agency (EPA) GHG
+                  simulation provided by the Institute for Global Environmental
+                  Strategies (IGES),
             {' '}
             <span>Recyglo</span>
             {' '}
-                        aims to provide transparent
-                        and actionable insights into its environmental impact.
+                  aims to provide transparent
+                  and actionable insights into its environmental impact.
           </p>
         </Col>
         <Col md={6}>
