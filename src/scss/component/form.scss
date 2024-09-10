@@ -429,11 +429,6 @@
 
 .report-block{
   width: 100%;
-  @include themify($themes) {
-    background-image: themed('legs');
-    height: 100%;
-    background-repeat: no-repeat;
-  }
 }
 
 .report-blockmini{
@@ -442,10 +437,6 @@
   display: block;
   margin-left: 25rem;
   display: block;
-  @include themify($themes) {
-    background-image: themed('forrest');
-    background-repeat: no-repeat;
-  }
   position: absolute;
 }
 
@@ -461,9 +452,6 @@
   display: block;
   margin-top: -140px;
   margin-left: -250px;
-  @include themify($themes) {
-    background-repeat: no-repeat;
-  }
   position: absolute;
 }
 
@@ -528,9 +516,7 @@
 
 .items-footprint {
   @include themify($themes) {
-    background-image: themed('foots');
     height: 100%;
-    background-repeat: no-repeat;
     width: 100%;
   }
 }

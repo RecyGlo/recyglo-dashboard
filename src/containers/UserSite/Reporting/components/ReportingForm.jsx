@@ -373,29 +373,23 @@ class ReportingForm extends React.Component {
                 </div>
               </div>
             </form>
-            <div className="animation-block">
-              <h1 className="heading-animation">
-                IDENTIFICATION
-              </h1>
-              <h1 className="heading-animation2">
-                ANALYSIS
-              </h1>
-              <h1 className="heading-animation">
-                QUANTIFICATION
-              </h1>
-            </div>
             <div className="report-block">
-              <div className="report-blockmini">
-                <h3>Get Started</h3>
-                <div className="form__form-group-input-wrap">
-                  {organization &&
-                    <CreateQuarterModal
-                      organization={organization._id}
-                      createQuarter={this.createQuarter}
-                    />
-                  }
-                </div>
-              </div>
+              {/* <div className="report-blockmini"> */}
+              {/*  <h3>Get Started</h3> */}
+              {/*  <div className="form__form-group-input-wrap"> */}
+              {/*    {organization && */}
+              {/*      <CreateQuarterModal */}
+              {/*        organization={organization._id} */}
+              {/*        createQuarter={this.createQuarter} */}
+              {/*      /> */}
+              {/*    } */}
+              {/*  </div> */}
+              {/* </div> */}
+              {organization &&
+              <CreateQuarterModal
+                organization={organization._id}
+                createQuarter={this.createQuarter}
+              />}
             </div>
             {/* <div className="report-block">
               <div className="report-blockmini">

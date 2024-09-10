@@ -11,7 +11,7 @@ import ReportingForm from './components/ReportingForm';
 class Reporting extends React.Component {
   render() {
     return (
-      <Container className="theme-bg">
+      <Container>
         <Row>
           <Col md={12}>
             <br />

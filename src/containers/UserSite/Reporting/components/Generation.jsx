@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import BarChart from './Graphs/BarChart';
 import '../../../../scss/reporting/Generation.scss';
-import kids from '../../../../shared/img/background/kids.png';
+// import kids from '../../../../shared/img/background/kids.png';
 
 // const months = ['January', 'February', 'March', 'April', 'May', 'June',
 //   'July', 'August', 'September', 'October', 'November', 'December',
@@ -21,7 +21,7 @@ class Generation extends Component {
     } = this.props;
     return (
       <div className="reporting-page">
-        <img className="kids" alt="about" src={kids} />
+        {/* <img className="kids" alt="about" src={kids} /> */}
         <div className="generation-content">
           <div className="generation-title">
             <div style={{ width: '70%', float: 'left' }}>
